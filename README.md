@@ -1,3 +1,42 @@
+
+# List / Search (home page)
+
+- search by pokemon name
+  - input name
+  - click on "GO" btn
+- diaplay list based on search result
+  - display pokemons in cards view
+    - picture (big) <https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{ID}.png>
+    - name
+  - pagination?
+- Click on pokemon card navigates to pokemon ditails page
+
+# Pokemon Details page
+
+Page with general pokemon details....
+
+- pokemon info
+  - Name
+  - Picture
+  - abilities
+  - moves
+  - weight
+  - consider others...
+- page functionality
+  - Go back to search
+  - show next pokemom
+  - show prev pokemon
+
+# TALK
+
+Demonstrate MFEs with UI testing per each MFE
+
+- Ability to run UI tests per MFE for faster CI and development
+- Ability to run all tests for entrie app all together.
+- Change MFE's framework (Recat <-> NG) without changing UI tests
+- Show test kits and explain the reusability of UI Testing Foundation beeing framework seemless. 
+
+
 # Pokemon
 
 <a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
@@ -42,7 +81,7 @@ Have a look at the [Nx Console extensions](https://nx.dev/nx-console). It provid
 
 Just run `nx build demoapp` to build the application. The build artifacts will be stored in the `dist/` directory, ready to be deployed.
 
-## Set up CI!
+## Set up CI
 
 Nx comes with local caching already built-in (check your `nx.json`). On CI you might want to go a step further.
 
@@ -50,7 +89,7 @@ Nx comes with local caching already built-in (check your `nx.json`). On CI you m
 - [Set up task distribution across multiple machines](https://nx.dev/nx-cloud/features/distribute-task-execution)
 - [Learn more how to setup CI](https://nx.dev/recipes/ci)
 
-## Connect with us!
+## Connect with us
 
 - [Join the community](https://nx.dev/community)
 - [Subscribe to the Nx Youtube Channel](https://www.youtube.com/@nxdevtools)

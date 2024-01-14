@@ -6,8 +6,10 @@
   "targets": {
     "build": {
       "executor": "@nx/webpack:webpack",
-      "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "development",
       "options": {
         "compiler": "babel",
         "outputPath": "dist/details",
@@ -15,7 +17,10 @@
         "baseHref": "/",
         "main": "details/src/main.ts",
         "tsConfig": "details/tsconfig.app.json",
-        "assets": ["details/src/favicon.ico", "details/src/assets"],
+        "assets": [
+          "details/src/favicon.ico",
+          "details/src/assets"
+        ],
         "styles": [],
         "scripts": [],
         "webpackConfig": "details/webpack.config.ts"
@@ -64,11 +69,13 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "serve-static": {
       "executor": "@nx/web:file-server",
-      "defaultConfiguration": "production",
+      "defaultConfiguration": "development",
       "options": {
         "buildTarget": "details:build",
         "watch": false,
@@ -85,7 +92,9 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "details/jest.config.ts"
       }

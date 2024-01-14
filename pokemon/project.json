@@ -1,87 +1,83 @@
 {
   "name": "pokemon",
   "$schema": "../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "pokemon/src",
   "projectType": "application",
+  "prefix": "pokemon",
+  "sourceRoot": "pokemon/src",
+  "tags": [],
   "targets": {
     "build": {
-      "executor": "@nx/webpack:webpack",
+      "executor": "@nx/angular:webpack-browser",
       "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
       "options": {
-        "compiler": "babel",
         "outputPath": "dist/pokemon",
         "index": "pokemon/src/index.html",
-        "baseHref": "/",
         "main": "pokemon/src/main.ts",
+        "polyfills": ["zone.js"],
         "tsConfig": "pokemon/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
         "assets": ["pokemon/src/favicon.ico", "pokemon/src/assets"],
-        "styles": [],
+        "styles": ["pokemon/src/styles.scss"],
         "scripts": [],
-        "webpackConfig": "pokemon/webpack.config.ts"
+        "customWebpackConfig": {
+          "path": "pokemon/webpack.config.ts"
+        }
       },
       "configurations": {
-        "development": {
-          "extractLicenses": false,
-          "optimization": false,
-          "sourceMap": true,
-          "vendorChunk": true
-        },
         "production": {
-          "fileReplacements": [
+          "budgets": [
             {
-              "replace": "pokemon/src/environments/environment.ts",
-              "with": "pokemon/src/environments/environment.prod.ts"
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
             }
           ],
-          "optimization": true,
           "outputHashing": "all",
-          "sourceMap": false,
-          "namedChunks": false,
-          "extractLicenses": true,
-          "vendorChunk": false,
-          "webpackConfig": "pokemon/webpack.config.prod.ts"
+          "customWebpackConfig": {
+            "path": "pokemon/webpack.prod.config.ts"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
         }
-      }
+      },
+      "defaultConfiguration": "production"
     },
     "serve": {
-      "executor": "@nx/react:module-federation-dev-server",
-      "defaultConfiguration": "development",
+      "executor": "@nx/angular:module-federation-dev-server",
       "options": {
-        "buildTarget": "pokemon:build",
-        "hmr": true,
-        "port": 4200
+        "port": 4200,
+        "publicHost": "http://localhost:4200"
       },
       "configurations": {
+        "production": {
+          "buildTarget": "pokemon:build:production"
+        },
         "development": {
           "buildTarget": "pokemon:build:development"
-        },
-        "production": {
-          "buildTarget": "pokemon:build:production",
-          "hmr": false
         }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "pokemon:build"
       }
     },
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"]
-    },
-    "serve-static": {
-      "executor": "@nx/web:file-server",
-      "defaultConfiguration": "production",
-      "options": {
-        "buildTarget": "pokemon:build",
-        "watch": false,
-        "port": 4200
-      },
-      "configurations": {
-        "development": {
-          "buildTarget": "pokemon:build:development"
-        },
-        "production": {
-          "buildTarget": "pokemon:build:production"
-        }
-      }
     },
     "test": {
       "executor": "@nx/jest:jest",
@@ -89,7 +85,13 @@
       "options": {
         "jestConfig": "pokemon/jest.config.ts"
       }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "pokemon:build",
+        "port": 4200
+      }
     }
-  },
-  "tags": []
+  }
 }

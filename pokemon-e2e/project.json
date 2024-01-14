@@ -9,8 +9,7 @@
       "options": {
         "cypressConfig": "pokemon-e2e/cypress.config.ts",
         "testingType": "e2e",
-        "devServerTarget": "pokemon:serve",
-        "baseUrl": "http://localhost:4200"
+        "devServerTarget": "pokemon:serve:development"
       },
       "configurations": {
         "production": {
@@ -26,6 +25,6 @@
       "outputs": ["{options.outputFile}"]
     }
   },
-  "implicitDependencies": ["pokemon"],
-  "tags": []
+  "tags": [],
+  "implicitDependencies": ["pokemon"]
 }

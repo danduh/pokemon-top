@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "details/Module": ["details/src/remote-entry.ts"],
-      "list/Routes": ["list/src/app/remote-entry/entry.routes.ts"]
+      "list/Routes": ["list/src/app/remote-entry/entry.routes.ts"],
+      "test/Routes": ["test/src/app/remote-entry/entry.routes.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
