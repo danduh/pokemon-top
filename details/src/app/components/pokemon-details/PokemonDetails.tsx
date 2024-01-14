@@ -23,35 +23,33 @@ export function PokemonDetails(props: PokemonDetailsProps) {
     width: '100%',
   };
   return (
-    <>
-      <Flex gap="middle" align="center" vertical>
-        <h1 data-cy="name">{pokemon?.name}</h1>
-        <img
-          data-cy="image"
-          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${currentIndex}.png`}
-        ></img>
-        <Flex gap="middle" justify="center" style={boxStyle}>
-          <Button
-            size="large"
-            type="primary"
-            data-cy="prev"
-            shape="round"
-            onClick={() => setCurrentIndex((currentIndex) => currentIndex - 1)}
-          >
-            Prev
-          </Button>
-          <Button
-            type="primary"
-            size="large"
-            shape="round"
-            data-cy="next"
-            onClick={() => setCurrentIndex((currentIndex) => currentIndex + 1)}
-          >
-            Next
-          </Button>
-        </Flex>
+    <Flex gap="middle" align="center" vertical>
+      <h1 data-cy="name">{pokemon?.name}</h1>
+      <img
+        data-cy="image"
+        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${currentIndex}.png`}
+      ></img>
+      <Flex gap="middle" justify="center" style={boxStyle}>
+        <Button
+          size="large"
+          type="primary"
+          data-cy="prev"
+          shape="round"
+          onClick={() => setCurrentIndex((currentIndex) => currentIndex - 1)}
+        >
+          Prev
+        </Button>
+        <Button
+          type="primary"
+          size="large"
+          shape="round"
+          data-cy="next"
+          onClick={() => setCurrentIndex((currentIndex) => currentIndex + 1)}
+        >
+          Next
+        </Button>
       </Flex>
-    </>
+    </Flex>
   );
 }
 

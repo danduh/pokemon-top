@@ -72,7 +72,7 @@ const ruleForStyles = {
 const webpackRules = [ruleForTsx, ruleForMisc, ruleForHtml, ruleForStyles];
 
 const webpackExtensions = ['.tsx', '.ts', '.js'];
-
+console.log('Details webpack.config.mfe.ts');
 export default composePlugins(
   withNx(),
   withReact(),
