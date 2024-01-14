@@ -21,7 +21,9 @@
           "details/src/favicon.ico",
           "details/src/assets"
         ],
-        "styles": [],
+        "styles": [
+          "details/src/styles.scss"
+        ],
         "scripts": [],
         "webpackConfig": "details/webpack.config.ts"
       },

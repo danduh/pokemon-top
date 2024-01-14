@@ -7,7 +7,6 @@ const StyledApp = styled.div`
 `;
 
 export function App() {
-  console.log('http-mfe-react-element App');
   return (
     <StyledApp>
       <NxWelcome title="details" />
