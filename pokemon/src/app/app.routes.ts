@@ -15,7 +15,7 @@ export const appRoutes: Route[] = [
     path: 'details',
     component: WebComponentWrapper,
     data: {
-      remoteEntry: `http://localhost:4203/details/remoteEntry.js`,
+      remoteEntry: `http://localhost:4202/remoteEntry.js`,
       remoteName: 'details',
       exposedModule: './Module',
       elementName: 'mfe-react-details',

@@ -38,7 +38,7 @@ const webpackModuleFederationPlugin: ModuleFederationConfig = {
   library: { type: 'var', name: 'details' },
   //filename: 'remoteEntry.js',
   exposes: {
-    './Module': path.resolve(__dirname, './src/bootstrap.tsx'),
+    './Module': path.resolve(__dirname, './src/bootstrap-mfe.tsx'),
   },
   // shared: ['react', 'react-dom'],
 };
@@ -50,7 +50,7 @@ const ruleForTsx = {
     {
       loader: 'babel-loader',
       options: {
-        cacheDirectory: true,
+        // cacheDirectory: true,
         presets: ['@babel/react', '@babel/env'],
       },
     },
@@ -86,7 +86,11 @@ export default composePlugins(
     config.optimization.runtimeChunk = false; // Only needed to bypass a temporary bug
     config.module.rules = webpackRules;
     config.resolve.extensions = webpackExtensions;
-
+    config.optimization = {
+      splitChunks: {
+        chunks: 'all',
+      },
+    };
     return config;
   }
 );
