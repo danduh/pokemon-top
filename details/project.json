@@ -25,7 +25,7 @@
           "details/src/styles.scss"
         ],
         "scripts": [],
-        "webpackConfig": "details/webpack.config.ts"
+        "webpackConfig": "details/webpack.config.serve.ts"
       },
       "configurations": {
         "development": {
@@ -48,6 +48,39 @@
           "extractLicenses": true,
           "vendorChunk": false,
           "webpackConfig": "details/webpack.config.prod.ts"
+        }
+      }
+    },
+    "build-mfe": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "development",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/details",
+        "index": "details/src/index.html",
+        "baseHref": "/",
+        "main": "details/src/main.ts",
+        "tsConfig": "details/tsconfig.app.json",
+        "assets": [
+          "details/src/favicon.ico",
+          "details/src/assets"
+        ],
+        "styles": [],
+        "scripts": [],
+        "webpackConfig": "details/webpack.config.mfe.ts"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "buildTarget": "details:build:production"
         }
       }
     },
@@ -79,13 +112,13 @@
       "executor": "@nx/web:file-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "details:build",
+        "buildTarget": "details:build-mfe",
         "watch": false,
         "port": 4202
       },
       "configurations": {
         "development": {
-          "buildTarget": "details:build:development"
+          "buildTarget": "details:build-mfe:development"
         },
         "production": {
           "buildTarget": "details:build:production"

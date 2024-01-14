@@ -1,5 +1,5 @@
 {
     "microfront-angular": "http://localhost:4201/remoteEntry.mjs",
-    "details": "http://localhost:4202/remoteEntry.mjs",
+    "details": "http://localhost:4203/remoteEntry.js",
     "a14-remote": "http://localhost:4401/remoteEntry.mjs"
 }
