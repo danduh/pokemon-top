@@ -16,6 +16,7 @@
     "@angular/router": "~17.0.0",
     "@nx/angular": "^17.2.8",
     "@nx/web": "^17.2.8",
+    "@shellygo/cypress-test-utils": "^2.0.29",
     "@swc/helpers": "~0.5.2",
     "antd": "^5.13.0",
     "ng-zorro-antd": "^17.1.0",
