@@ -1,5 +1,8 @@
 import { then } from '@shellygo/cypress-test-utils/assertable';
-import PokemonDetails, { PokemonDetailsProps } from './PokemonDetails';
+import { Builder } from 'builder-pattern';
+import { Chance } from 'chance';
+import { IPokemon } from 'pokeapi-typescript';
+import PokemonDetails from './PokemonDetails';
 import { PokemonDetailsComponentDriver } from './PokemonDetails.test.driver';
 
 describe(PokemonDetails.name, () => {
@@ -7,16 +10,19 @@ describe(PokemonDetails.name, () => {
     new PokemonDetailsComponentDriver();
   beforeAndAfter();
 
-  let props: PokemonDetailsProps;
-
+  const chance = new Chance();
+  const pokemonResponse = Builder<IPokemon>().name(chance.word()).build();
   beforeEach(() => {
+    ({ beforeAndAfter, given, when, get } =
+      new PokemonDetailsComponentDriver());
     given.mockImageResponse('default.png');
+    given.mockPokemoResponse(pokemonResponse);
   });
 
   it('when setting index to 3, name should be venusaur', () => {
     given.index(3);
     when.render(PokemonDetails);
 
-    then(get.pokemonName()).shouldEqual('venusaur');
+    then(get.pokemonName()).shouldEqual(pokemonResponse.name);
   });
 });
