@@ -1,0 +1,6 @@
+<nz-card nzHoverable style="width:240px" [nzCover]="coverTemplate">
+  <nz-card-meta [nzTitle]=pokemon.name nzDescription="www.instagram.com"></nz-card-meta>
+</nz-card>
+<ng-template #coverTemplate>
+  <pokemon-picture [pokeId]="pokemon.id"></pokemon-picture>
+</ng-template>
