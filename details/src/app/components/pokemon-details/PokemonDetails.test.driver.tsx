@@ -40,10 +40,13 @@ export class PokemonDetailsComponentDriver {
         { ...this.props, ...props },
         children
       ),
+    clickNext: () => this.helper.when.click('next'),
+    clickPrev: () => this.helper.when.click('prev'),
   };
 
   get = {
     pictureSrc: () => this.helper.get.elementsAttribute('pokemon-image', 'src'),
     pokemonImage: () => this.helper.get.elementByTestId('pokemon-image'),
+    pokemonName: () => this.helper.get.elementsText('pokemon-name'),
   };
 }

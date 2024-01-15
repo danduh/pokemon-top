@@ -2,7 +2,12 @@
   "name": "@pokemon/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "cy:open": "nx run detail:component-test --watch",
+    "cy:run": "nx run detail:component-test --headless",
+    "cy:e2e-open": "nx run detail:e2e --watch",
+    "cy:e2e-run": "nx run detail:e2e --headless"
+  },
   "private": true,
   "dependencies": {
     "@angular-architects/module-federation-tools": "^17.0.1",
@@ -41,6 +46,7 @@
     "@angular/language-service": "~17.0.0",
     "@babel/core": "^7.14.5",
     "@babel/preset-react": "^7.14.5",
+    "@cypress/webpack-dev-server": "^2.0.0",
     "@nx/cypress": "17.2.8",
     "@nx/eslint": "17.2.8",
     "@nx/eslint-plugin": "17.2.8",
@@ -74,6 +80,7 @@
     "eslint-plugin-jsx-a11y": "6.7.1",
     "eslint-plugin-react": "7.32.2",
     "eslint-plugin-react-hooks": "4.6.0",
+    "html-webpack-plugin": "^5.5.0",
     "jest": "^29.4.1",
     "jest-environment-jsdom": "^29.4.1",
     "jest-preset-angular": "~13.1.4",
