@@ -1,19 +1,29 @@
 import { Component, Injector } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NxWelcomeComponent } from './nx-welcome.component';
-import { bootstrapApplication } from '@angular/platform-browser';
+import { SearchComponent } from '../search/search.component';
+import { NzContentComponent, NzFooterComponent, NzHeaderComponent, NzLayoutComponent } from 'ng-zorro-antd/layout';
+import { HeaderComponent } from '../components/header/header.component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, NxWelcomeComponent],
+  imports: [CommonModule, SearchComponent, NzLayoutComponent, NzHeaderComponent, NzContentComponent, NzFooterComponent, HeaderComponent],
   selector: 'pokemon-list-entry',
-  template: `<pokemon-nx-welcome></pokemon-nx-welcome>`,
+  styles:`
+        nz-header {
+        background: #ebebeb;
+        padding: 16px;
+      }
+  `,
+  template: `
+      <nz-layout>
+          <nz-header>
+              <pokemon-header></pokemon-header>
+          </nz-header>
+          <nz-content>
+          <pokemon-search></pokemon-search>
+          </nz-content>
+          <nz-footer>Footer</nz-footer>
+      </nz-layout>
+      `,
 })
-export class RemoteEntryComponent {
-  // constructor(private injector: Injector) {}
-  // static render(container: HTMLElement): void {
-  //   bootstrapApplication(RemoteEntryComponent, {
-  //     hostElement: container,
-  //   });
-  // }
-}
+export class RemoteEntryComponent {}
