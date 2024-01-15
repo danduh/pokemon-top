@@ -24,9 +24,9 @@ export function PokemonDetails(props: PokemonDetailsProps) {
   };
   return (
     <Flex gap="middle" align="center" vertical>
-      <h1 data-cy="name">{pokemon?.name}</h1>
+      <h1 data-cy="pokemon-name">{pokemon?.name}</h1>
       <img
-        data-cy="image"
+        data-cy="pokemon-image"
         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${currentIndex}.png`}
       ></img>
       <Flex gap="middle" justify="center" style={boxStyle}>
