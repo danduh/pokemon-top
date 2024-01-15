@@ -1,17 +1,14 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { PokemonCardComponent } from '../pokemon-card/pokemon-card.component';
 
 @Component({
   selector: 'pokemon-nx-welcome',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, PokemonCardComponent],
   template: `
     <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <h1>Welcome to pokemon! LIST</h1>
-        </div>
-      </div>
+        <pokemon-pokemon-card></pokemon-pokemon-card>
     </div>
   `,
   styles: [],
