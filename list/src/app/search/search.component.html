@@ -1,0 +1,5 @@
+<div class="main-container">
+<div *ngIf="pokemons" nz-row [nzGutter]="8">
+  <pokemon-pokemon-card *ngFor="let pokemon of pokemons | async; index as pokeId" [pokemon]="pokemon" [pokeId]="pokeId+1"></pokemon-pokemon-card>
+</div>
+</div>
