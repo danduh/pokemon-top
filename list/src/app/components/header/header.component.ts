@@ -15,13 +15,14 @@ import { PokemonService } from '../../services/pokemon.service';
 import { Observable, tap } from 'rxjs';
 import { NamedAPIResource } from 'pokenode-ts';
 import { NzFormControlComponent, NzFormDirective, NzFormItemComponent, NzFormLabelComponent } from 'ng-zorro-antd/form';
+import { NzButtonComponent } from 'ng-zorro-antd/button';
 
 @Component({
   selector: 'pokemon-header',
   standalone: true,
   imports: [CommonModule, FormsModule,
     NzInputDirective, NzSelectComponent, NzOptionComponent, NzFormDirective, NzFormItemComponent,
-    NzInputModule, NzFormControlComponent, ReactiveFormsModule, NzFormLabelComponent
+    NzInputModule, NzFormControlComponent, ReactiveFormsModule, NzFormLabelComponent, NzButtonComponent
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
@@ -53,6 +54,11 @@ export class HeaderComponent implements OnInit{
 
   formHandle(data: any){
     console.log(data);
+    if(!data.type?.name)return
     this.pokemonService.filterByTypeName(data.type.name)
+  }
+
+  navigateTo(){
+    console.log(this.validateForm.getRawValue().name)
   }
 }
