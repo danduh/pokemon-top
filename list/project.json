@@ -25,7 +25,8 @@
           "list/src/assets"
         ],
         "styles": [
-          "list/src/styles.scss"
+          "list/src/styles.scss",
+          "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
         ],
         "scripts": [],
         "customWebpackConfig": {

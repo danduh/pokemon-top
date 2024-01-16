@@ -2,13 +2,25 @@ import { Button, Card, Flex, List } from 'antd';
 
 import PokeAPI, { IPokemon } from 'pokeapi-typescript';
 import { useEffect, useState } from 'react';
+
 /* eslint-disable-next-line */
 export interface PokemonDetailsProps {
   index?: number;
 }
 
 export function PokemonDetails(props: PokemonDetailsProps) {
+  const urlParams = new URLSearchParams(window.location.search);
+
   const [currentIndex, setCurrentIndex] = useState(props.index || 1);
+
+  if(urlParams.has('name')){
+    console.log(urlParams.get('name'))
+    // get by name
+  } else if(urlParams.has('id')){
+    console.log(urlParams.get('id'))
+    // get by ID
+  }
+
   const [pokemon, setPokemon] = useState<IPokemon | undefined>(undefined);
 
   const fetchPokemon = async (index: number) => {
