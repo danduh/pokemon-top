@@ -3,7 +3,7 @@ import {
   WebComponentWrapper,
   WebComponentWrapperOptions,
 } from '@angular-architects/module-federation-tools';
-import { env } from '../environments/environments';
+import { env } from '../environments/environment';
 
 export const appRoutes: Route[] = [
   {
