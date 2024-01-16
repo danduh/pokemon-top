@@ -10,6 +10,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-architects/module-federation-runtime": "^17.0.1",
     "@angular-architects/module-federation-tools": "^17.0.1",
     "@angular/animations": "~17.0.0",
     "@angular/common": "~17.0.0",
