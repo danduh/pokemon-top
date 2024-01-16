@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  FormBuilder,
   FormControl,
   FormGroup,
   FormsModule,
@@ -10,12 +9,12 @@ import {
 } from '@angular/forms';
 import { NzInputDirective, NzInputModule } from 'ng-zorro-antd/input';
 import { NzOptionComponent, NzSelectComponent } from 'ng-zorro-antd/select';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PokemonService } from '../../services/pokemon.service';
 import { Observable, tap } from 'rxjs';
 import { NamedAPIResource } from 'pokenode-ts';
 import { NzFormControlComponent, NzFormDirective, NzFormItemComponent, NzFormLabelComponent } from 'ng-zorro-antd/form';
 import { NzButtonComponent } from 'ng-zorro-antd/button';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'pokemon-header',
@@ -39,7 +38,10 @@ export class HeaderComponent implements OnInit{
     name: [''],
     ability: ['']
 })
-  constructor(private pokemonService: PokemonService, private fb: NonNullableFormBuilder, private changeDetec: ChangeDetectorRef) {
+  constructor(private pokemonService: PokemonService,
+              private fb: NonNullableFormBuilder,
+              private changeDetec: ChangeDetectorRef,
+              private router: Router) {
 
   }
 
@@ -53,12 +55,14 @@ export class HeaderComponent implements OnInit{
   }
 
   formHandle(data: any){
-    console.log(data);
     if(!data.type?.name)return
     this.pokemonService.filterByTypeName(data.type.name)
   }
 
   navigateTo(){
-    console.log(this.validateForm.getRawValue().name)
+    this.router.navigate(
+      ['/details'],
+      { queryParams: { name: this.validateForm.getRawValue().name } }
+    );
   }
 }
