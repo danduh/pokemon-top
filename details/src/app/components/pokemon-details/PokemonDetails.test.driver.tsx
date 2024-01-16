@@ -1,5 +1,6 @@
 import { CypressHelper } from '@shellygo/cypress-test-utils';
 import { CypressReactComponentHelper } from '@shellygo/cypress-test-utils/react';
+import { IPokemon } from 'pokeapi-typescript';
 import type { Attributes, ReactNode } from 'react';
 import PokemonDetails, { PokemonDetailsProps } from './PokemonDetails';
 
@@ -17,6 +18,11 @@ export class PokemonDetailsComponentDriver {
 
   given = {
     index: (value: number) => (this.props.index = value),
+    mockPokemoResponse: (response: IPokemon) =>
+      this.helper.given.interceptAndMockResponse({
+        url: '**https://pokeapi.co/api/v2/pokemon/**',
+        response: response,
+      }),
     mockImageResponse: (fileName: string) =>
       this.helper.given.interceptAndMockResponse({
         url: '**/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/**',
