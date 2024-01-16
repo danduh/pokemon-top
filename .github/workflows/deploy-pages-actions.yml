@@ -32,9 +32,9 @@ jobs:
       - name: Build APPLication
         run: |
           npm i
-          npx nx run details:build:production --nx-skip-cache
-          npx nx run list:build:production --nx-skip-cache
-          npx nx run pokemon:build:production --nx-skip-cache
+          npx nx run details:build:production
+          npx nx run list:build:production
+          npx nx run pokemon:build:production
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
