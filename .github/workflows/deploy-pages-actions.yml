@@ -1,8 +1,6 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+name: Deploy App to Pages
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
 
@@ -34,14 +32,16 @@ jobs:
       - name: Build APPLication
         run: |
           npm i
-          npx nx build pokemon
+          npx nx run details:build
+          npx nx run list:build
+          npx nx run pokemon:build
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: '.'
+          path: 'dist/pokemon'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

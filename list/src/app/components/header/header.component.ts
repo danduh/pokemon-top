@@ -17,7 +17,7 @@ import { NzButtonComponent } from 'ng-zorro-antd/button';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'pokemon-header',
+  selector: 'pokemon-list-header',
   standalone: true,
   imports: [CommonModule, FormsModule,
     NzInputDirective, NzSelectComponent, NzOptionComponent, NzFormDirective, NzFormItemComponent,

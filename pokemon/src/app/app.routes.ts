@@ -1,10 +1,9 @@
-import { NxWelcomeComponent } from './nx-welcome.component';
 import { Route } from '@angular/router';
-import { loadRemoteModule } from '@nx/angular/mf';
 import {
   WebComponentWrapper,
   WebComponentWrapperOptions,
 } from '@angular-architects/module-federation-tools';
+import { env } from '../environments/environments';
 
 export const appRoutes: Route[] = [
   {
@@ -15,15 +14,15 @@ export const appRoutes: Route[] = [
     path: 'details',
     component: WebComponentWrapper,
     data: {
-      remoteEntry: `http://localhost:4202/remoteEntry.js`,
+      remoteEntry: env.mfesOrigins.details,
       remoteName: 'details',
       exposedModule: './Module',
       elementName: 'mfe-react-details',
     } as WebComponentWrapperOptions,
   },
-
   {
     path: '',
-    component: NxWelcomeComponent,
+    pathMatch: 'full',
+    redirectTo: '/list',
   },
 ];

@@ -1,4 +1,4 @@
-import { Component, Injector } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SearchComponent } from '../search/search.component';
 import { NzContentComponent, NzFooterComponent, NzHeaderComponent, NzLayoutComponent } from 'ng-zorro-antd/layout';
@@ -17,7 +17,7 @@ import { HeaderComponent } from '../components/header/header.component';
   template: `
       <nz-layout>
           <nz-header>
-              <pokemon-header></pokemon-header>
+              <pokemon-list-header></pokemon-list-header>
           </nz-header>
           <nz-content>
           <pokemon-search></pokemon-search>

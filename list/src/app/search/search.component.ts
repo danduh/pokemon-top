@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { PokemonCardComponent } from '../pokemon-card/pokemon-card.component';
 import { NzRowDirective } from 'ng-zorro-antd/grid';
 import { PokemonService } from '../services/pokemon.service';
-import { Observable, tap } from 'rxjs';
 
 @Component({
   selector: 'pokemon-search',

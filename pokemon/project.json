@@ -37,6 +37,15 @@
               "maximumError": "4kb"
             }
           ],
+          "assets": ["pokemon/src/favicon.ico", "pokemon/src/assets",
+            { "input": "dist/details", "glob": "**/*", "output": "assets/details" },
+            { "input": "dist/list", "glob": "**/*", "output": "assets/list" }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "pokemon/src/environments/environment.ts",
+              "with": "pokemon/src/environments/environment.prod.ts"
+            }],
           "outputHashing": "all",
           "customWebpackConfig": {
             "path": "pokemon/webpack.prod.config.ts"

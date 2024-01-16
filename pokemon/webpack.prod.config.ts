@@ -13,4 +13,9 @@ export default withModuleFederation({
    *   ['app2', 'https://app2.example.com'],
    * ]
    */
+  remotes: [
+    ['list', '/assets/list/remoteEntry.mjs'],
+    ['details', '/assets/details/remoteEntry.js']
+  ],
+
 });
