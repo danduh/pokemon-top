@@ -4,9 +4,8 @@ import styled from 'styled-components';
 import PokemonDetails from './components/pokemon-details/PokemonDetails';
 
 const StyledApp = styled.div`
-  background-color: #282c34;
-  color: white;
-  height: 95vh;
+  background-color: #f0f3fa;
+  height: 98vh;
 `;
 
 export function App() {

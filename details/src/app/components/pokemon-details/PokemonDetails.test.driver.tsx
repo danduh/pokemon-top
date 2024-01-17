@@ -8,7 +8,7 @@ export class PokemonDetailsComponentDriver {
   private reactComponentHelper = new CypressReactComponentHelper();
 
   private props: PokemonDetailsProps = {
-    index: '0',
+    index: 0,
   };
 
   beforeAndAfter = () => {
@@ -16,7 +16,7 @@ export class PokemonDetailsComponentDriver {
   };
 
   given = {
-    index: (value: string) => (this.props.index = value),
+    index: (value: number) => (this.props.index = value),
     mockPokemoResponse: (response: Pokemon) =>
       this.helper.given.interceptAndMockResponse({
         url: '**https://pokeapi.co/api/v2/pokemon/**',

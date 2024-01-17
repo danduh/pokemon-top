@@ -5,7 +5,7 @@ import { useParams } from 'react-router';
 import { Pokemon } from 'pokenode-ts';
 import { useEffect, useState } from 'react';
 export interface PokemonDetailsProps {
-  index?: string;
+  index?: number;
 }
 
 export function PokemonDetails() {
