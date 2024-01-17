@@ -9,12 +9,16 @@ on:
 permissions:
   checks: write
   pull-requests: write
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
       - run: npm ci
       - name: Build Details
         if: always()

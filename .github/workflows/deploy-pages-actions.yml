@@ -1,5 +1,8 @@
 name: Deploy App to Pages
 
+env:
+  IS_FOR_GP: True
+
 on:
   push:
     branches: ["main"]
