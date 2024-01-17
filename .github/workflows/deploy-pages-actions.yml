@@ -34,7 +34,8 @@ jobs:
           npm i
           npx nx run details:build:production
           npx nx run list:build:production
-          npx nx run pokemon:build:production --base-href https://danduh.github.io/pokemon-top/
+          npx nx run pokemon:build:production --base-href /pokemon-top/
+          cp dist/pokemon/index.html dist/pokemon/404.html
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
