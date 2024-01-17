@@ -1,31 +1,23 @@
 import { Button, Card, Flex, List } from 'antd';
+import { useParams } from 'react-router';
 
 import PokeAPI, { IPokemon } from 'pokeapi-typescript';
 import { useEffect, useState } from 'react';
 
-/* eslint-disable-next-line */
 export interface PokemonDetailsProps {
-  index?: number;
+  index?: string;
 }
 
-export function PokemonDetails(props: PokemonDetailsProps) {
-  const urlParams = new URLSearchParams(window.location.search);
+export function PokemonDetails() {
+  const { id } = useParams();
 
-  const [currentIndex, setCurrentIndex] = useState(props.index || 1);
-
-  if(urlParams.has('name')){
-    console.log(urlParams.get('name'))
-    // get by name
-  } else if(urlParams.has('id')){
-    console.log(urlParams.get('id'))
-    // get by ID
-  }
-
+  const [currentIndex, setCurrentIndex] = useState<number>(Number(id) || 1);
   const [pokemon, setPokemon] = useState<IPokemon | undefined>(undefined);
 
   const fetchPokemon = async (index: number) => {
     const pokemon = await PokeAPI.Pokemon.resolve(index);
     setPokemon(pokemon);
+    setCurrentIndex(pokemon.id);
   };
 
   useEffect(() => {
@@ -37,8 +29,8 @@ export function PokemonDetails(props: PokemonDetailsProps) {
   };
   const listStyle: React.CSSProperties = {
     overflow: 'auto',
-    height: '300px',
-    width: '240px',
+    height: '15rem',
+    width: '12rem',
   };
 
   return (
@@ -64,7 +56,10 @@ export function PokemonDetails(props: PokemonDetailsProps) {
           size="large"
           shape="round"
           data-cy="next"
-          onClick={() => setCurrentIndex((currentIndex) => currentIndex + 1)}
+          onClick={() => {
+            debugger;
+            setCurrentIndex((currentIndex) => currentIndex + 1);
+          }}
         >
           Next
         </Button>
@@ -87,17 +82,6 @@ export function PokemonDetails(props: PokemonDetailsProps) {
             dataSource={pokemon?.types}
             renderItem={(item) => (
               <List.Item data-cy="pokemon-type">{item.type.name}</List.Item>
-            )}
-          />
-        </Card>
-        <Card title="Held Items" style={boxStyle}>
-          <List
-            style={listStyle}
-            dataSource={pokemon?.held_items}
-            renderItem={(item) => (
-              <List.Item data-cy="pokemon-held-item">
-                {item.item.name}
-              </List.Item>
             )}
           />
         </Card>
