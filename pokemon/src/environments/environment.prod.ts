@@ -1,7 +1,7 @@
-export const env = {
+export const environment = {
   isProd: true,
   mfesOrigins: {
-    details: "/assets/details/remoteEntry.js",
+    details: "/pokemon-top/assets/details/remoteEntry.js",
   },
-  manifestPath:'/pokemon-top/assets/module-federation.manifest.json'
+  manifestPath:'/pokemon-top/assets/module-federation.manifest.json',
 }

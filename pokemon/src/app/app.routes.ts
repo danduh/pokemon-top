@@ -3,7 +3,7 @@ import {
   WebComponentWrapper,
   WebComponentWrapperOptions,
 } from '@angular-architects/module-federation-tools';
-import { env } from '../environments/environment';
+import { environment } from '../environments/environment';
 
 export const appRoutes: Route[] = [
   {
@@ -14,7 +14,7 @@ export const appRoutes: Route[] = [
     path: 'details',
     component: WebComponentWrapper,
     data: {
-      remoteEntry: env.mfesOrigins.details,
+      remoteEntry: environment.mfesOrigins.details,
       remoteName: 'details',
       exposedModule: './Module',
       elementName: 'mfe-react-details',
