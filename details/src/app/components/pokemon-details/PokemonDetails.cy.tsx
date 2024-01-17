@@ -1,7 +1,7 @@
 import { then } from '@shellygo/cypress-test-utils/assertable';
 import { Builder } from 'builder-pattern';
 import { Chance } from 'chance';
-import { IPokemon } from 'pokeapi-typescript';
+import { Pokemon } from 'pokenode-ts';
 import PokemonDetails from './PokemonDetails';
 import { PokemonDetailsComponentDriver } from './PokemonDetails.test.driver';
 
@@ -11,7 +11,7 @@ describe(PokemonDetails.name, () => {
   beforeAndAfter();
 
   const chance = new Chance();
-  const pokemonResponse = Builder<IPokemon>().name(chance.word()).build();
+  const pokemonResponse = Builder<Pokemon>().name(chance.word()).build();
   beforeEach(() => {
     ({ beforeAndAfter, given, when, get } =
       new PokemonDetailsComponentDriver());

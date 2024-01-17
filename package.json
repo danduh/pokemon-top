@@ -28,7 +28,6 @@
     "axios": "^1.6.5",
     "axios-cache-interceptor": "^1.4.1",
     "ng-zorro-antd": "^17.1.0",
-    "pokeapi-typescript": "^2.1.0",
     "pokenode-ts": "^1.20.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",

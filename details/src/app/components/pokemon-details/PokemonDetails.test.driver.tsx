@@ -1,9 +1,8 @@
 import { CypressHelper } from '@shellygo/cypress-test-utils';
 import { CypressReactComponentHelper } from '@shellygo/cypress-test-utils/react';
-import { IPokemon } from 'pokeapi-typescript';
+import { Pokemon } from 'pokenode-ts';
 import type { Attributes, ReactNode } from 'react';
 import PokemonDetails, { PokemonDetailsProps } from './PokemonDetails';
-
 export class PokemonDetailsComponentDriver {
   private helper = new CypressHelper();
   private reactComponentHelper = new CypressReactComponentHelper();
@@ -18,7 +17,7 @@ export class PokemonDetailsComponentDriver {
 
   given = {
     index: (value: string) => (this.props.index = value),
-    mockPokemoResponse: (response: IPokemon) =>
+    mockPokemoResponse: (response: Pokemon) =>
       this.helper.given.interceptAndMockResponse({
         url: '**https://pokeapi.co/api/v2/pokemon/**',
         response: response,
