@@ -34,7 +34,7 @@ jobs:
           npm i
           npx nx run details:build:production
           npx nx run list:build:production
-          npx nx run pokemon:build:production
+          npx nx run pokemon:build:production --bae-href https://danduh.github.io/pokemon-top/
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
