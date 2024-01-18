@@ -8,7 +8,7 @@ import {
   PokemonAbility,
   PokemonSprites,
 } from 'pokenode-ts';
-import PokemonDetails from './PokemonDetails';
+import { PokemonDetails } from './PokemonDetails';
 import { PokemonDetailsComponentDriver } from './PokemonDetails.test.driver';
 
 describe('When rendering PokemonDetails component', () => {
