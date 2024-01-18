@@ -1,9 +1,13 @@
 import { Button, Card, Flex, List } from 'antd';
-import { PokemonClient } from 'pokenode-ts';
-import { useParams } from 'react-router';
-
-import { Pokemon } from 'pokenode-ts';
+import {
+  Pokemon,
+  PokemonAbility,
+  PokemonClient,
+  PokemonMove,
+  PokemonType,
+} from 'pokenode-ts';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
 export interface PokemonDetailsProps {
   index?: number;
 }
@@ -66,10 +70,7 @@ export function PokemonDetails() {
           size="large"
           shape="round"
           data-cy="next"
-          onClick={() => {
-            debugger;
-            setCurrentIndex((currentIndex) => currentIndex + 1);
-          }}
+          onClick={() => setCurrentIndex((currentIndex) => currentIndex + 1)}
         >
           Next
         </Button>
@@ -79,7 +80,7 @@ export function PokemonDetails() {
           <List
             style={listStyle}
             dataSource={pokemon?.abilities}
-            renderItem={(item) => (
+            renderItem={(item: PokemonAbility) => (
               <List.Item data-cy="pokemon-ability">
                 {item.ability.name}
               </List.Item>
@@ -90,7 +91,7 @@ export function PokemonDetails() {
           <List
             style={listStyle}
             dataSource={pokemon?.types}
-            renderItem={(item) => (
+            renderItem={(item: PokemonType) => (
               <List.Item data-cy="pokemon-type">{item.type.name}</List.Item>
             )}
           />
@@ -99,7 +100,7 @@ export function PokemonDetails() {
           <List
             style={listStyle}
             dataSource={pokemon?.moves}
-            renderItem={(item) => (
+            renderItem={(item: PokemonMove) => (
               <List.Item data-cy="pokemon-move">{item.move.name}</List.Item>
             )}
           />
