@@ -2,7 +2,7 @@ import { CypressHelper } from '@shellygo/cypress-test-utils';
 import { CypressReactComponentHelper } from '@shellygo/cypress-test-utils/react';
 import { Pokemon } from 'pokenode-ts';
 import type { Attributes, ReactNode } from 'react';
-import PokemonDetails, { PokemonDetailsProps } from './PokemonDetails';
+import { PokemonDetails, PokemonDetailsProps } from './PokemonDetails';
 export class PokemonDetailsComponentDriver {
   private helper = new CypressHelper();
   private reactComponentHelper = new CypressReactComponentHelper();
@@ -53,5 +53,9 @@ export class PokemonDetailsComponentDriver {
     pictureSrc: () => this.helper.get.elementsAttribute('pokemon-image', 'src'),
     pokemonImage: () => this.helper.get.elementByTestId('pokemon-image'),
     pokemonName: () => this.helper.get.elementsText('pokemon-name'),
+    pokemonAbilityText: (index: number) =>
+      this.helper.get.elementsText('pokemon-ability', index),
+    numberOfAbilities: () =>
+      this.helper.get.numberOfElements('pokemon-ability'),
   };
 }

@@ -109,5 +109,3 @@ export function PokemonDetails() {
     </Flex>
   );
 }
-
-export default PokemonDetails;
