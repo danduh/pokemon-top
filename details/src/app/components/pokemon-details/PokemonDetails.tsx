@@ -1,35 +1,38 @@
 import { Button, Card, Flex, List } from 'antd';
-
-import PokeAPI, { IPokemon } from 'pokeapi-typescript';
+import {
+  Pokemon,
+  PokemonAbility,
+  PokemonClient,
+  PokemonMove,
+  PokemonType,
+} from 'pokenode-ts';
 import { useEffect, useState } from 'react';
-
-/* eslint-disable-next-line */
+import { useParams } from 'react-router';
 export interface PokemonDetailsProps {
   index?: number;
 }
 
-export function PokemonDetails(props: PokemonDetailsProps) {
-  const urlParams = new URLSearchParams(window.location.search);
+export function PokemonDetails() {
+  const { id } = useParams();
 
-  const [currentIndex, setCurrentIndex] = useState(props.index || 1);
+  const [currentIndex, setCurrentIndex] = useState<number>(Number(id) || 1);
+  const [pokemon, setPokemon] = useState<Pokemon | undefined>(undefined);
+  const api = new PokemonClient();
 
-  if(urlParams.has('name')){
-    console.log(urlParams.get('name'))
-    // get by name
-  } else if(urlParams.has('id')){
-    console.log(urlParams.get('id'))
-    // get by ID
-  }
-
-  const [pokemon, setPokemon] = useState<IPokemon | undefined>(undefined);
-
-  const fetchPokemon = async (index: number) => {
-    const pokemon = await PokeAPI.Pokemon.resolve(index);
+  const fetchPokemonByIndex = async (index: number) => {
+    const pokemon: Pokemon = await api.getPokemonById(index);
     setPokemon(pokemon);
+    setCurrentIndex(pokemon.id);
+  };
+
+  const fetchPokemonByName = async (name: string) => {
+    const pokemon: Pokemon = await api.getPokemonByName(name);
+    setPokemon(pokemon);
+    setCurrentIndex(pokemon.id);
   };
 
   useEffect(() => {
-    fetchPokemon(currentIndex);
+    fetchPokemonByIndex(currentIndex);
   }, [currentIndex]);
 
   const boxStyle: React.CSSProperties = {
@@ -37,15 +40,18 @@ export function PokemonDetails(props: PokemonDetailsProps) {
   };
   const listStyle: React.CSSProperties = {
     overflow: 'auto',
-    height: '300px',
-    width: '240px',
+    height: '15rem',
+    width: '12rem',
   };
 
   return (
     <Flex gap="middle" align="center" vertical>
       <img
         data-cy="pokemon-image"
-        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${currentIndex}.png`}
+        src={`${
+          pokemon?.sprites.other?.['official-artwork'].front_default ||
+          pokemon?.sprites.front_default
+        }`}
       ></img>
       <h1 data-cy="pokemon-name">{pokemon?.name}</h1>
 
@@ -74,7 +80,7 @@ export function PokemonDetails(props: PokemonDetailsProps) {
           <List
             style={listStyle}
             dataSource={pokemon?.abilities}
-            renderItem={(item) => (
+            renderItem={(item: PokemonAbility) => (
               <List.Item data-cy="pokemon-ability">
                 {item.ability.name}
               </List.Item>
@@ -85,19 +91,8 @@ export function PokemonDetails(props: PokemonDetailsProps) {
           <List
             style={listStyle}
             dataSource={pokemon?.types}
-            renderItem={(item) => (
+            renderItem={(item: PokemonType) => (
               <List.Item data-cy="pokemon-type">{item.type.name}</List.Item>
-            )}
-          />
-        </Card>
-        <Card title="Held Items" style={boxStyle}>
-          <List
-            style={listStyle}
-            dataSource={pokemon?.held_items}
-            renderItem={(item) => (
-              <List.Item data-cy="pokemon-held-item">
-                {item.item.name}
-              </List.Item>
             )}
           />
         </Card>
@@ -105,7 +100,7 @@ export function PokemonDetails(props: PokemonDetailsProps) {
           <List
             style={listStyle}
             dataSource={pokemon?.moves}
-            renderItem={(item) => (
+            renderItem={(item: PokemonMove) => (
               <List.Item data-cy="pokemon-move">{item.move.name}</List.Item>
             )}
           />
@@ -114,5 +109,3 @@ export function PokemonDetails(props: PokemonDetailsProps) {
     </Flex>
   );
 }
-
-export default PokemonDetails;
