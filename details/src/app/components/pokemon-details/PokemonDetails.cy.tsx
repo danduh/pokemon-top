@@ -17,8 +17,10 @@ describe('When rendering PokemonDetails component', () => {
   beforeAndAfter();
 
   const chance = new Chance();
+  const id = chance.integer({ min: 1, max: 100 });
   const pokemonResponse = Builder<Pokemon>()
     .name(chance.word())
+    .id(id)
     .abilities(
       chance.n(
         () =>
@@ -46,18 +48,34 @@ describe('When rendering PokemonDetails component', () => {
       new PokemonDetailsComponentDriver());
     given.mockImageResponse('default.png');
     given.mockPokemoResponse(pokemonResponse);
-    when.render(PokemonDetails);
+    given.id(id);
+  });
+
+  it('should fetch pokemon by id', () => {
+    when.render(<PokemonDetails />);
+    then(get.pokemonRequestUrl()).shouldEndWith(`/${id}`);
+  });
+
+  it('should fetch pokemon by name', () => {
+    const name = chance.word();
+    debugger;
+    given.name(name);
+    when.render(<PokemonDetails />);
+    then(get.pokemonRequestUrl()).shouldEndWith(`/${name}`);
   });
 
   it('pokemon name should be displayed', () => {
+    when.render(<PokemonDetails />);
     then(get.pokemonName()).shouldEqual(pokemonResponse.name);
   });
 
   it('should render all abilities', () => {
+    when.render(<PokemonDetails />);
     then(get.numberOfAbilities()).shouldEqual(10);
   });
 
   it('should render ability name', () => {
+    when.render(<PokemonDetails />);
     then(get.pokemonAbilityText(2)).shouldEqual(
       pokemonResponse.abilities[2].ability.name
     );

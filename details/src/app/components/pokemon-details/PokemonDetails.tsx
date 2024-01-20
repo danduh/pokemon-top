@@ -8,32 +8,26 @@ import {
 } from 'pokenode-ts';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-export interface PokemonDetailsProps {
-  index?: number;
-}
 
 export function PokemonDetails() {
-  const { id } = useParams();
-
-  const [currentIndex, setCurrentIndex] = useState<number>(Number(id) || 1);
+  const params = useParams();
+  const [name, setName] = useState<string | undefined>(params.name);
+  const [currentIndex, setCurrentIndex] = useState<number>(Number(params.id));
   const [pokemon, setPokemon] = useState<Pokemon | undefined>(undefined);
   const api = new PokemonClient();
 
-  const fetchPokemonByIndex = async (index: number) => {
-    const pokemon: Pokemon = await api.getPokemonById(index);
+  const fetchPokemon = async (name?: string, id?: number) => {
+    const pokemon: Pokemon = await (name
+      ? api.getPokemonByName(name)
+      : api.getPokemonById(currentIndex || 1));
     setPokemon(pokemon);
     setCurrentIndex(pokemon.id);
-  };
-
-  const fetchPokemonByName = async (name: string) => {
-    const pokemon: Pokemon = await api.getPokemonByName(name);
-    setPokemon(pokemon);
-    setCurrentIndex(pokemon.id);
+    setName(undefined);
   };
 
   useEffect(() => {
-    fetchPokemonByIndex(currentIndex);
-  }, [currentIndex]);
+    fetchPokemon(name, currentIndex);
+  }, [name, currentIndex]);
 
   const boxStyle: React.CSSProperties = {
     width: '100%',

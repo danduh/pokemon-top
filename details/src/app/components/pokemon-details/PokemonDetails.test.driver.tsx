@@ -1,50 +1,56 @@
 import { CypressHelper } from '@shellygo/cypress-test-utils';
 import { CypressReactComponentHelper } from '@shellygo/cypress-test-utils/react';
 import { Pokemon } from 'pokenode-ts';
-import type { Attributes, ReactNode } from 'react';
-import { PokemonDetails, PokemonDetailsProps } from './PokemonDetails';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
+
 export class PokemonDetailsComponentDriver {
   private helper = new CypressHelper();
   private reactComponentHelper = new CypressReactComponentHelper();
 
-  private props: PokemonDetailsProps = {
-    index: 0,
-  };
-
+  private id: string = '1';
+  private name: string | undefined = undefined;
   beforeAndAfter = () => {
     this.helper.beforeAndAfter();
   };
 
   given = {
-    index: (value: number) => (this.props.index = value),
+    id: (value: string) => (this.id = value),
+    name: (value: string) => (this.name = value),
     mockPokemoResponse: (response: Pokemon) =>
       this.helper.given.interceptAndMockResponse({
         url: '**https://pokeapi.co/api/v2/pokemon/**',
         response: response,
+        alias: 'pokemon',
       }),
     mockImageResponse: (fileName: string) =>
       this.helper.given.interceptAndMockResponse({
         url: '**/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/**',
         response: { fixture: fileName },
+        alias: 'pokemonImage',
       }),
     missingImage: () =>
       this.helper.given.interceptAndMockResponse({
         url: '**/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/**',
         response: { headers: 404 },
+        alias: 'pokemonImage',
       }),
   };
 
   when = {
-    render: (
-      type: typeof PokemonDetails,
-      props?: (Attributes & Partial<PokemonDetailsProps>) | null,
-      ...children: ReactNode[]
-    ) =>
-      this.reactComponentHelper.when.mount(
-        type,
-        { ...this.props, ...props },
-        children
-      ),
+    render: (component: React.ReactNode) => {
+      debugger;
+      const path = this.name ? `/name/:name` : `/id/:id`;
+      const route = this.name ? `/name/${this.name}` : `/id/${this.id}`;
+      window.history.pushState({}, '', route);
+      const Wrapped = (
+        <MemoryRouter initialEntries={[route]}>
+          <Routes>
+            <Route element={component} path={path} />
+          </Routes>
+        </MemoryRouter>
+      );
+      this.reactComponentHelper.when.mountComponent(Wrapped);
+    },
     clickNext: () => this.helper.when.click('next'),
     clickPrev: () => this.helper.when.click('prev'),
   };
@@ -57,5 +63,6 @@ export class PokemonDetailsComponentDriver {
       this.helper.get.elementsText('pokemon-ability', index),
     numberOfAbilities: () =>
       this.helper.get.numberOfElements('pokemon-ability'),
+    pokemonRequestUrl: () => this.helper.get.requestUrl('pokemon'),
   };
 }
