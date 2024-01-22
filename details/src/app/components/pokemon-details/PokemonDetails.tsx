@@ -26,7 +26,7 @@ export function PokemonDetails() {
   };
 
   useEffect(() => {
-    fetchPokemon(name, currentIndex);
+    if (currentIndex !== pokemon?.id) fetchPokemon(name, currentIndex);
   }, [name, currentIndex]);
 
   const boxStyle: React.CSSProperties = {
