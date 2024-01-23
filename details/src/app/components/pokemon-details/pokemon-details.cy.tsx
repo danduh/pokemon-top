@@ -8,8 +8,8 @@ import {
   PokemonAbility,
   PokemonSprites,
 } from 'pokenode-ts';
-import { PokemonDetails } from './PokemonDetails';
-import { PokemonDetailsComponentDriver } from './PokemonDetails.test.driver';
+import { PokemonDetails } from './pokemon-details';
+import { PokemonDetailsComponentDriver } from './pokemon-details.test.driver';
 
 describe('When rendering PokemonDetails component', () => {
   let { beforeAndAfter, given, when, get } =

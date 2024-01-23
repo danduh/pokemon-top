@@ -8,22 +8,15 @@
   "targets": {
     "build": {
       "executor": "@nx/angular:webpack-browser",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/list",
         "index": "list/src/index.html",
         "main": "list/src/main.ts",
-        "polyfills": [
-          "zone.js"
-        ],
+        "polyfills": ["zone.js"],
         "tsConfig": "list/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": [
-          "list/src/favicon.ico",
-          "list/src/assets"
-        ],
+        "assets": ["list/src/favicon.ico", "list/src/assets"],
         "styles": [
           "list/src/styles.scss",
           "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
@@ -87,15 +80,11 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
-      ],
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
         "jestConfig": "list/jest.config.ts"
       }
@@ -115,6 +104,15 @@
         "production": {
           "buildTarget": "list:build:production"
         }
+      }
+    },
+    "component-test": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "list/cypress.config.ts",
+        "testingType": "component",
+        "skipServe": true,
+        "devServerTarget": "list:build"
       }
     }
   }

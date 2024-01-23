@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { PokemonDetails } from './components/pokemon-details/PokemonDetails';
+import { PokemonDetails } from './components/pokemon-details/pokemon-details';
 
 const StyledApp = styled.div`
   background-color: #f0f3fa;

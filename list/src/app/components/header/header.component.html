@@ -1,24 +1,35 @@
 <div>
   <form nz-form [nzLayout]="'inline'" [formGroup]="validateForm">
     <nz-form-item>
-      <nz-form-label nzFor="pokemon-name"  class="label">Insert name or ID</nz-form-label>
+      <nz-form-label nzFor="pokemon-name" class="label"
+        >Insert name or ID</nz-form-label
+      >
       <nz-form-control nzErrorTip="Please input name or ID">
         <nz-input-group>
-          <input formControlName="name" nz-input placeholder="Name or ID" />
+          <input
+            data-cy="name-id-input"
+            formControlName="name"
+            nz-input
+            placeholder="Name or ID"
+          />
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-control nzErrorTip="Please input name or ID">
-        <button nz-button (click)="navigateTo()">Go To</button>
+        <button nz-button (click)="navigateTo()" data-cy="go-to">Go To</button>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label nzFor="pokemon-type">Filter pokemon type</nz-form-label>
       <nz-form-control nzErrorTip="Filter by type:">
         <nz-input-group>
-          <nz-select formControlName="type">
-            <nz-option *ngFor="let type of types|async" [nzValue]="type" [nzLabel]="type.name"></nz-option>
+          <nz-select formControlName="type" data-cy="type">
+            <nz-option
+              *ngFor="let type of types | async"
+              [nzValue]="type"
+              [nzLabel]="type.name"
+            ></nz-option>
           </nz-select>
         </nz-input-group>
       </nz-form-control>
