@@ -1,12 +1,19 @@
+import {
+  BrowserAnimationsModule,
+  NoopAnimationsModule,
+} from '@angular/platform-browser/animations';
+import { then } from '@shellygo/cypress-test-utils/assertable';
 import { Chance } from 'chance';
 import { PictureComponent } from './picture.component';
 import { PictureComponentDriver } from './picture.component.test.driver';
 describe('PictureComponent Tests', () => {
-  const testConfig = {};
+  const testConfig = {
+    imports: [BrowserAnimationsModule, NoopAnimationsModule],
+  };
 
   const chance = new Chance();
 
-  let { when, given, get, then, beforeAndAfter } = new PictureComponentDriver();
+  let { when, given, get, beforeAndAfter } = new PictureComponentDriver();
   beforeAndAfter();
 
   beforeEach(() => {

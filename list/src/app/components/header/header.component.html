@@ -24,12 +24,14 @@
       <nz-form-label nzFor="pokemon-type">Filter pokemon type</nz-form-label>
       <nz-form-control nzErrorTip="Filter by type:">
         <nz-input-group>
-          <nz-select formControlName="type" data-cy="type">
+          <nz-select formControlName="type" data-cy="types">
             <nz-option
+              nzCustomContent
               *ngFor="let type of types | async"
               [nzValue]="type"
               [nzLabel]="type.name"
-            ></nz-option>
+              ><span data-cy="type-option">{{ type.name }}</span></nz-option
+            >
           </nz-select>
         </nz-input-group>
       </nz-form-control>

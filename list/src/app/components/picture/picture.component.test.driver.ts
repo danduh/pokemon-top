@@ -1,17 +1,8 @@
 import type { Type } from '@angular/core';
 import { CypressHelper } from '@shellygo/cypress-test-utils';
 import { CypressAngularComponentHelper } from '@shellygo/cypress-test-utils/angular';
-import { Assertable, then } from '@shellygo/cypress-test-utils/assertable';
 import { MountConfig } from 'cypress/angular';
 import { PictureComponent } from './picture.component';
-
-export class PictureComponentAssertable<T> extends Assertable<T> {
-  shouldWhatever = () =>
-    then(
-      this.chainable.pipe((text) => text!.toString().trim())
-      // this.chainable.then((text) => text!.toString().trim())
-    ).shouldStartWith('data:image/png;');
-}
 
 export class PictureComponentDriver {
   private helper = new CypressHelper();
@@ -22,9 +13,6 @@ export class PictureComponentDriver {
   beforeAndAfter = () => {
     this.helper.beforeAndAfter();
   };
-
-  then = (chainable: Cypress.Chainable) =>
-    new PictureComponentAssertable(chainable);
 
   given = {
     pokemonID: (value: number) => (this.componentProperties.pokeId = value),

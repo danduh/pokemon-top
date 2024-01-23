@@ -16,6 +16,7 @@ export class HeaderComponentDriver {
 
   private mockPokemonService: Partial<PokemonService> = {
     pokemonTypes: new BehaviorSubject([] as NamedAPIResource[]),
+    loadTypes: () => {},
     // pokemons: new BehaviorSubject([] as BetterPokemon[]),
   };
 
@@ -56,12 +57,14 @@ export class HeaderComponentDriver {
     typeIDorName: (value: string) =>
       this.helper.when.type('name-id-input', value),
     clickGo: () => this.helper.when.click('go-to'),
+    clickTypesList: () => this.helper.when.click('types'),
   };
 
   get = {
     mockPokemonService: () => this.mockPokemonService,
     mockRouter: () => this.mockRouter,
-    typeOptionText: () => this.helper.get.elementsText('type-option'),
+    typeOptionText: (index: number) =>
+      this.helper.get.elementsText('type-option', index),
     numberOfTypeOptions: () => this.helper.get.numberOfElements('type-option'),
     navigateByUrlSpy: () => this.helper.get.spy('navigateByUrl'),
   };
