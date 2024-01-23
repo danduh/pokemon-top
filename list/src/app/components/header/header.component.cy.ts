@@ -19,12 +19,10 @@ describe('HeaderComponent Tests', () => {
 
   it('given types should render types list', () => {
     given.types(['fire', 'water', 'grass']);
-    given.spyOnNavigate();
+    given.spyOnNavigateByUrl();
     when.render(HeaderComponent, testConfig);
     when.typeIDorName('9');
     when.clickGo();
-    then(get.navigateSpy()).shouldHaveBeenCalledWith(['/details/name/9']);
-    // when.selectType('fire');
-    // then(get.numberOfTypeOptions()).shouldEqual(3);
+    then(get.navigateByUrlSpy()).shouldHaveBeenCalledWith('/details/name/9');
   });
 });

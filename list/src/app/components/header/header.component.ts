@@ -73,8 +73,8 @@ export class HeaderComponent implements OnInit {
   }
 
   navigateTo() {
-    this.router.navigate([
-      `/details/name/${this.validateForm.getRawValue().name}`,
-    ]);
+    this.router.navigateByUrl(
+      `/details/name/${this.validateForm.getRawValue().name}`
+    );
   }
 }

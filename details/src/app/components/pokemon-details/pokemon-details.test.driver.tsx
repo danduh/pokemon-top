@@ -38,7 +38,6 @@ export class PokemonDetailsComponentDriver {
 
   when = {
     render: (component: React.ReactNode) => {
-      debugger;
       const path = this.name ? `/name/:name` : `/id/:id`;
       const route = this.name ? `/name/${this.name}` : `/id/${this.id}`;
       window.history.pushState({}, '', route);

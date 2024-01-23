@@ -1,13 +1,12 @@
-import { then } from '@shellygo/cypress-test-utils/assertable';
 import { Chance } from 'chance';
 import { PictureComponent } from './picture.component';
-import { PokemonImageComponentDriver as PictureComponentDriver } from './picture.component.test.driver';
+import { PictureComponentDriver } from './picture.component.test.driver';
 describe('PictureComponent Tests', () => {
   const testConfig = {};
 
   const chance = new Chance();
 
-  let { when, given, get, beforeAndAfter } = new PictureComponentDriver();
+  let { when, given, get, then, beforeAndAfter } = new PictureComponentDriver();
   beforeAndAfter();
 
   beforeEach(() => {
@@ -19,6 +18,7 @@ describe('PictureComponent Tests', () => {
     given.pokemonID(pokemonID);
     given.mockImageResponse('default.png');
     when.render(PictureComponent, testConfig);
+    when.waitForImageResponse();
     then(get.pictureSrc()).shouldEndWith(`/${pokemonID}.png`);
   });
 
@@ -27,6 +27,7 @@ describe('PictureComponent Tests', () => {
     given.pokemonID(pokemonIndex);
     given.missingImage();
     when.render(PictureComponent, testConfig);
-    then(get.pictureSrc()).shouldStartWith(`data:image/png;`);
+    when.waitForImageResponse();
+    then(get.pictureSrc()).shouldStartWith('data:image/png;');
   });
 });

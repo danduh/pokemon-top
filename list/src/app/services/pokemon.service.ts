@@ -53,7 +53,6 @@ export class PokemonService {
 
       const url = (pokemon as NamedAPIResource).url.match(/(\d+)\/?$/);
       const id = Array.isArray(url) && url.length > 1 ? parseInt(url[1]) : null;
-      debugger;
       return { ...pokemon, id } as BetterPokemon;
     });
   }

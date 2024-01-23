@@ -48,7 +48,7 @@ describe('When rendering PokemonDetails component', () => {
       new PokemonDetailsComponentDriver());
     given.mockImageResponse('default.png');
     given.mockPokemoResponse(pokemonResponse);
-    given.id(id);
+    given.id(`${id}`);
   });
 
   it('should fetch pokemon by id', () => {
@@ -58,7 +58,6 @@ describe('When rendering PokemonDetails component', () => {
 
   it('should fetch pokemon by name', () => {
     const name = chance.word();
-    debugger;
     given.name(name);
     when.render(<PokemonDetails />);
     then(get.pokemonRequestUrl()).shouldEndWith(`/${name}`);

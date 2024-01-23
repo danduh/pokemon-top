@@ -3,10 +3,14 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "cy:open": "nx run detail:component-test --watch",
-    "cy:run": "nx run detail:component-test --headless",
-    "cy:e2e-open": "nx run detail:e2e --watch",
-    "cy:e2e-run": "nx run detail:e2e --headless"
+    "cy:details-open": "nx run detail:component-test --watch",
+    "cy:details-run": "nx run detail:component-test --headless",
+    "cy:details-e2e-open": "nx run detail:e2e --watch",
+    "cy:details-e2e-run": "nx run detail:e2e --headless",
+    "cy:list-open": "nx run list:component-test --watch",
+    "cy:list-run": "nx run list:component-test --headless",
+    "cy:list-e2e-open": "nx run list:e2e --watch",
+    "cy:list-e2e-run": "nx run list:e2e --headless"
   },
   "private": true,
   "dependencies": {

@@ -34,8 +34,8 @@ export class HeaderComponentDriver {
     //   this.mockPokemonService.pokemons?.next(
     //     value.map(({ name, id }) => ({ name, id, url: '' }))
     //   ),
-    spyOnNavigate: () =>
-      (this.mockRouter.navigate = this.helper.given.spy('navigate')),
+    spyOnNavigateByUrl: () =>
+      (this.mockRouter.navigateByUrl = this.helper.given.spy('navigateByUrl')),
   };
 
   when = {
@@ -63,6 +63,6 @@ export class HeaderComponentDriver {
     mockRouter: () => this.mockRouter,
     typeOptionText: () => this.helper.get.elementsText('type-option'),
     numberOfTypeOptions: () => this.helper.get.numberOfElements('type-option'),
-    navigateSpy: () => this.helper.get.spy('navigate'),
+    navigateByUrlSpy: () => this.helper.get.spy('navigateByUrl'),
   };
 }
