@@ -40,6 +40,7 @@ export class PictureComponentDriver {
       });
     },
     waitForImageResponse: () => this.helper.when.waitForResponse('image'),
+    clickImage: () => this.helper.when.click('pokemon-image'),
   };
 
   get = {

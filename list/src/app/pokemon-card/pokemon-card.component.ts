@@ -27,9 +27,6 @@ export class PokemonCardComponent {
   @Input() pokeId!: number;
   constructor(private router: Router) {}
   navigateTo() {
-    // this.router.navigate(
-    //   ['/details'],
-    //   { queryParams: { name: this.validateForm.getRawValue().name } }
-    // );
+    this.router.navigateByUrl(`/details/name/${this.pokemon.name}`);
   }
 }
