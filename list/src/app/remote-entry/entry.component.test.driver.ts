@@ -4,16 +4,17 @@ import { CypressHelper } from '@shellygo/cypress-test-utils';
 import { CypressAngularComponentHelper } from '@shellygo/cypress-test-utils/angular';
 import { MountConfig } from 'cypress/angular';
 import { Observable } from 'rxjs';
-import { PictureComponentDriver } from '../components/picture/picture.component.test.driver';
-import type { BetterPokemon } from '../services/pokemon.service';
-import type { PokemonCardComponent } from './pokemon-card.component';
+import { HeaderComponentDriver } from '../components/header/header.component.test.driver';
+import { PokemonCardComponentDriver } from '../pokemon-card/pokemon-card.test.driver';
+import type { RemoteEntryComponent } from './entry.component';
 
-export class PokemonCardComponentDriver {
+export class RemoteEntryComponentDriver {
   private helper = new CypressHelper();
   private componentHelper =
-    new CypressAngularComponentHelper<PokemonCardComponent>();
-  private pictureDriver = new PictureComponentDriver();
-  private componentProperties: Partial<PokemonCardComponent> = {};
+    new CypressAngularComponentHelper<RemoteEntryComponent>();
+  private cardDriver = new PokemonCardComponentDriver();
+  private headerDriver = new HeaderComponentDriver();
+  private componentProperties: Partial<RemoteEntryComponent> = {};
 
   private mockRouter: Partial<Router> = {
     events: new Observable(),
@@ -26,23 +27,24 @@ export class PokemonCardComponentDriver {
 
   beforeAndAfter = () => {
     this.helper.beforeAndAfter();
-    this.pictureDriver.beforeAndAfter();
+    this.cardDriver.beforeAndAfter();
+    this.headerDriver.beforeAndAfter();
   };
 
   given = {
-    picture: this.pictureDriver.given,
-    pokemon: (value: BetterPokemon) =>
-      (this.componentProperties.pokemon = value),
-    pokeID: (value: number) => (this.componentProperties.pokeId = value),
+    header: this.headerDriver.given,
+    card: this.cardDriver.given,
+
     spyOnNavigateByUrl: () =>
       (this.mockRouter.navigateByUrl = this.helper.given.spy('navigateByUrl')),
   };
 
   when = {
-    picture: this.pictureDriver.when,
+    header: this.headerDriver.when,
+    card: this.cardDriver.when,
     render: (
-      type: Type<PokemonCardComponent>,
-      config: MountConfig<PokemonCardComponent>
+      type: Type<RemoteEntryComponent>,
+      config: MountConfig<RemoteEntryComponent>
     ) => {
       this.componentHelper.when.mount(type, config, {
         ...this.componentProperties,
@@ -52,7 +54,8 @@ export class PokemonCardComponentDriver {
   };
 
   get = {
-    picture: this.pictureDriver.get,
+    header: this.headerDriver.get,
+    card: this.cardDriver.get,
     mockRouter: () => this.mockRouter,
     navigateByUrlSpy: () => this.helper.get.spy('navigateByUrl'),
     pokemonNameText: () => this.helper.get.elementsText('pokemon-name'),

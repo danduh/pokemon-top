@@ -3,6 +3,7 @@ import { defineConfig } from 'cypress';
 
 export default defineConfig({
   component: nxComponentTestingPreset(__filename),
+  video: true,
   viewportHeight: 768,
   viewportWidth: 1024,
 });

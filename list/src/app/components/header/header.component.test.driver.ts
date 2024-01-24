@@ -5,7 +5,10 @@ import { CypressAngularComponentHelper } from '@shellygo/cypress-test-utils/angu
 import { MountConfig } from 'cypress/angular';
 import { NamedAPIResource } from 'pokenode-ts';
 import { BehaviorSubject } from 'rxjs';
-import type { PokemonService } from '../../services/pokemon.service';
+import type {
+  BetterPokemon,
+  PokemonService,
+} from '../../services/pokemon.service';
 import type { HeaderComponent } from './header.component';
 
 export class HeaderComponentDriver {
@@ -17,13 +20,23 @@ export class HeaderComponentDriver {
   private mockPokemonService: Partial<PokemonService> = {
     pokemonTypes: new BehaviorSubject([] as NamedAPIResource[]),
     loadTypes: () => {},
-    // pokemons: new BehaviorSubject([] as BetterPokemon[]),
+    getPokemons: () => this.mockPokemonService.pokemons!,
+    pokemons: new BehaviorSubject([] as BetterPokemon[]),
+    initialLoad: () => {},
+    filterByTypeName: () => {},
   };
 
   private mockRouter: Partial<Router> = {};
 
   beforeAndAfter = () => {
     this.helper.beforeAndAfter();
+    beforeEach(() => {
+      this.mockPokemonService.loadTypes = this.helper.given.spy('loadTypes');
+      this.mockPokemonService.initialLoad =
+        this.helper.given.spy('initialLoad');
+      this.mockPokemonService.filterByTypeName =
+        this.helper.given.spy('filterByTypeName');
+    });
   };
 
   given = {
@@ -31,10 +44,10 @@ export class HeaderComponentDriver {
       this.mockPokemonService.pokemonTypes?.next(
         value.map((name) => ({ name, url: '' }))
       ),
-    // pokemons: (value: { name: string; id: number }[]) =>
-    //   this.mockPokemonService.pokemons?.next(
-    //     value.map(({ name, id }) => ({ name, id, url: '' }))
-    //   ),
+    pokemons: (value: { name: string; id: number }[]) =>
+      this.mockPokemonService.pokemons?.next(
+        value.map(({ name, id }) => ({ name, id, url: '' }))
+      ),
     spyOnNavigateByUrl: () =>
       (this.mockRouter.navigateByUrl = this.helper.given.spy('navigateByUrl')),
   };
@@ -48,11 +61,8 @@ export class HeaderComponentDriver {
         ...this.componentProperties,
       });
     },
-    selectType: (type: string) => {
-      this.helper.when.doWithin(
-        () => this.helper.get.element('input').select(type),
-        'type'
-      );
+    selectType: (index: number) => {
+      this.helper.when.click('type-option', index);
     },
     typeIDorName: (value: string) =>
       this.helper.when.type('name-id-input', value),
@@ -67,5 +77,7 @@ export class HeaderComponentDriver {
       this.helper.get.elementsText('type-option', index),
     numberOfTypeOptions: () => this.helper.get.numberOfElements('type-option'),
     navigateByUrlSpy: () => this.helper.get.spy('navigateByUrl'),
+    loadTypesSpy: () => this.helper.get.spy('loadTypes'),
+    filterByTypeNameSpy: () => this.helper.get.spy('filterByTypeName'),
   };
 }
