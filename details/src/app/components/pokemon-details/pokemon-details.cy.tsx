@@ -8,8 +8,8 @@ import {
   PokemonAbility,
   PokemonSprites,
 } from 'pokenode-ts';
-import { PokemonDetails } from './PokemonDetails';
-import { PokemonDetailsComponentDriver } from './PokemonDetails.test.driver';
+import { PokemonDetails } from './pokemon-details';
+import { PokemonDetailsComponentDriver } from './pokemon-details.test.driver';
 
 describe('When rendering PokemonDetails component', () => {
   let { beforeAndAfter, given, when, get } =
@@ -48,7 +48,7 @@ describe('When rendering PokemonDetails component', () => {
       new PokemonDetailsComponentDriver());
     given.mockImageResponse('default.png');
     given.mockPokemoResponse(pokemonResponse);
-    given.id(id);
+    given.id(`${id}`);
   });
 
   it('should fetch pokemon by id', () => {
@@ -58,7 +58,6 @@ describe('When rendering PokemonDetails component', () => {
 
   it('should fetch pokemon by name', () => {
     const name = chance.word();
-    debugger;
     given.name(name);
     when.render(<PokemonDetails />);
     then(get.pokemonRequestUrl()).shouldEndWith(`/${name}`);

@@ -3,7 +3,7 @@ name: Build and Test CI
 on:
   workflow_dispatch:
   push:
-    branches: ["main"]
+    branches: ['main']
   pull_request:
 
 permissions:
@@ -25,9 +25,12 @@ jobs:
         run: |
           npx nx run details:build:production
           npx nx run details:component-test
+      - name: Build List
+        if: always()
+        run: |
+          npx nx run list:build:production
+          npx nx run list:component-test
 
-#      - name: Build List
-#        if: always()
 #        run: npm run build:react
 #      - run: npm run test:react
 #      - run: npm run validate:react

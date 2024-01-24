@@ -1,8 +1,8 @@
-import { Route } from '@angular/router';
 import {
   WebComponentWrapper,
   WebComponentWrapperOptions,
 } from '@angular-architects/module-federation-tools';
+import { Route } from '@angular/router';
 import { environment } from '../environments/environment';
 
 export const appRoutes: Route[] = [
@@ -11,7 +11,7 @@ export const appRoutes: Route[] = [
     loadChildren: () => import('list/Routes').then((m) => m.remoteRoutes),
   },
   {
-    path: 'details',
+    path: 'details/name/:name',
     component: WebComponentWrapper,
     data: {
       remoteEntry: environment.mfesOrigins.details,
