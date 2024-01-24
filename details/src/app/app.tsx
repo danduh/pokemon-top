@@ -13,12 +13,14 @@ export function App() {
     <StyledApp>
       <BrowserRouter>
         <Routes>
-          <Route path="" element={<PokemonDetails />}></Route>
-          <Route path="id">
-            <Route path=":id" element={<PokemonDetails />} />\
-          </Route>
-          <Route path="name">
-            <Route path=":name" element={<PokemonDetails />} />\
+          <Route path="details">
+            <Route path="" element={<PokemonDetails />}></Route>
+            <Route path="id">
+              <Route path=":id" element={<PokemonDetails />} />\
+            </Route>
+            <Route path="name">
+              <Route path=":name" element={<PokemonDetails />} />\
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>
