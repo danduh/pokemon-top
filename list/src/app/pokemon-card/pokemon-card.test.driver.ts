@@ -54,7 +54,9 @@ export class PokemonCardComponentDriver {
     mockRouter: () => this.mockRouter,
     navigateByUrlSpy: () =>
       this.helper.get.assertableStub(this.mockRouter.navigateByUrl),
-    pokemonNameText: () => this.helper.get.elementsText('pokemon-name'),
+    pokemonNameText: (index: number = 0) =>
+      this.helper.get.elementsText('pokemon-name', index),
     overlay: () => this.helper.get.element('.ant-image-preview-wrap'),
+    numberOfCards: () => this.helper.get.numberOfElements('pokemon-card'),
   };
 }

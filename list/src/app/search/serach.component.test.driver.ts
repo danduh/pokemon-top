@@ -1,8 +1,12 @@
 import type { Type } from '@angular/core';
+import { Router } from '@angular/router';
 import { CypressHelper } from '@shellygo/cypress-test-utils';
 import { CypressAngularComponentHelper } from '@shellygo/cypress-test-utils/angular';
 import { MountConfig } from 'cypress/angular';
+import { NamedAPIResource } from 'pokenode-ts';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { PokemonCardComponentDriver } from '../pokemon-card/pokemon-card.test.driver';
+import { BetterPokemon, PokemonService } from '../services/pokemon.service';
 import { SearchComponent } from './search.component';
 
 export class SearchComponentDriver {
@@ -12,6 +16,18 @@ export class SearchComponentDriver {
   private cardDriver = new PokemonCardComponentDriver();
   private componentProperties: Partial<SearchComponent> = {};
 
+  private mockPokemonService = this.helper.given.stubbedInstance(
+    PokemonService,
+    {
+      pokemonTypes: new BehaviorSubject<NamedAPIResource[]>([]),
+      pokemons: new BehaviorSubject<BetterPokemon[]>([]),
+    }
+  );
+
+  private mockRouter = this.helper.given.stubbedInstance(Router, {
+    events: new Observable(),
+  });
+
   beforeAndAfter = () => {
     this.helper.beforeAndAfter();
     this.cardDriver.beforeAndAfter();
@@ -19,6 +35,14 @@ export class SearchComponentDriver {
 
   given = {
     card: this.cardDriver.given,
+    types: (value: string[]) =>
+      this.mockPokemonService.pokemonTypes?.next(
+        value.map((name) => ({ name, url: '' }))
+      ),
+    pokemons: (value: { name: string; id: number }[]) =>
+      this.mockPokemonService.pokemons?.next(
+        value.map(({ name, id }) => ({ name, id, url: '' }))
+      ),
   };
 
   when = {
@@ -31,12 +55,11 @@ export class SearchComponentDriver {
         ...this.componentProperties,
       });
     },
-    clickMoreInfo: () => this.helper.when.click('more-info'),
   };
 
   get = {
     card: this.cardDriver.get,
-    pokemonNameText: () => this.helper.get.elementsText('pokemon-name'),
-    overlay: () => this.helper.get.element('.ant-image-preview-wrap'),
+    mockRouter: () => this.mockRouter,
+    mockPokemonService: () => this.mockPokemonService,
   };
 }

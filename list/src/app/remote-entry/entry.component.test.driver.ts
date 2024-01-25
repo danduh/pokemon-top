@@ -18,8 +18,13 @@ export class RemoteEntryComponentDriver {
   private headerDriver = new HeaderComponentDriver();
   private componentProperties: Partial<RemoteEntryComponent> = {};
 
-  private mockPokemonService =
-    this.helper.given.stubbedInstance(PokemonService);
+  private mockPokemonService = this.helper.given.stubbedInstance(
+    PokemonService,
+    {
+      pokemonTypes: new BehaviorSubject<NamedAPIResource[]>([]),
+      pokemons: new BehaviorSubject<BetterPokemon[]>([]),
+    }
+  );
 
   private mockRouter = this.helper.given.stubbedInstance(Router, {
     events: new Observable(),
@@ -29,12 +34,6 @@ export class RemoteEntryComponentDriver {
     this.helper.beforeAndAfter();
     this.cardDriver.beforeAndAfter();
     this.headerDriver.beforeAndAfter();
-    this.mockPokemonService.pokemonTypes = new BehaviorSubject(
-      [] as NamedAPIResource[]
-    );
-    this.mockPokemonService.pokemons = new BehaviorSubject(
-      [] as BetterPokemon[]
-    );
   };
 
   given = {

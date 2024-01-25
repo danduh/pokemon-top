@@ -47,7 +47,7 @@ describe('HeaderComponent Tests', () => {
     then(get.card.pokemonNameText()).shouldEqual(pokemon.name);
   });
 
-  it('when clicking mor info, should navigate', () => {
+  it('when clicking more info, should navigate', () => {
     when.card.clickMoreInfo();
     then(get.navigateByUrlSpy()).shouldHaveBeenCalled();
   });
