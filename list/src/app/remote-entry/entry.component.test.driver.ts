@@ -1,11 +1,13 @@
 import type { Type } from '@angular/core';
-import { UrlTree, type Router, type UrlCreationOptions } from '@angular/router';
+import { Router } from '@angular/router';
 import { CypressHelper } from '@shellygo/cypress-test-utils';
 import { CypressAngularComponentHelper } from '@shellygo/cypress-test-utils/angular';
 import { MountConfig } from 'cypress/angular';
-import { Observable } from 'rxjs';
+import { NamedAPIResource } from 'pokenode-ts';
+import { BehaviorSubject } from 'rxjs';
 import { HeaderComponentDriver } from '../components/header/header.component.test.driver';
 import { PokemonCardComponentDriver } from '../pokemon-card/pokemon-card.test.driver';
+import { BetterPokemon, PokemonService } from '../services/pokemon.service';
 import type { RemoteEntryComponent } from './entry.component';
 
 export class RemoteEntryComponentDriver {
@@ -16,27 +18,34 @@ export class RemoteEntryComponentDriver {
   private headerDriver = new HeaderComponentDriver();
   private componentProperties: Partial<RemoteEntryComponent> = {};
 
-  private mockRouter: Partial<Router> = {
-    events: new Observable(),
-    createUrlTree: (
-      commands: any[],
-      navigationExtras?: UrlCreationOptions | undefined
-    ) => new UrlTree(),
-    serializeUrl: (url: UrlTree) => '',
-  };
+  private mockPokemonService =
+    this.helper.given.stubbedInstance(PokemonService);
+
+  private mockRouter = this.helper.given.stubbedInstance(Router);
 
   beforeAndAfter = () => {
     this.helper.beforeAndAfter();
     this.cardDriver.beforeAndAfter();
     this.headerDriver.beforeAndAfter();
+    this.mockPokemonService.pokemonTypes = new BehaviorSubject(
+      [] as NamedAPIResource[]
+    );
+    this.mockPokemonService.pokemons = new BehaviorSubject(
+      [] as BetterPokemon[]
+    );
   };
 
   given = {
     header: this.headerDriver.given,
     card: this.cardDriver.given,
-
-    spyOnNavigateByUrl: () =>
-      (this.mockRouter.navigateByUrl = this.helper.given.spy('navigateByUrl')),
+    types: (value: string[]) =>
+      this.mockPokemonService.pokemonTypes?.next(
+        value.map((name) => ({ name, url: '' }))
+      ),
+    pokemons: (value: { name: string; id: number }[]) =>
+      this.mockPokemonService.pokemons?.next(
+        value.map(({ name, id }) => ({ name, id, url: '' }))
+      ),
   };
 
   when = {
@@ -57,8 +66,12 @@ export class RemoteEntryComponentDriver {
     header: this.headerDriver.get,
     card: this.cardDriver.get,
     mockRouter: () => this.mockRouter,
-    navigateByUrlSpy: () => this.helper.get.spy('navigateByUrl'),
+    mockPokemonService: () => this.mockPokemonService,
+    navigateByUrlSpy: () =>
+      this.helper.get.assertableStub(this.mockRouter.navigateByUrl),
     pokemonNameText: () => this.helper.get.elementsText('pokemon-name'),
     overlay: () => this.helper.get.element('.ant-image-preview-wrap'),
+    filterByTypeNameSpy: () =>
+      this.helper.get.assertableStub(this.mockPokemonService.filterByTypeName),
   };
 }

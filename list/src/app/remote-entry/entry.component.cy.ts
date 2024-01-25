@@ -17,15 +17,15 @@ describe('HeaderComponent Tests', () => {
     .id(chance.integer({ max: 100, min: 1 }))
     .build();
   const types = chance.n(() => chance.word(), 10);
-
   const { when, given, get, beforeAndAfter } = new RemoteEntryComponentDriver();
+
   beforeAndAfter();
 
   const testConfig = {
     imports: [BrowserAnimationsModule, NoopAnimationsModule],
     providers: [
-      { provide: PokemonService, useValue: get.header.mockPokemonService() },
-      { provide: Router, useValue: get.mockRouter() },
+      { provide: PokemonService, useValue: get.mockPokemonService() },
+      { provide: Router, useValue: get.header.mockRouter() },
       {
         provide: ActivatedRoute,
         useValue: {
@@ -38,11 +38,9 @@ describe('HeaderComponent Tests', () => {
   };
   beforeEach(() => {
     given.card.picture.mockImageResponse('default.png');
-    given.header.types(types);
-    given.header.pokemons([pokemon as { name: string; id: number }]);
-    given.spyOnNavigateByUrl();
-    given.card.pokemon(pokemon);
     when.render(RemoteEntryComponent, testConfig);
+    given.types(types);
+    given.pokemons([pokemon as { name: string; id: number }]);
   });
 
   it('given pokemon, should render pokemon name', () => {
@@ -51,19 +49,19 @@ describe('HeaderComponent Tests', () => {
 
   it('when clicking mor info, should navigate', () => {
     when.card.clickMoreInfo();
-    then(get.card.navigateByUrlSpy()).shouldHaveBeenCalled();
+    then(get.navigateByUrlSpy()).shouldHaveBeenCalled();
   });
 
   it('when selecting pokemon type, should filter pokemon list', () => {
     when.header.clickTypesList();
     when.header.selectType(3);
-    then(get.header.filterByTypeNameSpy()).shouldHaveBeenCalledWith(types[3]);
+    then(get.filterByTypeNameSpy()).shouldHaveBeenCalledWith(types[3]);
   });
 
   it('when typing name and clicking go should navigate to pokemon details', () => {
     when.header.typeIDorName(pokemon.name);
     when.header.clickGo();
-    then(get.header.navigateByUrlSpy()).shouldHaveBeenCalledWith(
+    then(get.navigateByUrlSpy()).shouldHaveBeenCalledWith(
       '/details/name/' + pokemon.name
     );
   });

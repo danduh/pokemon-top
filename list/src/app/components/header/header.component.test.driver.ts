@@ -1,14 +1,11 @@
 import type { Type } from '@angular/core';
-import type { Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { CypressHelper } from '@shellygo/cypress-test-utils';
 import { CypressAngularComponentHelper } from '@shellygo/cypress-test-utils/angular';
 import { MountConfig } from 'cypress/angular';
 import { NamedAPIResource } from 'pokenode-ts';
 import { BehaviorSubject } from 'rxjs';
-import type {
-  BetterPokemon,
-  PokemonService,
-} from '../../services/pokemon.service';
+import { BetterPokemon, PokemonService } from '../../services/pokemon.service';
 import type { HeaderComponent } from './header.component';
 
 export class HeaderComponentDriver {
@@ -17,25 +14,32 @@ export class HeaderComponentDriver {
     new CypressAngularComponentHelper<HeaderComponent>();
   private componentProperties: Partial<HeaderComponent> = {};
 
-  private mockPokemonService: Partial<PokemonService> = {
-    pokemonTypes: new BehaviorSubject([] as NamedAPIResource[]),
-    loadTypes: () => {},
-    getPokemons: () => this.mockPokemonService.pokemons!,
-    pokemons: new BehaviorSubject([] as BetterPokemon[]),
-    initialLoad: () => {},
-    filterByTypeName: () => {},
-  };
+  private mockPokemonService =
+    this.helper.given.stubbedInstance(PokemonService);
 
-  private mockRouter: Partial<Router> = {};
+  private mockRouter = this.helper.given.stubbedInstance(Router);
+  overrides = {
+    pokemonTypes: new BehaviorSubject<NamedAPIResource[]>([]),
+    pokemons: new BehaviorSubject<BetterPokemon[]>([]),
+  };
 
   beforeAndAfter = () => {
     this.helper.beforeAndAfter();
     beforeEach(() => {
-      this.mockPokemonService.loadTypes = this.helper.given.spy('loadTypes');
-      this.mockPokemonService.initialLoad =
-        this.helper.given.spy('initialLoad');
-      this.mockPokemonService.filterByTypeName =
-        this.helper.given.spy('filterByTypeName');
+      // this.mockPokemonService = {
+      //   ...this.mockPokemonService,
+      //   ...this.overrides,
+      // };
+      Object.keys(this.overrides).forEach((key) => {
+        // @ts-ignore
+        this.mockPokemonService[key] = this.overrides[key];
+      });
+      // this.mockPokemonService.pokemonTypes = new BehaviorSubject<
+      //   NamedAPIResource[]
+      // >([]);
+      // this.mockPokemonService.pokemons = new BehaviorSubject<BetterPokemon[]>(
+      //   []
+      // );
     });
   };
 
@@ -44,12 +48,6 @@ export class HeaderComponentDriver {
       this.mockPokemonService.pokemonTypes?.next(
         value.map((name) => ({ name, url: '' }))
       ),
-    pokemons: (value: { name: string; id: number }[]) =>
-      this.mockPokemonService.pokemons?.next(
-        value.map(({ name, id }) => ({ name, id, url: '' }))
-      ),
-    spyOnNavigateByUrl: () =>
-      (this.mockRouter.navigateByUrl = this.helper.given.spy('navigateByUrl')),
   };
 
   when = {
@@ -76,8 +74,13 @@ export class HeaderComponentDriver {
     typeOptionText: (index: number) =>
       this.helper.get.elementsText('type-option', index),
     numberOfTypeOptions: () => this.helper.get.numberOfElements('type-option'),
-    navigateByUrlSpy: () => this.helper.get.spy('navigateByUrl'),
-    loadTypesSpy: () => this.helper.get.spy('loadTypes'),
-    filterByTypeNameSpy: () => this.helper.get.spy('filterByTypeName'),
+    navigateByUrlSpy: () =>
+      this.helper.get.assertableStub(this.get.mockRouter().navigateByUrl),
+    loadTypesSpy: () =>
+      this.helper.get.assertableStub(this.get.mockPokemonService().loadTypes),
+    filterByTypeNameSpy: () =>
+      this.helper.get.assertableStub(
+        this.get.mockPokemonService().filterByTypeName
+      ),
   };
 }
