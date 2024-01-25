@@ -31,6 +31,14 @@ jobs:
           npx nx run list:build:production
           npx nx run list:component-test
 
+      - name: List Component Tests Report
+        uses: phoenix-actions/test-reporting@v8
+        id: list-component-report # Set ID reference for step
+        if: always() # run this step even if previous step failed
+        with:
+          name: List Component Tests # Name of the check run which will be created
+          path: ${{ github.workspace }}/list/cypress/results/json/mochawesome.json # Path to test results
+          reporter: mochawesome-json # Format of test results
 #        run: npm run build:react
 #      - run: npm run test:react
 #      - run: npm run validate:react
