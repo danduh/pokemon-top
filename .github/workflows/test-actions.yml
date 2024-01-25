@@ -26,6 +26,10 @@ jobs:
           npx nx run details:build:production
           npx nx run details:component-test
 
+      - name: Merge Details Reports
+        if: success() || failure() # run this step even if previous step failed
+        run: npm run details-merge-results
+
       - name: Details Component Tests Report
         uses: phoenix-actions/test-reporting@v8
         id: details-component-report # Set ID reference for step
