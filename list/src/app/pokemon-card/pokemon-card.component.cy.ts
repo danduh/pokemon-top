@@ -21,7 +21,6 @@ describe('HeaderComponent Tests', () => {
 
   beforeEach(() => {
     given.picture.mockImageResponse('default.png');
-    // given.spyOnNavigateByUrl();
     given.pokemon(pokemon);
   });
 

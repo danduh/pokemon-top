@@ -14,33 +14,18 @@ export class HeaderComponentDriver {
     new CypressAngularComponentHelper<HeaderComponent>();
   private componentProperties: Partial<HeaderComponent> = {};
 
-  private mockPokemonService =
-    this.helper.given.stubbedInstance(PokemonService);
+  private mockPokemonService = this.helper.given.stubbedInstance(
+    PokemonService,
+    {
+      pokemonTypes: new BehaviorSubject<NamedAPIResource[]>([]),
+      pokemons: new BehaviorSubject<BetterPokemon[]>([]),
+    }
+  );
 
   private mockRouter = this.helper.given.stubbedInstance(Router);
-  overrides = {
-    pokemonTypes: new BehaviorSubject<NamedAPIResource[]>([]),
-    pokemons: new BehaviorSubject<BetterPokemon[]>([]),
-  };
 
   beforeAndAfter = () => {
     this.helper.beforeAndAfter();
-    beforeEach(() => {
-      // this.mockPokemonService = {
-      //   ...this.mockPokemonService,
-      //   ...this.overrides,
-      // };
-      Object.keys(this.overrides).forEach((key) => {
-        // @ts-ignore
-        this.mockPokemonService[key] = this.overrides[key];
-      });
-      // this.mockPokemonService.pokemonTypes = new BehaviorSubject<
-      //   NamedAPIResource[]
-      // >([]);
-      // this.mockPokemonService.pokemons = new BehaviorSubject<BetterPokemon[]>(
-      //   []
-      // );
-    });
   };
 
   given = {

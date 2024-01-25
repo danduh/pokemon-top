@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CypressHelper } from '@shellygo/cypress-test-utils';
 import { CypressAngularComponentHelper } from '@shellygo/cypress-test-utils/angular';
 import { MountConfig } from 'cypress/angular';
+import { Observable } from 'rxjs';
 import { PictureComponentDriver } from '../components/picture/picture.component.test.driver';
 import type { BetterPokemon } from '../services/pokemon.service';
 import type { PokemonCardComponent } from './pokemon-card.component';
@@ -19,28 +20,13 @@ export class PokemonCardComponentDriver {
   private pictureDriver = new PictureComponentDriver();
   private componentProperties: Partial<PokemonCardComponent> = {};
 
-  private mockRouter: any = this.helper.given.stubbedInstance(Router);
-
-  // private mockRouter: Partial<Router> = {
-  //   events: new Observable(),
-  //   createUrlTree: (
-  //     commands: any[],
-  //     navigationExtras?: UrlCreationOptions | undefined
-  //   ) => new UrlTree(),
-  //   serializeUrl: (url: UrlTree) => '',
-  // };
+  private mockRouter: any = this.helper.given.stubbedInstance(Router, {
+    events: new Observable(),
+  });
 
   beforeAndAfter = () => {
-    // before(() => {
-    //   this.addGetter(this.mockRouter, 'events', new Observable());
-
-    // });
     this.helper.beforeAndAfter();
     this.pictureDriver.beforeAndAfter();
-    beforeEach(() => {
-      // debugger;
-      // this.mockRouter._events = new Observable();
-    });
   };
 
   given = {

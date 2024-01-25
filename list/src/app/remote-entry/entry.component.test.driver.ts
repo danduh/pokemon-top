@@ -4,7 +4,7 @@ import { CypressHelper } from '@shellygo/cypress-test-utils';
 import { CypressAngularComponentHelper } from '@shellygo/cypress-test-utils/angular';
 import { MountConfig } from 'cypress/angular';
 import { NamedAPIResource } from 'pokenode-ts';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { HeaderComponentDriver } from '../components/header/header.component.test.driver';
 import { PokemonCardComponentDriver } from '../pokemon-card/pokemon-card.test.driver';
 import { BetterPokemon, PokemonService } from '../services/pokemon.service';
@@ -21,7 +21,9 @@ export class RemoteEntryComponentDriver {
   private mockPokemonService =
     this.helper.given.stubbedInstance(PokemonService);
 
-  private mockRouter = this.helper.given.stubbedInstance(Router);
+  private mockRouter = this.helper.given.stubbedInstance(Router, {
+    events: new Observable(),
+  });
 
   beforeAndAfter = () => {
     this.helper.beforeAndAfter();

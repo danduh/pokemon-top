@@ -25,7 +25,7 @@ describe('HeaderComponent Tests', () => {
     imports: [BrowserAnimationsModule, NoopAnimationsModule],
     providers: [
       { provide: PokemonService, useValue: get.mockPokemonService() },
-      { provide: Router, useValue: get.header.mockRouter() },
+      { provide: Router, useValue: get.mockRouter() },
       {
         provide: ActivatedRoute,
         useValue: {
