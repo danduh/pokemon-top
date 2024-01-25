@@ -6,7 +6,7 @@ import { MountConfig } from 'cypress/angular';
 import { NamedAPIResource } from 'pokenode-ts';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HeaderComponentDriver } from '../components/header/header.component.test.driver';
-import { PokemonCardComponentDriver } from '../pokemon-card/pokemon-card.test.driver';
+import { SearchComponentDriver } from '../search/serach.component.test.driver';
 import { BetterPokemon, PokemonService } from '../services/pokemon.service';
 import type { RemoteEntryComponent } from './entry.component';
 
@@ -14,7 +14,7 @@ export class RemoteEntryComponentDriver {
   private helper = new CypressHelper();
   private componentHelper =
     new CypressAngularComponentHelper<RemoteEntryComponent>();
-  private cardDriver = new PokemonCardComponentDriver();
+  private searchDriver = new SearchComponentDriver();
   private headerDriver = new HeaderComponentDriver();
   private componentProperties: Partial<RemoteEntryComponent> = {};
 
@@ -32,13 +32,13 @@ export class RemoteEntryComponentDriver {
 
   beforeAndAfter = () => {
     this.helper.beforeAndAfter();
-    this.cardDriver.beforeAndAfter();
+    this.searchDriver.beforeAndAfter();
     this.headerDriver.beforeAndAfter();
   };
 
   given = {
     header: this.headerDriver.given,
-    card: this.cardDriver.given,
+    search: this.searchDriver.given,
     types: (value: string[]) =>
       this.mockPokemonService.pokemonTypes?.next(
         value.map((name) => ({ name, url: '' }))
@@ -51,7 +51,7 @@ export class RemoteEntryComponentDriver {
 
   when = {
     header: this.headerDriver.when,
-    card: this.cardDriver.when,
+    search: this.searchDriver.when,
     render: (
       type: Type<RemoteEntryComponent>,
       config: MountConfig<RemoteEntryComponent>
@@ -65,7 +65,7 @@ export class RemoteEntryComponentDriver {
 
   get = {
     header: this.headerDriver.get,
-    card: this.cardDriver.get,
+    search: this.searchDriver.get,
     mockRouter: () => this.mockRouter,
     mockPokemonService: () => this.mockPokemonService,
     navigateByUrlSpy: () =>

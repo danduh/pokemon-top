@@ -37,18 +37,18 @@ describe('HeaderComponent Tests', () => {
     ],
   };
   beforeEach(() => {
-    given.card.picture.mockImageResponse('default.png');
+    given.search.card.picture.mockImageResponse('default.png');
     when.render(RemoteEntryComponent, testConfig);
     given.types(types);
     given.pokemons([pokemon as { name: string; id: number }]);
   });
 
   it('given pokemon, should render pokemon name', () => {
-    then(get.card.pokemonNameText()).shouldEqual(pokemon.name);
+    then(get.search.card.pokemonNameText()).shouldEqual(pokemon.name);
   });
 
   it('when clicking more info, should navigate', () => {
-    when.card.clickMoreInfo();
+    when.search.card.clickMoreInfo();
     then(get.navigateByUrlSpy()).shouldHaveBeenCalled();
   });
 
