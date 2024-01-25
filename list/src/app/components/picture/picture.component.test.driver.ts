@@ -40,12 +40,14 @@ export class PictureComponentDriver {
       });
     },
     waitForImageResponse: () => this.helper.when.waitForResponse('image'),
-    clickImage: () => this.helper.when.click('pokemon-image'),
+    clickImage: (index: number = 0) =>
+      this.helper.when.click('pokemon-image', index),
   };
 
   get = {
-    pokemonImage: () => this.helper.get.elementByTestId('pokemon-image'),
-    pictureSrc: () =>
-      this.helper.get.elementByTestId('pokemon-image').invoke('attr', 'src'),
+    pokemonImage: (index: number = 0) =>
+      this.helper.get.elementByTestId('pokemon-image', index),
+    pictureSrc: (index: number = 0) =>
+      this.helper.get.elementsAttribute('pokemon-image', 'src', index),
   };
 }

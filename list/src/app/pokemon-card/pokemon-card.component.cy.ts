@@ -21,7 +21,6 @@ describe('HeaderComponent Tests', () => {
 
   beforeEach(() => {
     given.picture.mockImageResponse('default.png');
-    given.spyOnNavigateByUrl();
     given.pokemon(pokemon);
   });
 
@@ -54,5 +53,11 @@ describe('HeaderComponent Tests', () => {
   it('given pokemon should render pokemon picture', () => {
     when.render(PokemonCardComponent, testConfig);
     then(get.picture.pictureSrc()).shouldEndWith(`/${pokemon.id}.png`);
+  });
+
+  it('when clicking image should show overlay', () => {
+    when.render(PokemonCardComponent, testConfig);
+    when.picture.clickImage();
+    then(get.overlay()).shouldBeVisible();
   });
 });

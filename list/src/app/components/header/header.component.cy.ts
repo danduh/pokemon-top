@@ -17,7 +17,6 @@ describe('HeaderComponent Tests', () => {
   beforeAndAfter();
 
   beforeEach(() => {
-    given.spyOnNavigateByUrl();
     given.types(types);
   });
 
