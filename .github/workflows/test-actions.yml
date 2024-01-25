@@ -25,12 +25,38 @@ jobs:
         run: |
           npx nx run details:build:production
           npx nx run details:component-test
+
+      - name: Merge Details Reports
+        if: success() || failure() # run this step even if previous step failed
+        run: npm run details-merge-results
+
+      - name: Details Component Tests Report
+        uses: phoenix-actions/test-reporting@v8
+        id: details-component-report # Set ID reference for step
+        if: always() # run this step even if previous step failed
+        with:
+          name: Details Component Tests # Name of the check run which will be created
+          path: ${{ github.workspace }}/details/cypress/results/json/merged.json # Path to test results
+          reporter: mochawesome-json # Format of test results
+
       - name: Build List
         if: always()
         run: |
           npx nx run list:build:production
           npx nx run list:component-test
 
+      - name: Merge List Reports
+        if: success() || failure() # run this step even if previous step failed
+        run: npm run list-merge-results
+
+      - name: List Component Tests Report
+        uses: phoenix-actions/test-reporting@v8
+        id: list-component-report # Set ID reference for step
+        if: always() # run this step even if previous step failed
+        with:
+          name: List Component Tests # Name of the check run which will be created
+          path: ${{ github.workspace }}/list/cypress/results/json/merged.json # Path to test results
+          reporter: mochawesome-json # Format of test results
 #        run: npm run build:react
 #      - run: npm run test:react
 #      - run: npm run validate:react
