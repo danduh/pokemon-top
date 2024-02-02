@@ -17,21 +17,15 @@ describe('When rendering PokemonDetails component', () => {
   beforeEach(() => {
     ({ beforeAndAfter, given, when, get } =
       new PokemonDetailsComponentDriver());
+    given.name(pokemonResponse.name);
     given.mockImageResponse('default.png');
     given.mockPokemonResponse(pokemonResponse);
-    given.id(`${id}`);
-  });
-
-  it('should fetch pokemon by id', () => {
-    when.render(<PokemonDetails />);
-    then(get.pokemonRequestUrl()).shouldEndWith(`/${id}`);
+    // given.id(`${id}`);
   });
 
   it('should fetch pokemon by name', () => {
-    const name = chance.word();
-    given.name(name);
     when.render(<PokemonDetails />);
-    then(get.pokemonRequestUrl()).shouldEndWith(`/${name}`);
+    then(get.pokemonRequestUrl()).shouldEndWith(`/${pokemonResponse.name}`);
   });
 
   it('pokemon name should be displayed', () => {
@@ -101,13 +95,13 @@ describe('When rendering PokemonDetails component', () => {
   });
 
   it('when rendering first pokemon prev button should be disabled', () => {
-    given.id('1');
+    given.mockPokemonResponse({ ...pokemonResponse, id: 1 });
     when.render(<PokemonDetails />);
     then(get.prevButton()).shouldBeDisabled();
   });
 
   it('when rendering last pokemon next button should be disabled', () => {
-    given.id('1000');
+    given.mockPokemonResponse({ ...pokemonResponse, id: 1000 });
     when.render(<PokemonDetails />);
     then(get.nextButton()).shouldBeDisabled();
   });
