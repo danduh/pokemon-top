@@ -9,4 +9,15 @@ export default defineConfig({
   },
   viewportHeight: 960,
   viewportWidth: 1536,
+  reporter: '../node_modules/mochawesome',
+  reporterOptions: {
+    reportDir: 'cypress/results/json',
+    overwrite: false,
+    html: false,
+    json: true,
+    suiteTitleSeparatedBy: ' > ',
+    testCaseSwitchClassnameAndName: false,
+    rootSuiteTitle: 'Details E2E Tests',
+    toConsole: true,
+  },
 });

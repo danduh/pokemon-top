@@ -25,7 +25,6 @@ describe('Pokemon Details Integration Tests', () => {
     });
 
     it('should fetch pokemon by name', () => {
-      // when.waitForLastPokemonFetch();
       then(get.pokemonRequestUrl()).shouldEndWith(`/${pokemonResponse.name}`);
     });
 
