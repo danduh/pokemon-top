@@ -1,13 +1,6 @@
 import { then } from '@shellygo/cypress-test-utils/assertable';
-import { Builder } from 'builder-pattern';
 import { Chance } from 'chance';
-import {
-  NamedAPIResource,
-  OtherPokemonSprites,
-  Pokemon,
-  PokemonAbility,
-  PokemonSprites,
-} from 'pokenode-ts';
+import { aPokemon } from '../../test-helpers/pokemon-builder';
 import { PokemonDetails } from './pokemon-details';
 import { PokemonDetailsComponentDriver } from './pokemon-details.test.driver';
 
@@ -17,37 +10,15 @@ describe('When rendering PokemonDetails component', () => {
   beforeAndAfter();
 
   const chance = new Chance();
-  const id = chance.integer({ min: 1, max: 100 });
-  const pokemonResponse = Builder<Pokemon>()
-    .name(chance.word())
-    .id(id)
-    .abilities(
-      chance.n(
-        () =>
-          Builder<PokemonAbility>()
-            .ability(Builder<NamedAPIResource>().name(chance.word()).build())
-            .build(),
-        10
-      )
-    )
-    .sprites(
-      Builder<PokemonSprites>()
-        .other(
-          Builder<OtherPokemonSprites>()
-            ['official-artwork']({
-              front_default:
-                'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/26.png',
-            })
-            .build()
-        )
-        .build()
-    )
-    .build();
+  const id = chance.integer({ min: 2, max: 100 });
+
+  const pokemonResponse = aPokemon(id);
+
   beforeEach(() => {
     ({ beforeAndAfter, given, when, get } =
       new PokemonDetailsComponentDriver());
     given.mockImageResponse('default.png');
-    given.mockPokemoResponse(pokemonResponse);
+    given.mockPokemonResponse(pokemonResponse);
     given.id(`${id}`);
   });
 
@@ -70,13 +41,74 @@ describe('When rendering PokemonDetails component', () => {
 
   it('should render all abilities', () => {
     when.render(<PokemonDetails />);
-    then(get.numberOfAbilities()).shouldEqual(10);
+    then(get.numberOfAbilities()).shouldEqual(pokemonResponse.abilities.length);
   });
 
   it('should render ability name', () => {
     when.render(<PokemonDetails />);
-    then(get.pokemonAbilityText(2)).shouldEqual(
-      pokemonResponse.abilities[2].ability.name
+    const testFocus = chance.integer({
+      min: 0,
+      max: pokemonResponse.abilities.length - 1,
+    });
+    then(get.pokemonAbilityText(testFocus)).shouldEqual(
+      pokemonResponse.abilities[testFocus].ability.name
     );
+  });
+
+  it('should render all types', () => {
+    when.render(<PokemonDetails />);
+    then(get.numberOfTypes()).shouldEqual(pokemonResponse.types.length);
+  });
+
+  it('should render type name', () => {
+    when.render(<PokemonDetails />);
+    const testFocus = chance.integer({
+      min: 0,
+      max: pokemonResponse.types.length - 1,
+    });
+    then(get.pokemonTypeText(testFocus)).shouldEqual(
+      pokemonResponse.types[testFocus].type.name
+    );
+  });
+  it('should render all moves', () => {
+    when.render(<PokemonDetails />);
+    then(get.numberOfMoves()).shouldEqual(pokemonResponse.moves.length);
+  });
+
+  it('should render type name', () => {
+    when.render(<PokemonDetails />);
+    const testFocus = chance.integer({
+      min: 0,
+      max: pokemonResponse.moves.length - 1,
+    });
+    then(get.pokemonMoveText(testFocus)).shouldEqual(
+      pokemonResponse.moves[testFocus].move.name
+    );
+  });
+
+  it('when clicking next should fetch next pokemon', () => {
+    when.render(<PokemonDetails />);
+    when.waitForLastPokemonFetch();
+    when.clickNext();
+    then(get.pokemonRequestUrl()).shouldEndWith(`/${id + 1}`);
+  });
+
+  it('when clicking prev should fetch prev pokemon', () => {
+    when.render(<PokemonDetails />);
+    when.waitForLastPokemonFetch();
+    when.clickPrev();
+    then(get.pokemonRequestUrl()).shouldEndWith(`/${id - 1}`);
+  });
+
+  it('when rendering first pokemon prev button should be disabled', () => {
+    given.id('1');
+    when.render(<PokemonDetails />);
+    then(get.prevButton()).shouldBeDisabled();
+  });
+
+  it('when rendering last pokemon next button should be disabled', () => {
+    given.id('1000');
+    when.render(<PokemonDetails />);
+    then(get.nextButton()).shouldBeDisabled();
   });
 });
