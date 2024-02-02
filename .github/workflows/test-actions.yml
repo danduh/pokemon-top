@@ -25,10 +25,13 @@ jobs:
         run: |
           npx nx run details:build:production
           npx nx run details:component-test
+          npx nx run details-e2e:e2e
 
       - name: Merge Details Reports
         if: success() || failure() # run this step even if previous step failed
-        run: npm run details-merge-results
+        run: |
+          npm run details-merge-results
+          npm run details-e2e-merge-results
 
       - name: Details Component Tests Report
         uses: phoenix-actions/test-reporting@v8
@@ -37,6 +40,15 @@ jobs:
         with:
           name: Details Component Tests # Name of the check run which will be created
           path: ${{ github.workspace }}/details/cypress/results/json/merged.json # Path to test results
+          reporter: mochawesome-json # Format of test results
+
+      - name: Details Integration & E2E Tests Report
+        uses: phoenix-actions/test-reporting@v8
+        id: details-e2e-report # Set ID reference for step
+        if: always() # run this step even if previous step failed
+        with:
+          name: Details Integration & E2E Tests # Name of the check run which will be created
+          path: ${{ github.workspace }}/details-e2e/cypress/results/json/merged.json # Path to test results
           reporter: mochawesome-json # Format of test results
 
       - name: Build List
