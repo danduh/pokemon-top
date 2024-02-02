@@ -16,10 +16,16 @@ export class PokemonDetailsComponentDriver {
   given = {
     id: (value: string) => (this.id = value),
     name: (value: string) => (this.name = value),
-    mockPokemoResponse: (response: Pokemon) =>
+    mockPokemonResponse: (response: Pokemon) =>
       this.helper.given.interceptAndMockResponse({
-        url: '**https://pokeapi.co/api/v2/pokemon/**',
+        url: /\/pokeapi\.co\/api\/v2\/pokemon\/(?!other$)/,
         response: response,
+        alias: 'pokemon',
+      }),
+    errorFetchingPokemon: (nameOrId: string) =>
+      this.helper.given.interceptAndMockResponse({
+        url: /\/pokeapi\.co\/api\/v2\/pokemon\/(?!other$)/,
+        response: { forceNetworkError: true },
         alias: 'pokemon',
       }),
     mockImageResponse: (fileName: string) =>
@@ -52,6 +58,7 @@ export class PokemonDetailsComponentDriver {
     },
     clickNext: () => this.helper.when.click('next'),
     clickPrev: () => this.helper.when.click('prev'),
+    waitForLastPokemonFetch: () => this.helper.when.waitForLastCall('pokemon'),
   };
 
   get = {
@@ -62,6 +69,14 @@ export class PokemonDetailsComponentDriver {
       this.helper.get.elementsText('pokemon-ability', index),
     numberOfAbilities: () =>
       this.helper.get.numberOfElements('pokemon-ability'),
+    pokemonTypeText: (index: number) =>
+      this.helper.get.elementsText('pokemon-type', index),
+    numberOfTypes: () => this.helper.get.numberOfElements('pokemon-type'),
+    pokemonMoveText: (index: number) =>
+      this.helper.get.elementsText('pokemon-move', index),
+    numberOfMoves: () => this.helper.get.numberOfElements('pokemon-move'),
     pokemonRequestUrl: () => this.helper.get.requestUrl('pokemon'),
+    prevButton: () => this.helper.get.elementByTestId('prev'),
+    nextButton: () => this.helper.get.elementByTestId('next'),
   };
 }
