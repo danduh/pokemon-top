@@ -1,0 +1,4 @@
+{
+  "list": "http://localhost:4201/remoteEntry.mjs",
+  "details": "http://localhost:4202/remoteEntry.js"
+}

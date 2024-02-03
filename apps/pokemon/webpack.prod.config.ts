@@ -1,7 +1,7 @@
 import { withModuleFederation } from '@nx/angular/module-federation';
 import config from './module-federation.config';
 
-const prefix = process.env["IS_FOR_GP"] ? '/pokemon-top' : '';
+const prefix = process.env['IS_FOR_GP'] ? '/pokemon-top' : '';
 
 export default withModuleFederation({
   ...config,
@@ -17,7 +17,6 @@ export default withModuleFederation({
    */
   remotes: [
     ['list', `${prefix}/assets/list/remoteEntry.mjs`],
-    ['details', `${prefix}/assets/details/remoteEntry.js`]
+    ['details', `${prefix}/assets/details/remoteEntry.js`],
   ],
-
 });

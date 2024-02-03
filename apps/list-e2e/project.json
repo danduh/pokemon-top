@@ -1,22 +1,22 @@
 {
-  "name": "pokemon-e2e",
-  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "name": "list-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "pokemon-e2e/src",
+  "sourceRoot": "apps/list-e2e/src",
   "targets": {
     "e2e": {
       "executor": "@nx/cypress:cypress",
       "options": {
-        "cypressConfig": "pokemon-e2e/cypress.config.ts",
+        "cypressConfig": "apps/list-e2e/cypress.config.ts",
         "testingType": "e2e",
-        "devServerTarget": "pokemon:serve:development"
+        "devServerTarget": "list:serve:development"
       },
       "configurations": {
         "production": {
-          "devServerTarget": "pokemon:serve:production"
+          "devServerTarget": "list:serve:production"
         },
         "ci": {
-          "devServerTarget": "pokemon:serve-static"
+          "devServerTarget": "list:serve-static"
         }
       }
     },
@@ -26,5 +26,5 @@
     }
   },
   "tags": [],
-  "implicitDependencies": ["pokemon"]
+  "implicitDependencies": ["list"]
 }

@@ -1,26 +1,26 @@
 {
   "name": "pokemon",
-  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "prefix": "pokemon",
-  "sourceRoot": "pokemon/src",
+  "prefix": "apps/pokemon",
+  "sourceRoot": "apps/pokemon/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@nx/angular:webpack-browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/pokemon",
-        "index": "pokemon/src/index.html",
-        "main": "pokemon/src/main.ts",
+        "outputPath": "dist/apps/pokemon",
+        "index": "apps/pokemon/src/index.html",
+        "main": "apps/pokemon/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "pokemon/tsconfig.app.json",
+        "tsConfig": "apps/pokemon/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["pokemon/src/favicon.ico", "pokemon/src/assets"],
-        "styles": ["pokemon/src/styles.scss"],
+        "assets": ["apps/pokemon/src/favicon.ico", "apps/pokemon/src/assets"],
+        "styles": ["apps/pokemon/src/styles.scss"],
         "scripts": [],
         "customWebpackConfig": {
-          "path": "pokemon/webpack.config.ts"
+          "path": "apps/pokemon/webpack.config.ts"
         }
       },
       "configurations": {
@@ -37,18 +37,29 @@
               "maximumError": "4kb"
             }
           ],
-          "assets": ["pokemon/src/favicon.ico", "pokemon/src/assets",
-            { "input": "dist/details", "glob": "**/*", "output": "assets/details" },
-            { "input": "dist/list", "glob": "**/*", "output": "assets/list" }
+          "assets": [
+            "apps/pokemon/src/favicon.ico",
+            "apps/pokemon/src/assets",
+            {
+              "input": "dist/details",
+              "glob": "**/*",
+              "output": "assets/details"
+            },
+            {
+              "input": "dist/list",
+              "glob": "**/*",
+              "output": "assets/list"
+            }
           ],
           "fileReplacements": [
             {
-              "replace": "pokemon/src/environments/environment.ts",
-              "with": "pokemon/src/environments/environment.prod.ts"
-            }],
+              "replace": "apps/pokemon/src/environments/environment.ts",
+              "with": "apps/pokemon/src/environments/environment.prod.ts"
+            }
+          ],
           "outputHashing": "all",
           "customWebpackConfig": {
-            "path": "pokemon/webpack.prod.config.ts"
+            "path": "apps/pokemon/webpack.prod.config.ts"
           }
         },
         "development": {
@@ -92,7 +103,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "pokemon/jest.config.ts"
+        "jestConfig": "apps/pokemon/jest.config.ts"
       }
     },
     "serve-static": {
