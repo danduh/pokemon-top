@@ -9,7 +9,7 @@ export default defineConfig({
   },
   viewportHeight: 960,
   viewportWidth: 1536,
-  reporter: '../node_modules/mochawesome',
+  reporter: '../../node_modules/mochawesome',
   reporterOptions: {
     reportDir: 'cypress/results/json',
     overwrite: false,
