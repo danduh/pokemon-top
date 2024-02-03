@@ -1,7 +1,7 @@
 {
   "name": "details",
-  "$schema": "../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "details/src",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/details/src",
   "projectType": "application",
   "targets": {
     "build": {
@@ -10,15 +10,15 @@
       "defaultConfiguration": "development",
       "options": {
         "compiler": "babel",
-        "outputPath": "dist/details",
-        "index": "details/src/index.html",
+        "outputPath": "dist/apps/details",
+        "index": "apps/details/src/index.html",
         "baseHref": "/",
-        "main": "details/src/main.ts",
-        "tsConfig": "details/tsconfig.app.json",
-        "assets": ["details/src/favicon.ico", "details/src/assets"],
-        "styles": ["details/src/styles.scss"],
+        "main": "apps/details/src/main.ts",
+        "tsConfig": "apps/details/tsconfig.app.json",
+        "assets": ["apps/details/src/favicon.ico", "apps/details/src/assets"],
+        "styles": ["apps/details/src/styles.scss"],
         "scripts": [],
-        "webpackConfig": "details/webpack.config.serve.ts"
+        "webpackConfig": "apps/details/webpack.config.serve.ts"
       },
       "configurations": {
         "development": {
@@ -30,8 +30,8 @@
         "production": {
           "fileReplacements": [
             {
-              "replace": "details/src/environments/environment.ts",
-              "with": "details/src/environments/environment.prod.ts"
+              "replace": "apps/details/src/environments/environment.ts",
+              "with": "apps/details/src/environments/environment.prod.ts"
             }
           ],
           "optimization": true,
@@ -40,7 +40,7 @@
           "namedChunks": false,
           "extractLicenses": true,
           "vendorChunk": false,
-          "webpackConfig": "details/webpack.config.prod.ts"
+          "webpackConfig": "apps/details/webpack.config.prod.ts"
         }
       }
     },
@@ -50,15 +50,15 @@
       "defaultConfiguration": "development",
       "options": {
         "compiler": "babel",
-        "outputPath": "dist/details",
-        "index": "details/src/index.html",
+        "outputPath": "dist/apps/details",
+        "index": "apps/details/src/index.html",
         "baseHref": "/",
-        "main": "details/src/main.ts",
-        "tsConfig": "details/tsconfig.app.json",
-        "assets": ["details/src/favicon.ico", "details/src/assets"],
+        "main": "apps/details/src/main.ts",
+        "tsConfig": "apps/details/tsconfig.app.json",
+        "assets": ["apps/details/src/favicon.ico", "apps/details/src/assets"],
         "styles": [],
         "scripts": [],
-        "webpackConfig": "details/webpack.config.mfe.ts"
+        "webpackConfig": "apps/details/webpack.config.mfe.ts"
       },
       "configurations": {
         "development": {
@@ -115,13 +115,13 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "details/jest.config.ts"
+        "jestConfig": "apps/details/jest.config.ts"
       }
     },
     "component-test": {
       "executor": "@nx/cypress:cypress",
       "options": {
-        "cypressConfig": "details/cypress.config.ts",
+        "cypressConfig": "apps/details/cypress.config.ts",
         "testingType": "component",
         "devServerTarget": "details:build",
         "skipServe": true
