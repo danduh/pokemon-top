@@ -1,29 +1,29 @@
 {
   "name": "list",
-  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "pokemon",
-  "sourceRoot": "list/src",
+  "sourceRoot": "apps/list/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@nx/angular:webpack-browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/list",
-        "index": "list/src/index.html",
-        "main": "list/src/main.ts",
+        "outputPath": "dist/apps/list",
+        "index": "apps/list/src/index.html",
+        "main": "apps/list/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "list/tsconfig.app.json",
+        "tsConfig": "apps/list/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["list/src/favicon.ico", "list/src/assets"],
+        "assets": ["apps/list/src/favicon.ico", "apps/list/src/assets"],
         "styles": [
-          "list/src/styles.scss",
+          "apps/list/src/styles.scss",
           "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
         ],
         "scripts": [],
         "customWebpackConfig": {
-          "path": "list/webpack.config.ts"
+          "path": "apps/list/webpack.config.ts"
         }
       },
       "configurations": {
@@ -42,7 +42,7 @@
           ],
           "outputHashing": "all",
           "customWebpackConfig": {
-            "path": "list/webpack.prod.config.ts"
+            "path": "apps/list/webpack.prod.config.ts"
           }
         },
         "development": {
@@ -86,7 +86,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "list/jest.config.ts"
+        "jestConfig": "apps/list/jest.config.ts"
       }
     },
     "serve-static": {
@@ -109,7 +109,7 @@
     "component-test": {
       "executor": "@nx/cypress:cypress",
       "options": {
-        "cypressConfig": "list/cypress.config.ts",
+        "cypressConfig": "apps/list/cypress.config.ts",
         "testingType": "component",
         "skipServe": true,
         "devServerTarget": "list:build"

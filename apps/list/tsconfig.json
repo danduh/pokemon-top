@@ -22,10 +22,10 @@
       "path": "./tsconfig.editor.json"
     },
     {
-      "path": "./cypress/tsconfig.json"
+      "path": "./cypress/tsconfig.base.json"
     }
   ],
-  "extends": "../tsconfig.base.json",
+  "extends": "../../tsconfig.base.json",
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
