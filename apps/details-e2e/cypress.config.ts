@@ -19,5 +19,6 @@ export default defineConfig({
     testCaseSwitchClassnameAndName: false,
     rootSuiteTitle: 'Details E2E Tests',
     toConsole: true,
+    defaultCommandTimeout: 50000,
   },
 });

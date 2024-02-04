@@ -1,7 +1,7 @@
 import { withModuleFederation } from '@nx/angular/module-federation';
 import config from './module-federation.config';
 
-const prefix = process.env['IS_FOR_GP'] ? '/pokemon-top' : '';
+const prefix = process.env['IS_FOR_GP'] ? '/pokemon-top/apps' : '';
 
 export default withModuleFederation({
   ...config,
