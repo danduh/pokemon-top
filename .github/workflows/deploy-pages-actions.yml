@@ -37,15 +37,17 @@ jobs:
           npm i
           npx nx run details:build:production
           npx nx run list:build:production
-          npx nx run pokemon:build:production --base-href /pokemon-top/apps
+          npx nx run pokemon:build:production --base-href /pokemon-top/
           cp dist/pokemon/index.html dist/pokemon/404.html
+          cp -r dist/apps/list dist/apps/pokemon/assets
+          cp -r dist/apps/details dist/apps/pokemon/assets
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: 'dist/pokemon'
+          path: 'dist/apps/pokemon'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
