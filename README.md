@@ -40,19 +40,22 @@ Demonstrate MFEs with UI testing per each MFE
 
 ## Run host and all MFEs alltogether
 
+First run MFEs, each command per terminal
+```bash
+nx serve-static list
+nx serve-static details
+```
+
+Or you can run all MFEs with one command
+```bash
+nx run-many -t serve-static -p list,details
+```
+
 Run host app:
 
 ```bash
-npx nx serve pokemon
+nx serve pokemon --skipRemotes list,details --watch
 ```
-
-Run details MFE
-
-```bash
-npx nx serve-static details
-```
-
-|Note: **list** MFE will be generated automatically
 
 Navigate to <http://localhost:4200>
 
