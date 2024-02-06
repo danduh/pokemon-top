@@ -1,0 +1,132 @@
+{
+  "name": "details",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/details/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "development",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/details",
+        "index": "apps/details/src/index.html",
+        "baseHref": "/",
+        "main": "apps/details/src/main.ts",
+        "tsConfig": "apps/details/tsconfig.app.json",
+        "assets": ["apps/details/src/favicon.ico", "apps/details/src/assets"],
+        "styles": ["apps/details/src/styles.scss"],
+        "scripts": [],
+        "webpackConfig": "apps/details/webpack.config.serve.ts"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/details/src/environments/environment.ts",
+              "with": "apps/details/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "webpackConfig": "apps/details/webpack.config.prod.ts"
+        }
+      }
+    },
+    "build-mfe": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "development",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/details",
+        "index": "apps/details/src/index.html",
+        "baseHref": "/",
+        "main": "apps/details/src/main.ts",
+        "tsConfig": "apps/details/tsconfig.app.json",
+        "assets": ["apps/details/src/favicon.ico", "apps/details/src/assets"],
+        "styles": [],
+        "scripts": [],
+        "webpackConfig": "apps/details/webpack.config.mfe.ts"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "buildTarget": "details:build:production"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/react:module-federation-dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "details:build",
+        "hmr": true,
+        "port": 4202
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "details:build:development"
+        },
+        "production": {
+          "buildTarget": "details:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "details:build-mfe",
+        "watch": false,
+        "port": 4202
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "details:build-mfe:development"
+        },
+        "production": {
+          "buildTarget": "details:build:production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/details/jest.config.ts"
+      }
+    },
+    "component-test": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/details/cypress.config.ts",
+        "testingType": "component",
+        "devServerTarget": "details:build",
+        "skipServe": true
+      }
+    }
+  },
+  "tags": []
+}

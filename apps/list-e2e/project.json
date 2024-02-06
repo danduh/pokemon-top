@@ -1,0 +1,30 @@
+{
+  "name": "list-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/list-e2e/src",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/list-e2e/cypress.config.ts",
+        "testingType": "e2e",
+        "devServerTarget": "list:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "list:serve:production"
+        },
+        "ci": {
+          "devServerTarget": "list:serve-static"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["list"]
+}

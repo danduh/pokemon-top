@@ -1,0 +1,117 @@
+{
+  "name": "pokemon",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "apps/pokemon",
+  "sourceRoot": "apps/pokemon/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/pokemon",
+        "index": "apps/pokemon/src/index.html",
+        "main": "apps/pokemon/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/pokemon/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": ["apps/pokemon/src/favicon.ico", "apps/pokemon/src/assets"],
+        "styles": ["apps/pokemon/src/styles.scss"],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "apps/pokemon/webpack.config.ts"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "assets": [
+            "apps/pokemon/src/favicon.ico",
+            "apps/pokemon/src/assets",
+            {
+              "input": "dist/details",
+              "glob": "**/*",
+              "output": "assets/details"
+            },
+            {
+              "input": "dist/list",
+              "glob": "**/*",
+              "output": "assets/list"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/pokemon/src/environments/environment.ts",
+              "with": "apps/pokemon/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "apps/pokemon/webpack.prod.config.ts"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nx/angular:module-federation-dev-server",
+      "options": {
+        "port": 4200,
+        "publicHost": "http://localhost:4200"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "pokemon:build:production"
+        },
+        "development": {
+          "buildTarget": "pokemon:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "pokemon:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/pokemon/jest.config.ts"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "pokemon:build",
+        "port": 4200
+      }
+    }
+  }
+}
