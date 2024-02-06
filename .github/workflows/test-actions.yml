@@ -39,7 +39,7 @@ jobs:
         if: always() # run this step even if previous step failed
         with:
           name: Details Component Tests # Name of the check run which will be created
-          path: ${{ github.workspace }}/details/cypress/results/json/merged.json # Path to test results
+          path: ${{ github.workspace }}/apps/details/cypress/results/json/merged.json # Path to test results
           reporter: mochawesome-json # Format of test results
 
       - name: Details Integration & E2E Tests Report
@@ -48,7 +48,7 @@ jobs:
         if: always() # run this step even if previous step failed
         with:
           name: Details Integration & E2E Tests # Name of the check run which will be created
-          path: ${{ github.workspace }}/details-e2e/cypress/results/json/merged.json # Path to test results
+          path: ${{ github.workspace }}/apps/details-e2e/cypress/results/json/merged.json # Path to test results
           reporter: mochawesome-json # Format of test results
 
       - name: Build List
@@ -67,7 +67,7 @@ jobs:
         if: always() # run this step even if previous step failed
         with:
           name: List Component Tests # Name of the check run which will be created
-          path: ${{ github.workspace }}/list/cypress/results/json/merged.json # Path to test results
+          path: ${{ github.workspace }}/apps/list/cypress/results/json/merged.json # Path to test results
           reporter: mochawesome-json # Format of test results
 #        run: npm run build:react
 #      - run: npm run test:react
