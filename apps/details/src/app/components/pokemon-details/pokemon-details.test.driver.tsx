@@ -59,6 +59,13 @@ export class PokemonDetailsComponentDriver {
     clickNext: () => this.helper.when.click('next'),
     clickPrev: () => this.helper.when.click('prev'),
     waitForLastPokemonFetch: () => this.helper.when.waitForLastCall('pokemon'),
+    waitForPokemonName: (pokemonName: string) =>
+      this.helper.when.waitUntil(() =>
+        this.helper.when.doWithin(
+          () => this.helper.get.elementByText(pokemonName),
+          'pokemon-name'
+        )
+      ),
   };
 
   get = {

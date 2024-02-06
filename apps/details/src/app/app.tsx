@@ -5,7 +5,6 @@ import { PokemonDetails } from './components/pokemon-details/pokemon-details';
 
 const StyledApp = styled.div`
   background-color: #f0f3fa;
-  height: 98vh;
 `;
 
 export function App() {

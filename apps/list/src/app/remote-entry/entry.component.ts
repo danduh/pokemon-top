@@ -35,10 +35,6 @@ import { SearchComponent } from '../search/search.component';
       <nz-content>
         <pokemon-search></pokemon-search>
       </nz-content>
-      <nz-footer
-        >Pokémon and Pokémon character names are trademarks of
-        Nintendo</nz-footer
-      >
     </nz-layout>
   `,
 })

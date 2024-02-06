@@ -1,5 +1,6 @@
 import { then } from '@shellygo/cypress-test-utils/assertable';
 import { Chance } from 'chance';
+import React from 'react';
 import { aPokemon } from '../../test-helpers/pokemon-builder';
 import { PokemonDetails } from './pokemon-details';
 import { PokemonDetailsComponentDriver } from './pokemon-details.test.driver';

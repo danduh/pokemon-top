@@ -14,6 +14,7 @@ describe('Pokemon Details E2E Tests', () => {
   describe('when navigate to home page by name', () => {
     beforeEach(() => {
       when.navigateToHomePageByName('caterpie');
+      when.waitForPokemonName('caterpie');
     });
 
     it('pokemon name should be displayed', () => {
@@ -45,6 +46,7 @@ describe('Pokemon Details E2E Tests', () => {
 
     it('when clicking next should show next pokemon', () => {
       when.clickNext();
+      when.waitForPokemonName('metapod');
       then(get.pokemonName()).shouldEqual('metapod');
     });
 

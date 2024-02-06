@@ -18,10 +18,14 @@ export function PokemonDetails() {
   const [pokemon, setPokemon] = useState<Pokemon | undefined>(undefined);
   const api = new PokemonClient();
 
-  const fetchPokemonByInput = async (name?: string, id?: number) =>
-    await (name ? api.getPokemonByName(name) : api.getPokemonById(id || 1));
+  const fetchPokemonByInput = async (name?: string, id?: number) => {
+    if (id) return api.getPokemonById(id);
+    return name ? api.getPokemonByName(name) : api.getPokemonById(1);
+  };
+  const shouldFetchPokemon = (name?: string, id?: number) =>
+    !((!name && !id) || (id && pokemon?.id === id));
   const fetchPokemon = async (name?: string, id?: number) => {
-    if (!name && !id) return;
+    if (!shouldFetchPokemon(name, id)) return;
     try {
       const fetchedPokemon = await fetchPokemonByInput(name, id);
       setPokemon(fetchedPokemon);
@@ -30,8 +34,6 @@ export function PokemonDetails() {
       console.log(e);
       alert('Pokemon not found, showing the first pokemon');
       setCurrentIndex(1);
-    } finally {
-      setName(undefined);
     }
   };
 
