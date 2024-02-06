@@ -11,9 +11,9 @@
     "cy:list-run": "nx run list:component-test --headless",
     "cy:list-e2e-open": "nx run list:e2e --watch",
     "cy:list-e2e-run": "nx run list:e2e --headless",
-    "list-merge-results": "mochawesome-merge list/cypress/results/json/*.json > list/cypress/results/json/merged.json",
-    "details-merge-results": "mochawesome-merge details/cypress/results/json/*.json > details/cypress/results/json/merged.json",
-    "details-e2e-merge-results": "mochawesome-merge details-e2e/cypress/results/json/*.json > details-e2e/cypress/results/json/merged.json"
+    "list-merge-results": "mochawesome-merge apps/list/cypress/results/json/*.json > list/cypress/results/json/merged.json",
+    "details-merge-results": "mochawesome-merge apps/details/cypress/results/json/*.json > details/cypress/results/json/merged.json",
+    "details-e2e-merge-results": "mochawesome-merge apps/details-e2e/cypress/results/json/*.json > details-e2e/cypress/results/json/merged.json"
   },
   "private": true,
   "dependencies": {
