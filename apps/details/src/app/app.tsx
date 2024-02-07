@@ -21,6 +21,17 @@ export function App() {
               <Route path=":name" element={<PokemonDetails />} />\
             </Route>
           </Route>
+          <Route path="pokemon-top">
+            <Route path="details">
+              <Route path="" element={<PokemonDetails />}></Route>
+              <Route path="id">
+                <Route path=":id" element={<PokemonDetails />} />\
+              </Route>
+              <Route path="name">
+                <Route path=":name" element={<PokemonDetails />} />\
+              </Route>
+            </Route>
+          </Route>
         </Routes>
       </BrowserRouter>
     </StyledApp>
