@@ -1,10 +1,10 @@
 import type { Type } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, Event as RouterEvent } from '@angular/router';
 import { CypressHelper } from '@shellygo/cypress-test-utils';
 import { CypressAngularComponentHelper } from '@shellygo/cypress-test-utils/angular';
 import { MountConfig } from 'cypress/angular';
 import { NamedAPIResource } from 'pokenode-ts';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { PokemonCardComponentDriver } from '../pokemon-card/pokemon-card.test.driver';
 import { BetterPokemon, PokemonService } from '../services/pokemon.service';
 import { SearchComponent } from './search.component';
@@ -25,7 +25,7 @@ export class SearchComponentDriver {
   );
 
   private mockRouter = this.helper.given.stubbedInstance(Router, {
-    events: new Observable(),
+    events: new Observable<RouterEvent>(),
   });
 
   beforeAndAfter = () => {
@@ -36,13 +36,15 @@ export class SearchComponentDriver {
   given = {
     card: this.cardDriver.given,
     types: (value: string[]) =>
-      this.mockPokemonService.pokemonTypes?.next(
-        value.map((name) => ({ name, url: '' }))
-      ),
+      (
+        this.mockPokemonService.pokemonTypes! as unknown as Subject<
+          NamedAPIResource[]
+        >
+      ).next(value.map((name) => ({ name, url: '' }))),
     pokemons: (value: { name: string; id: number }[]) =>
-      this.mockPokemonService.pokemons?.next(
-        value.map(({ name, id }) => ({ name, id, url: '' }))
-      ),
+      (
+        this.mockPokemonService.pokemons! as unknown as Subject<BetterPokemon[]>
+      ).next(value.map(({ name, id }) => ({ name, id, url: '' }))),
   };
 
   when = {

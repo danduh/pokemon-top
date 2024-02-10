@@ -4,7 +4,7 @@ import { CypressHelper } from '@shellygo/cypress-test-utils';
 import { CypressAngularComponentHelper } from '@shellygo/cypress-test-utils/angular';
 import { MountConfig } from 'cypress/angular';
 import { NamedAPIResource } from 'pokenode-ts';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { BetterPokemon, PokemonService } from '../../services/pokemon.service';
 import type { HeaderComponent } from './header.component';
 
@@ -30,9 +30,11 @@ export class HeaderComponentDriver {
 
   given = {
     types: (value: string[]) =>
-      this.mockPokemonService.pokemonTypes?.next(
-        value.map((name) => ({ name, url: '' }))
-      ),
+      (
+        this.mockPokemonService.pokemonTypes as unknown as Subject<
+          NamedAPIResource[]
+        >
+      ).next(value.map((name) => ({ name, url: '' }))),
   };
 
   when = {
@@ -54,18 +56,20 @@ export class HeaderComponentDriver {
   };
 
   get = {
-    mockPokemonService: () => this.mockPokemonService,
-    mockRouter: () => this.mockRouter,
+    mock: {
+      pokemonService: () => this.mockPokemonService,
+      router: () => this.mockRouter,
+    },
     typeOptionText: (index: number) =>
       this.helper.get.elementsText('type-option', index),
     numberOfTypeOptions: () => this.helper.get.numberOfElements('type-option'),
     navigateByUrlSpy: () =>
-      this.helper.get.assertableStub(this.get.mockRouter().navigateByUrl),
+      this.helper.get.assertableStub(this.get.mock.router().navigateByUrl),
     loadTypesSpy: () =>
-      this.helper.get.assertableStub(this.get.mockPokemonService().loadTypes),
+      this.helper.get.assertableStub(this.get.mock.pokemonService().loadTypes),
     filterByTypeNameSpy: () =>
       this.helper.get.assertableStub(
-        this.get.mockPokemonService().filterByTypeName
+        this.get.mock.pokemonService().filterByTypeName
       ),
   };
 }

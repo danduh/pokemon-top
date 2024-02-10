@@ -27,7 +27,7 @@ describe('HeaderComponent Tests', () => {
   const testConfig = {
     imports: [BrowserAnimationsModule, NoopAnimationsModule],
     providers: [
-      { provide: Router, useValue: get.mockRouter() },
+      { provide: Router, useValue: get.mock.router() },
       {
         provide: ActivatedRoute,
         useValue: {
