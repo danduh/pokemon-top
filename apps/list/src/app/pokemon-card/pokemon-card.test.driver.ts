@@ -1,5 +1,5 @@
 import type { Type } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, Event as RouterEvent } from '@angular/router';
 import { CypressHelper } from '@shellygo/cypress-test-utils';
 import { CypressAngularComponentHelper } from '@shellygo/cypress-test-utils/angular';
 import { MountConfig } from 'cypress/angular';
@@ -21,7 +21,7 @@ export class PokemonCardComponentDriver {
   private componentProperties: Partial<PokemonCardComponent> = {};
 
   private mockRouter: any = this.helper.given.stubbedInstance(Router, {
-    events: new Observable(),
+    events: new Observable<RouterEvent>(),
   });
 
   beforeAndAfter = () => {
