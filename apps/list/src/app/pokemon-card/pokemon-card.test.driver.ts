@@ -51,7 +51,7 @@ export class PokemonCardComponentDriver {
 
   get = {
     picture: this.pictureDriver.get,
-    mockRouter: () => this.mockRouter,
+    mock: { router: () => this.mockRouter },
     navigateByUrlSpy: () =>
       this.helper.get.assertableStub(this.mockRouter.navigateByUrl),
     pokemonNameText: (index: number = 0) =>

@@ -56,18 +56,20 @@ export class HeaderComponentDriver {
   };
 
   get = {
-    mockPokemonService: () => this.mockPokemonService,
-    mockRouter: () => this.mockRouter,
+    mock: {
+      pokemonService: () => this.mockPokemonService,
+      router: () => this.mockRouter,
+    },
     typeOptionText: (index: number) =>
       this.helper.get.elementsText('type-option', index),
     numberOfTypeOptions: () => this.helper.get.numberOfElements('type-option'),
     navigateByUrlSpy: () =>
-      this.helper.get.assertableStub(this.get.mockRouter().navigateByUrl),
+      this.helper.get.assertableStub(this.get.mock.router().navigateByUrl),
     loadTypesSpy: () =>
-      this.helper.get.assertableStub(this.get.mockPokemonService().loadTypes),
+      this.helper.get.assertableStub(this.get.mock.pokemonService().loadTypes),
     filterByTypeNameSpy: () =>
       this.helper.get.assertableStub(
-        this.get.mockPokemonService().filterByTypeName
+        this.get.mock.pokemonService().filterByTypeName
       ),
   };
 }

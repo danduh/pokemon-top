@@ -46,9 +46,9 @@ export class RemoteEntryComponentDriver {
         >
       ).next(value.map((name) => ({ name, url: '' }))),
     pokemons: (value: { name: string; id: number }[]) =>
-      this.mockPokemonService.pokemons?.next(
-        value.map(({ name, id }) => ({ name, id, url: '' }))
-      ),
+      (
+        this.mockPokemonService.pokemons! as unknown as Subject<BetterPokemon[]>
+      ).next(value.map(({ name, id }) => ({ name, id, url: '' }))),
   };
 
   when = {
