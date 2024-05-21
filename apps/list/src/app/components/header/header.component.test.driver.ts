@@ -63,13 +63,8 @@ export class HeaderComponentDriver {
     typeOptionText: (index: number) =>
       this.helper.get.elementsText('type-option', index),
     numberOfTypeOptions: () => this.helper.get.numberOfElements('type-option'),
-    navigateByUrlSpy: () =>
-      this.helper.get.assertableStub(this.get.mock.router().navigateByUrl),
-    loadTypesSpy: () =>
-      this.helper.get.assertableStub(this.get.mock.pokemonService().loadTypes),
-    filterByTypeNameSpy: () =>
-      this.helper.get.assertableStub(
-        this.get.mock.pokemonService().filterByTypeName
-      ),
+    navigateByUrlSpy: () => this.get.mock.router().navigateByUrl,
+    loadTypesSpy: () => this.get.mock.pokemonService().loadTypes,
+    filterByTypeNameSpy: () => this.get.mock.pokemonService().filterByTypeName,
   };
 }
