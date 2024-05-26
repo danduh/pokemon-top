@@ -121,6 +121,7 @@
     "component-test": {
       "executor": "@nx/cypress:cypress",
       "options": {
+        "tsConfig": "apps/details/tsconfig.json",
         "cypressConfig": "apps/details/cypress.config.ts",
         "testingType": "component",
         "devServerTarget": "details:build",

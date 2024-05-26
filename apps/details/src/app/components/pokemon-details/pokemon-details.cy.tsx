@@ -1,9 +1,11 @@
+// import { aPokemon } from '@pokemon/test-helpers';
 import { then } from '@shellygo/cypress-test-utils/assertable';
 import { Chance } from 'chance';
 import React from 'react';
-import { aPokemon } from '../../test-helpers/pokemon-builder';
 import { PokemonDetails } from './pokemon-details';
 import { PokemonDetailsComponentDriver } from './pokemon-details.test.driver';
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import { aPokemon } from '../../../../../../libs/test-helpers/src';
 
 describe('When rendering PokemonDetails component', () => {
   let { beforeAndAfter, given, when, get } =
