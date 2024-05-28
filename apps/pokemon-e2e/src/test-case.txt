@@ -1,0 +1,5 @@
+As a user I want to got to the PokemonListPage.
+On pokemon list page, I will use input for searching pokemon by name.
+I will search for pokemon "ivysaur".
+And should be navigated to pokemon details page with pokemon "ivysaur".
+On details page I want to be able to click on the Next button and see "venusaur"

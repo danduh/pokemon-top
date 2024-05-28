@@ -1,13 +1,24 @@
-import { getGreeting } from '../support/app.po';
+import { PokemonListPage } from './../pages/list-po.cy';
+import { PokemonDetailsPage } from './../pages/details-po.cy';
+describe('Pokemon Search and Navigation', () => {
+  const pokemonListPage = new PokemonListPage();
+  const pokemonDetailsPage = new PokemonDetailsPage();
 
-describe('pokemon-e2e', () => {
-  beforeEach(() => cy.visit('/'));
+  it('should search for Ivysaur and navigate to its details page, then navigate to Venusaur details page', () => {
+      // Visit Pokemon List Page
+      cy.visit('/');
 
-  it('should display welcome message', () => {
-    // Custom command example, see `../support/commands.ts` file
-    cy.login('my-email@something.com', 'myPassword');
+      // Search for Ivysaur
+      pokemonListPage.getNameIdInput().type('ivysaur');
+      pokemonListPage.getGoToButton().click();
 
-    // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains(/Welcome/);
+      // Verify navigation to Ivysaur Details Page
+      pokemonDetailsPage.pokemonName.should('contain', 'ivysaur');
+
+      // Click on the Next button
+      pokemonDetailsPage.nextButton.click();
+
+      // Verify navigation to Venusaur Details Page
+      pokemonDetailsPage.pokemonName.should('contain', 'venusaur');
   });
 });
