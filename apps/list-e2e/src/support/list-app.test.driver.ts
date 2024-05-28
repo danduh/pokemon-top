@@ -20,6 +20,12 @@ export class PokemonListAppDriver {
         response,
         alias: 'types',
       }),
+    pokemonsResponse: (response: NamedAPIResourceList) =>
+      this.helper.given.interceptAndMockResponse({
+        url: '**/api/v2/pokemon?*',
+        response,
+        alias: 'pokemons',
+      }),
     pokemonsByTypeResponse: (response: Type) =>
       this.helper.given.interceptAndMockResponse({
         url: '**/api/v2/type/*',
