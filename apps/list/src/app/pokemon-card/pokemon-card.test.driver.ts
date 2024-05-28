@@ -1,27 +1,22 @@
 import type { Type } from '@angular/core';
-import { Router, Event as RouterEvent } from '@angular/router';
+import { Router, type Event } from '@angular/router';
 import { CypressHelper } from '@shellygo/cypress-test-utils';
 import { CypressAngularComponentHelper } from '@shellygo/cypress-test-utils/angular';
 import { MountConfig } from 'cypress/angular';
+// import { stubObject } from 'ts-sinon';
 import { Observable } from 'rxjs';
 import { PictureComponentDriver } from '../components/picture/picture.component.test.driver';
 import type { BetterPokemon } from '../services/pokemon.service';
 import type { PokemonCardComponent } from './pokemon-card.component';
-
 export class PokemonCardComponentDriver {
-  // private addGetter = (obj: Object, key: string, value: any) => {
-  //   Object.defineProperty(obj, key, {
-  //     get: () => value,
-  //   });
-  // }
   private helper = new CypressHelper();
   private componentHelper =
     new CypressAngularComponentHelper<PokemonCardComponent>();
   private pictureDriver = new PictureComponentDriver();
   private componentProperties: Partial<PokemonCardComponent> = {};
 
-  private mockRouter: any = this.helper.given.stubbedInstance(Router, {
-    events: new Observable<RouterEvent>(),
+  private mockRouter: Router = this.helper.given.stubbedInstance(Router, {
+    events: new Observable<Event>(),
   });
 
   beforeAndAfter = () => {
@@ -52,8 +47,7 @@ export class PokemonCardComponentDriver {
   get = {
     picture: this.pictureDriver.get,
     mock: { router: () => this.mockRouter },
-    navigateByUrlSpy: () =>
-      this.helper.get.assertableStub(this.mockRouter.navigateByUrl),
+    navigateByUrlSpy: () => this.mockRouter.navigateByUrl,
     pokemonNameText: (index: number = 0) =>
       this.helper.get.elementsText('pokemon-name', index),
     overlay: () => this.helper.get.element('.ant-image-preview-wrap'),
