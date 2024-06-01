@@ -9,14 +9,14 @@
       "options": {
         "cypressConfig": "apps/details-e2e/cypress.config.ts",
         "testingType": "e2e",
-        "devServerTarget": "details:serve"
+        "devServerTarget": "details-app:serve"
       },
       "configurations": {
         "production": {
-          "devServerTarget": "details:serve:production"
+          "devServerTarget": "details-app:serve:production"
         },
         "ci": {
-          "devServerTarget": "details:serve-static"
+          "devServerTarget": "details-app:serve-static"
         }
       }
     },
@@ -25,6 +25,6 @@
       "outputs": ["{options.outputFile}"]
     }
   },
-  "implicitDependencies": ["details"],
+  "implicitDependencies": ["details-app"],
   "tags": []
 }

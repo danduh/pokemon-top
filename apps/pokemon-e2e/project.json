@@ -9,14 +9,14 @@
       "options": {
         "cypressConfig": "apps/pokemon-e2e/cypress.config.ts",
         "testingType": "e2e",
-        "devServerTarget": "pokemon:serve:development"
+        "devServerTarget": "pokemon-app:serve:development"
       },
       "configurations": {
         "production": {
-          "devServerTarget": "pokemon:serve:production"
+          "devServerTarget": "pokemon-app:serve:production"
         },
         "ci": {
-          "devServerTarget": "pokemon:serve-static"
+          "devServerTarget": "pokemon-app:serve-static"
         }
       }
     },
@@ -26,5 +26,5 @@
     }
   },
   "tags": [],
-  "implicitDependencies": ["pokemon"]
+  "implicitDependencies": ["pokemon-app"]
 }
