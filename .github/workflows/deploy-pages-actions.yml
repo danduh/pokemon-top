@@ -35,12 +35,12 @@ jobs:
       - name: Build APPLication
         run: |
           npm i
-          npx nx run details:build:production
-          npx nx run list:build:production
+          npx nx run details-app:build:production
+          npx nx run list-app:build:production
           npx nx run pokemon:build:production --base-href /pokemon-top/
           cp dist/apps/pokemon/index.html dist/apps/pokemon/404.html
-          cp -r dist/apps/list dist/apps/pokemon/assets
-          cp -r dist/apps/details dist/apps/pokemon/assets
+          cp -r dist/apps/list-app dist/apps/pokemon/assets
+          cp -r dist/apps/details-app dist/apps/pokemon/assets
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
