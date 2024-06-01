@@ -1,29 +1,29 @@
 {
-  "name": "list",
+  "name": "list-app",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "pokemon",
-  "sourceRoot": "apps/list/src",
+  "sourceRoot": "apps/list-app/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@nx/angular:webpack-browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/list",
-        "index": "apps/list/src/index.html",
-        "main": "apps/list/src/main.ts",
+        "outputPath": "dist/apps/list-app",
+        "index": "apps/list-app/src/index.html",
+        "main": "apps/list-app/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/list/tsconfig.app.json",
+        "tsConfig": "apps/list-app/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/list/src/favicon.ico", "apps/list/src/assets"],
+        "assets": ["apps/list-app/src/favicon.ico", "apps/list-app/src/assets"],
         "styles": [
-          "apps/list/src/styles.scss",
+          "apps/list-app/src/styles.scss",
           "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
         ],
         "scripts": [],
         "customWebpackConfig": {
-          "path": "apps/list/webpack.config.ts"
+          "path": "apps/list-app/webpack.config.ts"
         }
       },
       "configurations": {
@@ -42,7 +42,7 @@
           ],
           "outputHashing": "all",
           "customWebpackConfig": {
-            "path": "apps/list/webpack.prod.config.ts"
+            "path": "apps/list-app/webpack.prod.config.ts"
           }
         },
         "development": {
@@ -63,10 +63,10 @@
       },
       "configurations": {
         "production": {
-          "buildTarget": "list:build:production"
+          "buildTarget": "list-app:build:production"
         },
         "development": {
-          "buildTarget": "list:build:development"
+          "buildTarget": "list-app:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -74,7 +74,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "buildTarget": "list:build"
+        "buildTarget": "list-app:build"
       }
     },
     "lint": {
@@ -85,33 +85,33 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/list/jest.config.ts"
+        "jestConfig": "apps/list-app/jest.config.ts"
       }
     },
     "serve-static": {
       "executor": "@nx/web:file-server",
       "defaultConfiguration": "production",
       "options": {
-        "buildTarget": "list:build",
+        "buildTarget": "list-app:build",
         "port": 4201,
         "watch": false
       },
       "configurations": {
         "development": {
-          "buildTarget": "list:build:development"
+          "buildTarget": "list-app:build:development"
         },
         "production": {
-          "buildTarget": "list:build:production"
+          "buildTarget": "list-app:build:production"
         }
       }
     },
     "component-test": {
       "executor": "@nx/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/list/cypress.config.ts",
+        "cypressConfig": "apps/list-app/cypress.config.ts",
         "testingType": "component",
         "skipServe": true,
-        "devServerTarget": "list:build"
+        "devServerTarget": "list-app:build"
       }
     }
   }

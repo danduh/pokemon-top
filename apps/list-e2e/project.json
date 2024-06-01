@@ -9,14 +9,14 @@
       "options": {
         "cypressConfig": "apps/list-e2e/cypress.config.ts",
         "testingType": "e2e",
-        "devServerTarget": "list:serve:development"
+        "devServerTarget": "list-app:serve:development"
       },
       "configurations": {
         "production": {
-          "devServerTarget": "list:serve:production"
+          "devServerTarget": "list-app:serve:production"
         },
         "ci": {
-          "devServerTarget": "list:serve-static"
+          "devServerTarget": "list-app:serve-static"
         }
       }
     },
@@ -26,5 +26,5 @@
     }
   },
   "tags": [],
-  "implicitDependencies": ["list"]
+  "implicitDependencies": ["list-app"]
 }
