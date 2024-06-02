@@ -5,9 +5,9 @@ import { CypressAngularComponentHelper } from '@shellygo/cypress-test-utils/angu
 import { MountConfig } from 'cypress/angular';
 import { NamedAPIResource } from 'pokenode-ts';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { StubbedInstance } from 'ts-sinon';
 import { BetterPokemon, PokemonService } from '../../services/pokemon.service';
 import type { HeaderComponent } from './header.component';
-
 export class HeaderComponentDriver {
   private helper = new CypressHelper();
   private angularComponentHelper =
@@ -57,7 +57,8 @@ export class HeaderComponentDriver {
 
   get = {
     mock: {
-      pokemonService: () => this.mockPokemonService,
+      pokemonService: (): StubbedInstance & PokemonService =>
+        this.mockPokemonService,
       router: () => this.mockRouter,
     },
     typeOptionText: (index: number) =>

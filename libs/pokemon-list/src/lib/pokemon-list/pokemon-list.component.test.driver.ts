@@ -6,11 +6,14 @@ import { MountConfig } from 'cypress/angular';
 import { NamedAPIResource } from 'pokenode-ts';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { HeaderComponentDriver } from './components/header/header.component.test.driver';
+import { PokemonListComponent } from './pokemon-list.component';
 import { SearchComponentDriver } from './search/serach.component.test.driver';
 import { BetterPokemon, PokemonService } from './services/pokemon.service';
-import { PokemonListComponent } from './pokemon-list.component';
+
+import * as sinon from '@shellygo/cypress-test-utils/node_modules/cypress/types/sinon';
 
 export class PokemonListComponentDriver {
+  kuku = sinon;
   private helper = new CypressHelper();
   private componentHelper =
     new CypressAngularComponentHelper<PokemonListComponent>();
@@ -70,11 +73,9 @@ export class PokemonListComponentDriver {
     search: this.searchDriver.get,
     mockRouter: () => this.mockRouter,
     mockPokemonService: () => this.mockPokemonService,
-    navigateByUrlSpy: () =>
-      this.helper.get.assertableStub(this.mockRouter.navigateByUrl),
+    navigateByUrlSpy: () => this.mockRouter.navigateByUrl,
     pokemonNameText: () => this.helper.get.elementsText('pokemon-name'),
     overlay: () => this.helper.get.element('.ant-image-preview-wrap'),
-    filterByTypeNameSpy: () =>
-      this.mockPokemonService.filterByTypeName,
+    filterByTypeNameSpy: () => this.mockPokemonService.filterByTypeName,
   };
 }

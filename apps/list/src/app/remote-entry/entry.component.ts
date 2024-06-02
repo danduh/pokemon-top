@@ -1,12 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import {
+  HeaderComponent,
+  PokemonListComponent,
+  SearchComponent,
+} from '@pokemon/pokemon-list';
+import {
   NzContentComponent,
   NzFooterComponent,
   NzHeaderComponent,
   NzLayoutComponent,
 } from 'ng-zorro-antd/layout';
-import { HeaderComponent, SearchComponent } from '@pokemon/pokemon-list';
 
 @Component({
   standalone: true,
@@ -18,6 +22,7 @@ import { HeaderComponent, SearchComponent } from '@pokemon/pokemon-list';
     NzContentComponent,
     NzFooterComponent,
     HeaderComponent,
+    PokemonListComponent,
   ],
   selector: 'pokemon-list-entry',
   styles: `
@@ -26,8 +31,6 @@ import { HeaderComponent, SearchComponent } from '@pokemon/pokemon-list';
         padding: 16px;
       }
   `,
-  template: `
-    <pokemon-list></pokemon-list>
-  `,
+  template: ` <pokemon-list></pokemon-list> `,
 })
 export class RemoteEntryComponent {}

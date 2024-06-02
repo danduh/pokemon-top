@@ -20,7 +20,7 @@ import { SearchComponent } from './search/search.component';
     NzFooterComponent,
     HeaderComponent,
   ],
-  selector: 'pokemon-list-entry',
+  selector: 'pokemon-list',
   styles: `
         nz-header {
         background: #ebebeb;
@@ -39,4 +39,3 @@ import { SearchComponent } from './search/search.component';
   `,
 })
 export class PokemonListComponent {}
-

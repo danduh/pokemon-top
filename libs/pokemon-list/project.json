@@ -18,6 +18,17 @@
         "skipServe": true,
         "devServerTarget": "pokemon-list:build"
       }
+    },
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/pokemon-list",
+        "main": "libs/pokemon-list/src/index.ts",
+        "index": "libs/pokemon-list/src/index.ts",
+        "tsConfig": "libs/pokemon-list/tsconfig.lib.json",
+        "assets": []
+      }
     }
   }
 }
