@@ -23,8 +23,8 @@ describe('HeaderComponent Tests', () => {
   const testConfig = {
     imports: [BrowserAnimationsModule, NoopAnimationsModule],
     providers: [
-      { provide: PokemonService, useValue: get.mockPokemonService() },
-      { provide: Router, useValue: get.mockRouter() },
+      { provide: PokemonService, useValue: get.mock.pokemonService() },
+      { provide: Router, useValue: get.mock.router() },
       {
         provide: ActivatedRoute,
         useValue: {

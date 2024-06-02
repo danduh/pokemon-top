@@ -3,17 +3,17 @@ import { Router, Event as RouterEvent } from '@angular/router';
 import { CypressHelper } from '@shellygo/cypress-test-utils';
 import { CypressAngularComponentHelper } from '@shellygo/cypress-test-utils/angular';
 import { MountConfig } from 'cypress/angular';
+import type * as Sinon from 'cypress/types/sinon';
+import type { SinonStub } from 'cypress/types/sinon';
 import { NamedAPIResource } from 'pokenode-ts';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import type { StubbedInstance } from 'ts-stubber/.';
 import { HeaderComponentDriver } from './components/header/header.component.test.driver';
 import { PokemonListComponent } from './pokemon-list.component';
 import { SearchComponentDriver } from './search/serach.component.test.driver';
 import { BetterPokemon, PokemonService } from './services/pokemon.service';
 
-import * as sinon from '@shellygo/cypress-test-utils/node_modules/cypress/types/sinon';
-
 export class PokemonListComponentDriver {
-  kuku = sinon;
   private helper = new CypressHelper();
   private componentHelper =
     new CypressAngularComponentHelper<PokemonListComponent>();
@@ -71,11 +71,16 @@ export class PokemonListComponentDriver {
   get = {
     header: this.headerDriver.get,
     search: this.searchDriver.get,
-    mockRouter: () => this.mockRouter,
-    mockPokemonService: () => this.mockPokemonService,
-    navigateByUrlSpy: () => this.mockRouter.navigateByUrl,
+    mock: {
+      router: (): StubbedInstance<Router, SinonStub> & Router =>
+        this.mockRouter,
+      pokemonService: (): StubbedInstance<PokemonService, SinonStub> &
+        PokemonService => this.mockPokemonService,
+    },
+    navigateByUrlSpy: (): Sinon.SinonStub => this.mockRouter.navigateByUrl,
     pokemonNameText: () => this.helper.get.elementsText('pokemon-name'),
     overlay: () => this.helper.get.element('.ant-image-preview-wrap'),
-    filterByTypeNameSpy: () => this.mockPokemonService.filterByTypeName,
+    filterByTypeNameSpy: (): Sinon.SinonStub =>
+      this.mockPokemonService.filterByTypeName,
   };
 }

@@ -2,8 +2,8 @@ import type { Type } from '@angular/core';
 import { CypressHelper } from '@shellygo/cypress-test-utils';
 import { CypressAngularComponentHelper } from '@shellygo/cypress-test-utils/angular';
 import { MountConfig } from 'cypress/angular';
+import { Interception } from 'cypress/types/net-stubbing';
 import { PictureComponent } from './picture.component';
-
 export class PictureComponentDriver {
   private helper = new CypressHelper();
   private angularComponentHelper =
@@ -39,7 +39,8 @@ export class PictureComponentDriver {
         ...this.componentProperties,
       });
     },
-    waitForImageResponse: () => this.helper.when.waitForResponse('image'),
+    waitForImageResponse: (): Cypress.Chainable<Interception> =>
+      this.helper.when.waitForResponse('image'),
     clickImage: (index: number = 0) =>
       this.helper.when.click('pokemon-image', index),
   };

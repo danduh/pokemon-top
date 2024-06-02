@@ -3,8 +3,10 @@ import { Router, Event as RouterEvent } from '@angular/router';
 import { CypressHelper } from '@shellygo/cypress-test-utils';
 import { CypressAngularComponentHelper } from '@shellygo/cypress-test-utils/angular';
 import { MountConfig } from 'cypress/angular';
+import type { SinonStub } from 'cypress/types/sinon';
 import { NamedAPIResource } from 'pokenode-ts';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import type { StubbedInstance } from 'ts-stubber/.';
 import { PokemonCardComponentDriver } from '../pokemon-card/pokemon-card.test.driver';
 import { BetterPokemon, PokemonService } from '../services/pokemon.service';
 import { SearchComponent } from './search.component';
@@ -61,7 +63,11 @@ export class SearchComponentDriver {
 
   get = {
     card: this.cardDriver.get,
-    mockRouter: () => this.mockRouter,
-    mockPokemonService: () => this.mockPokemonService,
+    mock: {
+      router: (): StubbedInstance<Router, SinonStub> & Router =>
+        this.mockRouter,
+      pokemonService: (): StubbedInstance<PokemonService, SinonStub> &
+        PokemonService => this.mockPokemonService,
+    },
   };
 }

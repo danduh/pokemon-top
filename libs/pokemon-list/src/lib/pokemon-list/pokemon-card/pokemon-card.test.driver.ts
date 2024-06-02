@@ -3,7 +3,6 @@ import { Router, type Event } from '@angular/router';
 import { CypressHelper } from '@shellygo/cypress-test-utils';
 import { CypressAngularComponentHelper } from '@shellygo/cypress-test-utils/angular';
 import { MountConfig } from 'cypress/angular';
-// import { stubObject } from 'ts-sinon';
 import { Observable } from 'rxjs';
 import { PictureComponentDriver } from '../components/picture/picture.component.test.driver';
 import type { BetterPokemon } from '../services/pokemon.service';

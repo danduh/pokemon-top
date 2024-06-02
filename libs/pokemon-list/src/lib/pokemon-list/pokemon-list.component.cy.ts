@@ -6,9 +6,9 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import { then } from '@shellygo/cypress-test-utils/assertable';
 import { Builder } from 'builder-pattern';
 import { Chance } from 'chance';
+import { PokemonListComponent } from './pokemon-list.component';
+import { PokemonListComponentDriver } from './pokemon-list.component.test.driver';
 import { BetterPokemon, PokemonService } from './services/pokemon.service';
-import {PokemonListComponent} from './pokemon-list.component'
-import {PokemonListComponentDriver} from './pokemon-list.component.test.driver'
 
 describe('HeaderComponent Tests', () => {
   const chance = new Chance();
@@ -24,8 +24,8 @@ describe('HeaderComponent Tests', () => {
   const testConfig = {
     imports: [BrowserAnimationsModule, NoopAnimationsModule],
     providers: [
-      { provide: PokemonService, useValue: get.mockPokemonService() },
-      { provide: Router, useValue: get.mockRouter() },
+      { provide: PokemonService, useValue: get.mock.pokemonService() },
+      { provide: Router, useValue: get.mock.router() },
       {
         provide: ActivatedRoute,
         useValue: {
