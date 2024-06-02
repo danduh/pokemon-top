@@ -60,7 +60,9 @@ jobs:
 
       - name: Merge List Reports
         if: success() || failure() # run this step even if previous step failed
-        run: npm run list-merge-results
+        run: |
+          npm run list-merge-results
+          npm run list-e2e-merge-results
 
       - name: List Component Tests Report
         uses: phoenix-actions/test-reporting@v8
@@ -70,6 +72,16 @@ jobs:
           name: List Component Tests # Name of the check run which will be created
           path: ${{ github.workspace }}/libs/pokemon-list/cypress/results/json/merged.json # Path to test results
           reporter: mochawesome-json # Format of test results
+
+      - name: List Integration & E2E Tests Report
+        uses: phoenix-actions/test-reporting@v8
+        id: list-e2e-report # Set ID reference for step
+        if: always() # run this step even if previous step failed
+        with:
+          name: List Integration & E2E Tests # Name of the check run which will be created
+          path: ${{ github.workspace }}/apps/list-e2e/cypress/results/json/merged.json # Path to test results
+          reporter: mochawesome-json # Format of test results
+
 #        run: npm run build:react
 #      - run: npm run test:react
 #      - run: npm run validate:react
