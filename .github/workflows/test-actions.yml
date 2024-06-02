@@ -67,7 +67,7 @@ jobs:
         if: always() # run this step even if previous step failed
         with:
           name: List Component Tests # Name of the check run which will be created
-          path: ${{ github.workspace }}/apps/list/cypress/results/json/merged.json # Path to test results
+          path: ${{ github.workspace }}/libs/pokemon-list/cypress/results/json/merged.json # Path to test results
           reporter: mochawesome-json # Format of test results
 #        run: npm run build:react
 #      - run: npm run test:react

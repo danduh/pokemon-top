@@ -5,18 +5,18 @@ import { CypressAngularComponentHelper } from '@shellygo/cypress-test-utils/angu
 import { MountConfig } from 'cypress/angular';
 import { NamedAPIResource } from 'pokenode-ts';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { HeaderComponentDriver } from '../components/header/header.component.test.driver';
-import { SearchComponentDriver } from '../search/serach.component.test.driver';
-import { BetterPokemon, PokemonService } from '../services/pokemon.service';
-import type { RemoteEntryComponent } from './entry.component';
+import { HeaderComponentDriver } from './components/header/header.component.test.driver';
+import { SearchComponentDriver } from './search/serach.component.test.driver';
+import { BetterPokemon, PokemonService } from './services/pokemon.service';
+import { PokemonListComponent } from './pokemon-list.component';
 
-export class RemoteEntryComponentDriver {
+export class PokemonListComponentDriver {
   private helper = new CypressHelper();
   private componentHelper =
-    new CypressAngularComponentHelper<RemoteEntryComponent>();
+    new CypressAngularComponentHelper<PokemonListComponent>();
   private searchDriver = new SearchComponentDriver();
   private headerDriver = new HeaderComponentDriver();
-  private componentProperties: Partial<RemoteEntryComponent> = {};
+  private componentProperties: Partial<PokemonListComponent> = {};
 
   private mockPokemonService = this.helper.given.stubbedInstance(
     PokemonService,
@@ -55,8 +55,8 @@ export class RemoteEntryComponentDriver {
     header: this.headerDriver.when,
     search: this.searchDriver.when,
     render: (
-      type: Type<RemoteEntryComponent>,
-      config: MountConfig<RemoteEntryComponent>
+      type: Type<PokemonListComponent>,
+      config: MountConfig<PokemonListComponent>
     ) => {
       this.componentHelper.when.mount(type, config, {
         ...this.componentProperties,
@@ -75,6 +75,6 @@ export class RemoteEntryComponentDriver {
     pokemonNameText: () => this.helper.get.elementsText('pokemon-name'),
     overlay: () => this.helper.get.element('.ant-image-preview-wrap'),
     filterByTypeNameSpy: () =>
-      this.helper.get.assertableStub(this.mockPokemonService.filterByTypeName),
+      this.mockPokemonService.filterByTypeName,
   };
 }

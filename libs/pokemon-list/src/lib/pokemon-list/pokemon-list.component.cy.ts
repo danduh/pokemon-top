@@ -6,9 +6,9 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import { then } from '@shellygo/cypress-test-utils/assertable';
 import { Builder } from 'builder-pattern';
 import { Chance } from 'chance';
-import { RemoteEntryComponentDriver } from '../remote-entry/entry.component.test.driver';
-import { BetterPokemon, PokemonService } from '../services/pokemon.service';
-import { RemoteEntryComponent } from './entry.component';
+import { BetterPokemon, PokemonService } from './services/pokemon.service';
+import {PokemonListComponent} from './pokemon-list.component'
+import {PokemonListComponentDriver} from './pokemon-list.component.test.driver'
 
 describe('HeaderComponent Tests', () => {
   const chance = new Chance();
@@ -17,7 +17,7 @@ describe('HeaderComponent Tests', () => {
     .id(chance.integer({ max: 100, min: 1 }))
     .build();
   const types = chance.n(() => chance.word(), 10);
-  const { when, given, get, beforeAndAfter } = new RemoteEntryComponentDriver();
+  const { when, given, get, beforeAndAfter } = new PokemonListComponentDriver();
 
   beforeAndAfter();
 
@@ -38,7 +38,7 @@ describe('HeaderComponent Tests', () => {
   };
   beforeEach(() => {
     given.search.card.picture.mockImageResponse('default.png');
-    when.render(RemoteEntryComponent, testConfig);
+    when.render(PokemonListComponent, testConfig);
     given.types(types);
     given.pokemons([pokemon as { name: string; id: number }]);
   });

@@ -6,8 +6,7 @@ import {
   NzHeaderComponent,
   NzLayoutComponent,
 } from 'ng-zorro-antd/layout';
-import { HeaderComponent } from '@pokemon/pokemon-list';
-import { SearchComponent } from '../search/search.component';
+import { HeaderComponent, SearchComponent } from '@pokemon/pokemon-list';
 
 @Component({
   standalone: true,
@@ -28,14 +27,7 @@ import { SearchComponent } from '../search/search.component';
       }
   `,
   template: `
-    <nz-layout>
-      <nz-header>
-        <pokemon-list-header></pokemon-list-header>
-      </nz-header>
-      <nz-content>
-        <pokemon-search></pokemon-search>
-      </nz-content>
-    </nz-layout>
+    <pokemon-list></pokemon-list>
   `,
 })
 export class RemoteEntryComponent {}
