@@ -55,7 +55,7 @@ jobs:
         if: always()
         run: |
           npx nx run list:build:production
-          npx nx run list:component-test
+          npx nx run pokemon-list:component-test
 
       - name: Merge List Reports
         if: success() || failure() # run this step even if previous step failed
