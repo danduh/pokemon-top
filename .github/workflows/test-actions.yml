@@ -56,6 +56,7 @@ jobs:
         run: |
           npx nx run list:build:production
           npx nx run pokemon-list:component-test
+          npx nx run list-e2e:e2e
 
       - name: Merge List Reports
         if: success() || failure() # run this step even if previous step failed
