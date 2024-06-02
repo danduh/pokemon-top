@@ -1,0 +1,24 @@
+<nz-card
+  nzHoverable
+  style="width: 240px"
+  [nzCover]="coverTemplate"
+  [nzActions]="[showDetails]"
+  data-cy="pokemon-card"
+>
+  <nz-card-meta [nzTitle]="pokemonName"></nz-card-meta>
+</nz-card>
+<ng-template #coverTemplate>
+  <pokemon-picture [pokeId]="pokemon.id"></pokemon-picture>
+</ng-template>
+<ng-template #showDetails>
+  <a
+    nz-button
+    [routerLink]="['/details/name', pokemon.name]"
+    data-cy="more-info"
+  >
+    More Info
+  </a>
+</ng-template>
+<ng-template #pokemonName>
+  <span data-cy="pokemon-name">{{ pokemon.name }}</span>
+</ng-template>

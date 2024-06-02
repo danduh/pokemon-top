@@ -6,7 +6,7 @@ import {
   NzHeaderComponent,
   NzLayoutComponent,
 } from 'ng-zorro-antd/layout';
-import { HeaderComponent } from '@pokemon/pokemon-list';
+import { HeaderComponent } from '../components/header/header.component';
 import { SearchComponent } from '../search/search.component';
 
 @Component({
