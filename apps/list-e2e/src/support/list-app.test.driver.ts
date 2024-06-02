@@ -1,11 +1,10 @@
+import { PokemonListComponentDriver } from '@pokemon/pokemon-list';
 import { CypressHelper } from '@shellygo/cypress-test-utils';
 import type { NamedAPIResourceList, Type } from 'pokenode-ts';
-// eslint-disable-next-line @nx/enforce-module-boundaries
-import { RemoteEntryComponentDriver } from '../../../list/src/app/remote-entry/entry.component.test.driver';
 export class PokemonListAppDriver {
   private helper = new CypressHelper();
 
-  private remoteEntryComponentDriver = new RemoteEntryComponentDriver();
+  private remoteEntryComponentDriver = new PokemonListComponentDriver();
 
   beforeAndAfter = () => {
     this.helper.beforeAndAfter();

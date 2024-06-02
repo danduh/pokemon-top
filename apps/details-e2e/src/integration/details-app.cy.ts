@@ -1,12 +1,10 @@
-import { CypressHelper } from '@shellygo/cypress-test-utils';
+import { aPokemon } from '@pokemon/test-helpers';
 import { then } from '@shellygo/cypress-test-utils/assertable';
 import { Chance } from 'chance';
-import { aPokemon } from '../../../details/src/app/test-helpers/pokemon-builder';
 import { PokemonDetailsAppDriver } from '../support/details-app.test.driver';
 
 describe('Pokemon Details Integration Tests', () => {
   let { beforeAndAfter, given, when, get } = new PokemonDetailsAppDriver();
-  const helper = new CypressHelper();
   beforeAndAfter();
 
   const chance = new Chance();

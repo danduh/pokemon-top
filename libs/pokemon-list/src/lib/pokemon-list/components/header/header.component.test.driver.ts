@@ -3,11 +3,12 @@ import { Router } from '@angular/router';
 import { CypressHelper } from '@shellygo/cypress-test-utils';
 import { CypressAngularComponentHelper } from '@shellygo/cypress-test-utils/angular';
 import { MountConfig } from 'cypress/angular';
+import { SinonStub } from 'cypress/types/sinon';
 import { NamedAPIResource } from 'pokenode-ts';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { StubbedInstance } from 'ts-stubber';
 import { BetterPokemon, PokemonService } from '../../services/pokemon.service';
 import type { HeaderComponent } from './header.component';
-
 export class HeaderComponentDriver {
   private helper = new CypressHelper();
   private angularComponentHelper =
@@ -57,8 +58,10 @@ export class HeaderComponentDriver {
 
   get = {
     mock: {
-      pokemonService: () => this.mockPokemonService,
-      router: () => this.mockRouter,
+      pokemonService: (): StubbedInstance<PokemonService, SinonStub> &
+        PokemonService => this.mockPokemonService,
+      router: (): StubbedInstance<Router, SinonStub> & Router =>
+        this.mockRouter,
     },
     typeOptionText: (index: number) =>
       this.helper.get.elementsText('type-option', index),

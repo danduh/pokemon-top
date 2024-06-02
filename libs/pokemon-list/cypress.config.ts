@@ -1,14 +1,11 @@
-import { nxE2EPreset } from '@nx/cypress/plugins/cypress-preset';
-
+import { nxComponentTestingPreset } from '@nx/angular/plugins/component-testing';
 import { defineConfig } from 'cypress';
 
 export default defineConfig({
-  e2e: {
-    ...nxE2EPreset(__filename, { cypressDir: 'src' }),
-    baseUrl: 'http://localhost:4200',
-  },
-  viewportHeight: 960,
-  viewportWidth: 1536,
+  component: nxComponentTestingPreset(__filename),
+  video: true,
+  viewportHeight: 768,
+  viewportWidth: 1024,
   reporter: '../../node_modules/mochawesome',
   reporterOptions: {
     reportDir: 'cypress/results/json',
@@ -17,8 +14,7 @@ export default defineConfig({
     json: true,
     suiteTitleSeparatedBy: ' > ',
     testCaseSwitchClassnameAndName: false,
-    rootSuiteTitle: 'List E2E Tests',
+    rootSuiteTitle: 'Pokemon List Component Tests',
     toConsole: true,
-    defaultCommandTimeout: 50000,
   },
 });

@@ -7,13 +7,14 @@
     "cy:details-run": "nx run detail:component-test --headless",
     "cy:details-e2e-open": "nx run detail:e2e --watch",
     "cy:details-e2e-run": "nx run detail:e2e --headless",
-    "cy:list-open": "nx run list:component-test --watch",
-    "cy:list-run": "nx run list:component-test --headless",
+    "cy:list-open": "nx run pokemon-list:component-test --watch",
+    "cy:list-run": "nx run pokemon-list:component-test --headless",
     "cy:list-e2e-open": "nx run list:e2e --watch",
     "cy:list-e2e-run": "nx run list:e2e --headless",
-    "list-merge-results": "mochawesome-merge apps/list/cypress/results/json/*.json > apps/list/cypress/results/json/merged.json",
+    "list-merge-results": "mochawesome-merge libs/pokemon-list/cypress/results/json/*.json > libs/pokemon-list/cypress/results/json/merged.json",
     "details-merge-results": "mochawesome-merge apps/details/cypress/results/json/*.json > apps/details/cypress/results/json/merged.json",
-    "details-e2e-merge-results": "mochawesome-merge apps/details-e2e/cypress/results/json/*.json > apps/details-e2e/cypress/results/json/merged.json"
+    "details-e2e-merge-results": "mochawesome-merge apps/details-e2e/cypress/results/json/*.json > apps/details-e2e/cypress/results/json/merged.json",
+    "list-e2e-merge-results": "mochawesome-merge apps/list-e2e/cypress/results/json/*.json > apps/list-e2e/cypress/results/json/merged.json"
   },
   "private": true,
   "dependencies": {
@@ -69,7 +70,7 @@
     "@nx/workspace": "17.2.8",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
     "@schematics/angular": "~17.0.0",
-    "@shellygo/cypress-test-utils": "^2.1.7",
+    "@shellygo/cypress-test-utils": "^2.1.10",
     "@svgr/webpack": "^8.0.1",
     "@swc-node/register": "~1.6.7",
     "@swc/cli": "~0.1.62",
@@ -89,6 +90,7 @@
     "builder-pattern": "^2.2.0",
     "chance": "^1.1.11",
     "cypress": "^13.0.0",
+    "cypress-pipe": "^2.0.0",
     "eslint": "~8.48.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-cypress": "^2.13.4",
@@ -108,6 +110,7 @@
     "react-refresh": "^0.10.0",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
+    "ts-stubber": "^1.0.3",
     "typescript": "~5.2.2",
     "url-loader": "^4.1.1"
   }

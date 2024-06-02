@@ -1,0 +1,34 @@
+{
+  "name": "pokemon-list",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/pokemon-list/src",
+  "prefix": "pokemon",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "component-test": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "libs/pokemon-list/cypress.config.ts",
+        "testingType": "component",
+        "skipServe": true,
+        "devServerTarget": "pokemon-list:build"
+      }
+    },
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/pokemon-list",
+        "main": "libs/pokemon-list/src/index.ts",
+        "index": "libs/pokemon-list/src/index.ts",
+        "tsConfig": "libs/pokemon-list/tsconfig.lib.json",
+        "assets": []
+      }
+    }
+  }
+}

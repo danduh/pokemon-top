@@ -3,20 +3,20 @@ import { Router, Event as RouterEvent } from '@angular/router';
 import { CypressHelper } from '@shellygo/cypress-test-utils';
 import { CypressAngularComponentHelper } from '@shellygo/cypress-test-utils/angular';
 import { MountConfig } from 'cypress/angular';
+import type { SinonStub } from 'cypress/types/sinon';
 import { NamedAPIResource } from 'pokenode-ts';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { HeaderComponentDriver } from '../components/header/header.component.test.driver';
-import { SearchComponentDriver } from '../search/serach.component.test.driver';
+import type { StubbedInstance } from 'ts-stubber/.';
+import { PokemonCardComponentDriver } from '../pokemon-card/pokemon-card.test.driver';
 import { BetterPokemon, PokemonService } from '../services/pokemon.service';
-import type { RemoteEntryComponent } from './entry.component';
+import { SearchComponent } from './search.component';
 
-export class RemoteEntryComponentDriver {
+export class SearchComponentDriver {
   private helper = new CypressHelper();
   private componentHelper =
-    new CypressAngularComponentHelper<RemoteEntryComponent>();
-  private searchDriver = new SearchComponentDriver();
-  private headerDriver = new HeaderComponentDriver();
-  private componentProperties: Partial<RemoteEntryComponent> = {};
+    new CypressAngularComponentHelper<SearchComponent>();
+  private cardDriver = new PokemonCardComponentDriver();
+  private componentProperties: Partial<SearchComponent> = {};
 
   private mockPokemonService = this.helper.given.stubbedInstance(
     PokemonService,
@@ -32,13 +32,11 @@ export class RemoteEntryComponentDriver {
 
   beforeAndAfter = () => {
     this.helper.beforeAndAfter();
-    this.searchDriver.beforeAndAfter();
-    this.headerDriver.beforeAndAfter();
+    this.cardDriver.beforeAndAfter();
   };
 
   given = {
-    header: this.headerDriver.given,
-    search: this.searchDriver.given,
+    card: this.cardDriver.given,
     types: (value: string[]) =>
       (
         this.mockPokemonService.pokemonTypes! as unknown as Subject<
@@ -52,29 +50,24 @@ export class RemoteEntryComponentDriver {
   };
 
   when = {
-    header: this.headerDriver.when,
-    search: this.searchDriver.when,
+    card: this.cardDriver.when,
     render: (
-      type: Type<RemoteEntryComponent>,
-      config: MountConfig<RemoteEntryComponent>
+      type: Type<SearchComponent>,
+      config: MountConfig<SearchComponent>
     ) => {
       this.componentHelper.when.mount(type, config, {
         ...this.componentProperties,
       });
     },
-    clickMoreInfo: () => this.helper.when.click('more-info'),
   };
 
   get = {
-    header: this.headerDriver.get,
-    search: this.searchDriver.get,
-    mockRouter: () => this.mockRouter,
-    mockPokemonService: () => this.mockPokemonService,
-    navigateByUrlSpy: () =>
-      this.helper.get.assertableStub(this.mockRouter.navigateByUrl),
-    pokemonNameText: () => this.helper.get.elementsText('pokemon-name'),
-    overlay: () => this.helper.get.element('.ant-image-preview-wrap'),
-    filterByTypeNameSpy: () =>
-      this.helper.get.assertableStub(this.mockPokemonService.filterByTypeName),
+    card: this.cardDriver.get,
+    mock: {
+      router: (): StubbedInstance<Router, SinonStub> & Router =>
+        this.mockRouter,
+      pokemonService: (): StubbedInstance<PokemonService, SinonStub> &
+        PokemonService => this.mockPokemonService,
+    },
   };
 }

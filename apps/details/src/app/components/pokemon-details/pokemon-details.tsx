@@ -75,7 +75,6 @@ export function PokemonDetails() {
         <LeftOutlined />
         Back
       </Button>
-      belly
       <h1 data-cy="pokemon-name">{pokemon?.name}</h1>
       {loading && <Spin size="large" />}
       <img
