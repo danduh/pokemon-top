@@ -1,0 +1,56 @@
+{
+  "name": "pokemon-details",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/pokemon-details/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "development",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/libs/pokemon-details",
+        "index": "libs/pokemon-details/src/index.ts",
+        "main": "libs/pokemon-details/src/index.ts",
+        "tsConfig": "libs/pokemon-details/tsconfig.lib.json",
+        "assets": []
+      },
+      "development": {
+        "extractLicenses": false,
+        "optimization": false,
+        "sourceMap": true,
+        "vendorChunk": true
+      },
+      "production": {
+        "fileReplacements": [
+          {
+            "replace": "apps/details/src/environments/environment.ts",
+            "with": "apps/details/src/environments/environment.prod.ts"
+          }
+        ],
+        "optimization": true,
+        "outputHashing": "all",
+        "sourceMap": false,
+        "namedChunks": false,
+        "extractLicenses": true,
+        "vendorChunk": false,
+        "webpackConfig": "apps/details/webpack.config.prod.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "component-test": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "libs/pokemon-details/cypress.config.ts",
+        "testingType": "component",
+        "devServerTarget": "pokemon-details:build",
+        "skipServe": true
+      }
+    }
+  }
+}

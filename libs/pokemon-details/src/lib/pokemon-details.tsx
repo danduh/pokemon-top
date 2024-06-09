@@ -19,30 +19,32 @@ export function PokemonDetails() {
   );
   const [pokemon, setPokemon] = useState<Pokemon | undefined>(undefined);
   const [loading, setLoading] = useState(true);
-  const api = new PokemonClient();
-
-  const fetchPokemonByInput = async (name?: string, id?: number) => {
-    if (id) return api.getPokemonById(id);
-    return name ? api.getPokemonByName(name) : api.getPokemonById(1);
-  };
-  const shouldFetchPokemon = (name?: string, id?: number) =>
-    !((!name && !id) || (id && pokemon?.id === id));
-  const fetchPokemon = async (name?: string, id?: number) => {
-    if (!shouldFetchPokemon(name, id)) return;
-    try {
-      const fetchedPokemon = await fetchPokemonByInput(name, id);
-      setPokemon(fetchedPokemon);
-      setCurrentIndex(fetchedPokemon?.id);
-    } catch (e) {
-      console.log(e);
-      alert('Pokemon not found, showing the first pokemon');
-      setCurrentIndex(1);
-    }
-  };
 
   useEffect(() => {
+    const api = new PokemonClient();
+
+    const fetchPokemonByInput = async (name?: string, id?: number) => {
+      if (id) return api.getPokemonById(id);
+      return name ? api.getPokemonByName(name) : api.getPokemonById(1);
+    };
+
+    const shouldFetchPokemon = (name?: string, id?: number) =>
+      !((!name && !id) || (id && pokemon?.id === id));
+    const fetchPokemon = async (name?: string, id?: number) => {
+      if (!shouldFetchPokemon(name, id)) return;
+      try {
+        const fetchedPokemon = await fetchPokemonByInput(name, id);
+        setPokemon(fetchedPokemon);
+        setCurrentIndex(fetchedPokemon?.id);
+      } catch (e) {
+        console.log(e);
+        alert('Pokemon not found, showing the first pokemon');
+        setCurrentIndex(1);
+      }
+    };
+
     fetchPokemon(name, currentIndex);
-  }, [name, currentIndex]);
+  }, [name, currentIndex, pokemon?.id]);
 
   const boxStyle: React.CSSProperties = {
     width: '100%',
@@ -79,11 +81,11 @@ export function PokemonDetails() {
       {loading && <Spin size="large" />}
       <Image
         data-cy="pokemon-image"
-        width={200}
-        preview={false}
         src={`${pictureSrc}`}
         alt={pokemon?.name}
         onLoad={imageLoaded}
+        width={200}
+        preview={false}
         style={{ visibility: loading ? 'hidden' : 'visible' }}
       ></Image>
       {currentIndex !== undefined && (

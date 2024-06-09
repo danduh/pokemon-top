@@ -1,5 +1,5 @@
+import { PokemonDetailsComponentDriver } from '@pokemon/pokemon-details';
 import { CypressHelper } from '@shellygo/cypress-test-utils';
-import { PokemonDetailsComponentDriver } from '../../../details/src/app/components/pokemon-details/pokemon-details.test.driver';
 export class PokemonDetailsAppDriver {
   private helper = new CypressHelper();
   private detailsDriver = new PokemonDetailsComponentDriver();

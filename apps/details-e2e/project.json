@@ -25,6 +25,6 @@
       "outputs": ["{options.outputFile}"]
     }
   },
-  "implicitDependencies": ["details"],
+  "implicitDependencies": ["details", "pokemon-details"],
   "tags": []
 }
