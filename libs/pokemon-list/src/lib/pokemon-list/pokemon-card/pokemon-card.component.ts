@@ -20,7 +20,6 @@ import { BetterPokemon } from '../services/pokemon.service';
     NzButtonComponent,
   ],
   templateUrl: './pokemon-card.component.html',
-  styleUrl: './pokemon-card.component.css',
 })
 export class PokemonCardComponent {
   @Input() pokemon!: BetterPokemon;
