@@ -15,7 +15,11 @@
     "skipDefaultLibCheck": true,
     "baseUrl": "./",
     "paths": {
+      "@pokemon/poke-d": ["pokemon-details/src/index.ts"],
       "@pokemon/pokemon-details": ["libs/pokemon-details/src/index.ts"],
+      "@pokemon/pokemon-details/test-kits": [
+        "libs/pokemon-details/src/lib/test-kits/index.ts"
+      ],
       "@pokemon/pokemon-list": ["libs/pokemon-list/src/index.ts"],
       "@pokemon/test-helpers": ["libs/test-helpers/src/index.ts"],
       "details/Module": ["apps/details/src/remote-entry.ts"],

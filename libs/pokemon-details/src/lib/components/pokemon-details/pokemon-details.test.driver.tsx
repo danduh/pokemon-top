@@ -20,6 +20,9 @@ export class PokemonDetailsComponentDriver {
   };
 
   given = {
+    image: this.pokemonImageDriver.given,
+    attributes: this.pokemonAttributesDriver.given,
+
     pokemon: (value: Pokemon) => (this.props.pokemon = value),
     nextIsDisabled: (value: boolean = true) =>
       (this.props.isNextDisabled = value),
@@ -28,6 +31,9 @@ export class PokemonDetailsComponentDriver {
   };
 
   when = {
+    image: this.pokemonImageDriver.when,
+    attributes: this.pokemonAttributesDriver.when,
+
     render: (
       type: typeof PokemonDetailsComponent,
       props?: (Attributes & Partial<IProps>) | null,

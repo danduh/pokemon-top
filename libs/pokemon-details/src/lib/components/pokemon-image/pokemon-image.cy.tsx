@@ -1,8 +1,8 @@
 import { aPokemon } from '@pokemon/test-helpers';
 import { then } from '@shellygo/cypress-test-utils/assertable';
 import { Chance } from 'chance';
-import { PokemonImageComponentDriver } from '../pokemon-image/pokemon-image.test.driver';
 import { PokemonImage } from './pokemon-image';
+import { PokemonImageComponentDriver } from './pokemon-image.test.driver';
 
 describe('When rendering PokemonDetails component', () => {
   let { beforeAndAfter, given, when, get } = new PokemonImageComponentDriver();

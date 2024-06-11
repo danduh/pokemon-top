@@ -1,0 +1,9 @@
+{
+  "name": "@pokemon/pokemon-details",
+  "version": "0.0.1",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": "./src/index.ts",
+    "./test-kits": "./src/test-kits/index.ts"
+  }
+}

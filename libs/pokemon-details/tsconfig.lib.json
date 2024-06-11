@@ -23,16 +23,7 @@
     "**/*.cy.ts",
     "**/*.cy.js",
     "**/*.cy.tsx",
-    "**/*.cy.jsx",
-    "**/*.test.driver.tsx"
+    "**/*.cy.jsx"
   ],
-  "include": [
-    "src/**/*.js",
-    "src/**/*.jsx",
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/lib/components/pokemon-details/pokemon-details.test.driver.tsx",
-    "../test-helpers/src/lib/test-drivers/pokemon-attributes.test.driver.tsx",
-    "../test-helpers/src/lib/test-drivers/pokemon-image.test.driver.tsx"
-  ]
+  "include": ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx"]
 }

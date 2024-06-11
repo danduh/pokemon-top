@@ -1,4 +1,4 @@
-import { PokemonDetailsComponentDriver } from '@pokemon/pokemon-details';
+import { PokemonDetailsComponentDriver } from '@pokemon/pokemon-details/test-kits';
 import { CypressHelper } from '@shellygo/cypress-test-utils';
 export class PokemonDetailsAppDriver {
   private helper = new CypressHelper();

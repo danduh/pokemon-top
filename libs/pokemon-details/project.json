@@ -5,43 +5,32 @@
   "projectType": "library",
   "tags": [],
   "targets": {
-    "build": {
-      "executor": "@nx/js:tsc",
-      "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "development",
-      "options": {
-        "compiler": "babel",
-        "outputPath": "dist/libs/pokemon-details",
-        "index": "libs/pokemon-details/src/index.ts",
-        "main": "libs/pokemon-details/src/index.ts",
-        "tsConfig": "libs/pokemon-details/tsconfig.lib.json",
-        "assets": []
-      },
-      "development": {
-        "extractLicenses": false,
-        "optimization": false,
-        "sourceMap": true,
-        "vendorChunk": true
-      },
-      "production": {
-        "fileReplacements": [
-          {
-            "replace": "apps/details/src/environments/environment.ts",
-            "with": "apps/details/src/environments/environment.prod.ts"
-          }
-        ],
-        "optimization": true,
-        "outputHashing": "all",
-        "sourceMap": false,
-        "namedChunks": false,
-        "extractLicenses": true,
-        "vendorChunk": false,
-        "webpackConfig": "apps/details/webpack.config.prod.ts"
-      }
-    },
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"]
+    },
+    "build": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/pokemon-details",
+        "tsConfig": "libs/pokemon-details/tsconfig.lib.json",
+        "project": "libs/pokemon-details/package.json",
+        "entryFile": "libs/pokemon-details/src/index.ts",
+        "additionalEntryPoints": [
+          "libs/pokemon-details/src/lib/test-kits/index.ts"
+        ],
+        "external": ["react", "react-dom", "react/jsx-runtime"],
+        "rollupConfig": "@nx/react/plugins/bundle-rollup",
+        "compiler": "babel",
+        "assets": [
+          {
+            "glob": "libs/pokemon-details/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
     },
     "component-test": {
       "executor": "@nx/cypress:cypress",
