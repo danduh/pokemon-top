@@ -49,7 +49,7 @@ jobs:
         id: pokemon-details-component-report # Set ID reference for step
         if: always() # run this step even if previous step failed
         with:
-          name: Details App Component Tests # Name of the check run which will be created
+          name: Pokemon Details Component Tests # Name of the check run which will be created
           path: ${{ github.workspace }}/libs/pokemon-details/cypress/results/json/merged.json # Path to test results
           reporter: mochawesome-json # Format of test results
 
