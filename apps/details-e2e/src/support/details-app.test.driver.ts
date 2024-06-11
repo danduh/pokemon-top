@@ -1,8 +1,8 @@
 import { CypressHelper } from '@shellygo/cypress-test-utils';
-import { PokemonDetailsComponentDriver } from '../../../details/src/app/components/pokemon-details/pokemon-details.test.driver';
+import { PokemonDetailsDriver } from '../../../details/src/app/components/pokemon-details/pokemon-details.test.driver';
 export class PokemonDetailsAppDriver {
   private helper = new CypressHelper();
-  private detailsDriver = new PokemonDetailsComponentDriver();
+  private detailsDriver = new PokemonDetailsDriver();
 
   beforeAndAfter = () => {
     this.helper.beforeAndAfter();

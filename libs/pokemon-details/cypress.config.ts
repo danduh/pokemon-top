@@ -1,4 +1,4 @@
-import { nxComponentTestingPreset } from '@nx/angular/plugins/component-testing';
+import { nxComponentTestingPreset } from '@nx/react/plugins/component-testing';
 import { defineConfig } from 'cypress';
 
 export default defineConfig({
@@ -14,7 +14,7 @@ export default defineConfig({
     json: true,
     suiteTitleSeparatedBy: ' > ',
     testCaseSwitchClassnameAndName: false,
-    rootSuiteTitle: 'List MFE Component Tests',
+    rootSuiteTitle: 'Pokemon Details Component Tests',
     toConsole: true,
   },
 });

@@ -1,12 +1,13 @@
+import { PokemonDetailsComponentDriver } from '@pokemon/pokemon-details/test-kits';
 import { CypressHelper } from '@shellygo/cypress-test-utils';
 import { CypressReactComponentHelper } from '@shellygo/cypress-test-utils/react';
 import { Pokemon } from 'pokenode-ts';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
-export class PokemonDetailsComponentDriver {
+export class PokemonDetailsDriver {
   private helper = new CypressHelper();
   private reactComponentHelper = new CypressReactComponentHelper();
-
+  private pokemonDetailsComponentDriver = new PokemonDetailsComponentDriver();
   private id: string = '1';
   private name: string | undefined = undefined;
   beforeAndAfter = () => {
@@ -14,6 +15,8 @@ export class PokemonDetailsComponentDriver {
   };
 
   given = {
+    ...this.pokemonDetailsComponentDriver.given,
+
     id: (value: string) => (this.id = value),
     name: (value: string) => (this.name = value),
     mockPokemonResponse: (response: Pokemon) =>
@@ -28,21 +31,10 @@ export class PokemonDetailsComponentDriver {
         response: { forceNetworkError: true },
         alias: 'pokemon',
       }),
-    mockImageResponse: (fileName: string) =>
-      this.helper.given.interceptAndMockResponse({
-        url: '**/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/**',
-        response: { fixture: fileName },
-        alias: 'pokemonImage',
-      }),
-    missingImage: () =>
-      this.helper.given.interceptAndMockResponse({
-        url: '**/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/**',
-        response: { headers: 404 },
-        alias: 'pokemonImage',
-      }),
   };
 
   when = {
+    ...this.pokemonDetailsComponentDriver.when,
     render: (component: React.ReactNode) => {
       const path = this.name ? `/name/:name` : `/id/:id`;
       const route = this.name ? `/name/${this.name}` : `/id/${this.id}`;
@@ -56,8 +48,7 @@ export class PokemonDetailsComponentDriver {
       );
       this.reactComponentHelper.when.mountComponent(Wrapped);
     },
-    clickNext: () => this.helper.when.click('next'),
-    clickPrev: () => this.helper.when.click('prev'),
+
     waitForLastPokemonFetch: () => this.helper.when.waitForLastCall('pokemon'),
     waitForPokemonName: (pokemonName: string) =>
       this.helper.when.waitUntil(() =>
@@ -69,21 +60,8 @@ export class PokemonDetailsComponentDriver {
   };
 
   get = {
-    pictureSrc: () => this.helper.get.elementsAttribute('pokemon-image', 'src'),
-    pokemonImage: () => this.helper.get.elementByTestId('pokemon-image'),
-    pokemonName: () => this.helper.get.elementsText('pokemon-name'),
-    pokemonAbilityText: (index: number) =>
-      this.helper.get.elementsText('pokemon-ability', index),
-    numberOfAbilities: () =>
-      this.helper.get.numberOfElements('pokemon-ability'),
-    pokemonTypeText: (index: number) =>
-      this.helper.get.elementsText('pokemon-type', index),
-    numberOfTypes: () => this.helper.get.numberOfElements('pokemon-type'),
-    pokemonMoveText: (index: number) =>
-      this.helper.get.elementsText('pokemon-move', index),
-    numberOfMoves: () => this.helper.get.numberOfElements('pokemon-move'),
+    ...this.pokemonDetailsComponentDriver.get,
+
     pokemonRequestUrl: () => this.helper.get.requestUrl('pokemon'),
-    prevButton: () => this.helper.get.elementByTestId('prev'),
-    nextButton: () => this.helper.get.elementByTestId('next'),
   };
 }

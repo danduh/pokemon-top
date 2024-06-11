@@ -1,0 +1,42 @@
+{
+  "name": "pokemon-details",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/pokemon-details/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "build": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/pokemon-details",
+        "tsConfig": "libs/pokemon-details/tsconfig.lib.json",
+        "project": "libs/pokemon-details/package.json",
+        "entryFile": "libs/pokemon-details/src/index.ts",
+        "external": ["react", "react-dom", "react/jsx-runtime"],
+        "rollupConfig": "@nx/react/plugins/bundle-rollup",
+        "compiler": "babel",
+        "assets": [
+          {
+            "glob": "libs/pokemon-details/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "component-test": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "libs/pokemon-details/cypress.config.ts",
+        "testingType": "component",
+        "devServerTarget": "pokemon-details:build",
+        "skipServe": true
+      }
+    }
+  }
+}

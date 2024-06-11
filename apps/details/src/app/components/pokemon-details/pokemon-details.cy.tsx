@@ -3,11 +3,10 @@ import { then } from '@shellygo/cypress-test-utils/assertable';
 import { Chance } from 'chance';
 import React from 'react';
 import { PokemonDetails } from './pokemon-details';
-import { PokemonDetailsComponentDriver } from './pokemon-details.test.driver';
+import { PokemonDetailsDriver } from './pokemon-details.test.driver';
 
 describe('When rendering PokemonDetails component', () => {
-  let { beforeAndAfter, given, when, get } =
-    new PokemonDetailsComponentDriver();
+  let { beforeAndAfter, given, when, get } = new PokemonDetailsDriver();
   beforeAndAfter();
 
   const chance = new Chance();
@@ -16,12 +15,10 @@ describe('When rendering PokemonDetails component', () => {
   const pokemonResponse = aPokemon(id);
 
   beforeEach(() => {
-    ({ beforeAndAfter, given, when, get } =
-      new PokemonDetailsComponentDriver());
+    ({ beforeAndAfter, given, when, get } = new PokemonDetailsDriver());
     given.name(pokemonResponse.name);
-    given.mockImageResponse('default.png');
+    given.image.mockImageResponse('default.png');
     given.mockPokemonResponse(pokemonResponse);
-    // given.id(`${id}`);
   });
 
   it('should fetch pokemon by name', () => {
@@ -36,7 +33,9 @@ describe('When rendering PokemonDetails component', () => {
 
   it('should render all abilities', () => {
     when.render(<PokemonDetails />);
-    then(get.numberOfAbilities()).shouldEqual(pokemonResponse.abilities.length);
+    then(get.attributes.numberOfAbilities()).shouldEqual(
+      pokemonResponse.abilities.length
+    );
   });
 
   it('should render ability name', () => {
@@ -45,14 +44,16 @@ describe('When rendering PokemonDetails component', () => {
       min: 0,
       max: pokemonResponse.abilities.length - 1,
     });
-    then(get.pokemonAbilityText(testFocus)).shouldEqual(
+    then(get.attributes.pokemonAbilityText(testFocus)).shouldEqual(
       pokemonResponse.abilities[testFocus].ability.name
     );
   });
 
   it('should render all types', () => {
     when.render(<PokemonDetails />);
-    then(get.numberOfTypes()).shouldEqual(pokemonResponse.types.length);
+    then(get.attributes.numberOfTypes()).shouldEqual(
+      pokemonResponse.types.length
+    );
   });
 
   it('should render type name', () => {
@@ -61,13 +62,15 @@ describe('When rendering PokemonDetails component', () => {
       min: 0,
       max: pokemonResponse.types.length - 1,
     });
-    then(get.pokemonTypeText(testFocus)).shouldEqual(
+    then(get.attributes.pokemonTypeText(testFocus)).shouldEqual(
       pokemonResponse.types[testFocus].type.name
     );
   });
   it('should render all moves', () => {
     when.render(<PokemonDetails />);
-    then(get.numberOfMoves()).shouldEqual(pokemonResponse.moves.length);
+    then(get.attributes.numberOfMoves()).shouldEqual(
+      pokemonResponse.moves.length
+    );
   });
 
   it('should render type name', () => {
@@ -76,7 +79,7 @@ describe('When rendering PokemonDetails component', () => {
       min: 0,
       max: pokemonResponse.moves.length - 1,
     });
-    then(get.pokemonMoveText(testFocus)).shouldEqual(
+    then(get.attributes.pokemonMoveText(testFocus)).shouldEqual(
       pokemonResponse.moves[testFocus].move.name
     );
   });

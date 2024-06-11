@@ -1,4 +1,4 @@
-import { PokemonListComponentDriver } from '@pokemon/pokemon-list';
+import { PokemonListComponentDriver } from '@pokemon/pokemon-list/test-kits';
 import { CypressHelper } from '@shellygo/cypress-test-utils';
 import type { NamedAPIResourceList, Type } from 'pokenode-ts';
 export class PokemonListAppDriver {
