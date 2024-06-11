@@ -17,9 +17,6 @@
         "tsConfig": "libs/pokemon-details/tsconfig.lib.json",
         "project": "libs/pokemon-details/package.json",
         "entryFile": "libs/pokemon-details/src/index.ts",
-        "additionalEntryPoints": [
-          "libs/pokemon-details/src/lib/test-kits/index.ts"
-        ],
         "external": ["react", "react-dom", "react/jsx-runtime"],
         "rollupConfig": "@nx/react/plugins/bundle-rollup",
         "compiler": "babel",
