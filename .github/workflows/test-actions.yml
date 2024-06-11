@@ -23,7 +23,7 @@ jobs:
       - name: Build Details
         if: always()
         run: |
-          npx nx run details:build
+          npx nx run details:build:production
           npx nx run pokemon-details:component-test
           npx nx run details:component-test
           npx nx run details-e2e:e2e

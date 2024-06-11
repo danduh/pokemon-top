@@ -35,7 +35,7 @@ jobs:
       - name: Build APPLication
         run: |
           npm i
-          npx nx run details:build
+          npx nx run details:build:production
           npx nx run list:build:production
           npx nx run pokemon:build:production --base-href /pokemon-top/
           cp dist/apps/pokemon/index.html dist/apps/pokemon/404.html
