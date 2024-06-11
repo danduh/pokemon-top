@@ -17,7 +17,7 @@ describe('Pokemon Details Integration Tests', () => {
 
   describe('when navigate to home page by name', () => {
     beforeEach(() => {
-      given.mockImageResponse('default.png');
+      given.image.mockImageResponse('default.png');
       given.mockPokemonResponse(pokemonResponse);
       when.navigateToHomePageByName(pokemonResponse.name);
     });
@@ -31,7 +31,7 @@ describe('Pokemon Details Integration Tests', () => {
     });
 
     it('should render all abilities', () => {
-      then(get.numberOfAbilities()).shouldEqual(
+      then(get.attributes.numberOfAbilities()).shouldEqual(
         pokemonResponse.abilities.length
       );
     });
@@ -41,13 +41,15 @@ describe('Pokemon Details Integration Tests', () => {
         min: 0,
         max: pokemonResponse.abilities.length - 1,
       });
-      then(get.pokemonAbilityText(testFocus)).shouldEqual(
+      then(get.attributes.pokemonAbilityText(testFocus)).shouldEqual(
         pokemonResponse.abilities[testFocus].ability.name
       );
     });
 
     it('should render all types', () => {
-      then(get.numberOfTypes()).shouldEqual(pokemonResponse.types.length);
+      then(get.attributes.numberOfTypes()).shouldEqual(
+        pokemonResponse.types.length
+      );
     });
 
     it('should render type name', () => {
@@ -55,12 +57,14 @@ describe('Pokemon Details Integration Tests', () => {
         min: 0,
         max: pokemonResponse.types.length - 1,
       });
-      then(get.pokemonTypeText(testFocus)).shouldEqual(
+      then(get.attributes.pokemonTypeText(testFocus)).shouldEqual(
         pokemonResponse.types[testFocus].type.name
       );
     });
     it('should render all moves', () => {
-      then(get.numberOfMoves()).shouldEqual(pokemonResponse.moves.length);
+      then(get.attributes.numberOfMoves()).shouldEqual(
+        pokemonResponse.moves.length
+      );
     });
 
     it('should render move name', () => {
@@ -68,7 +72,7 @@ describe('Pokemon Details Integration Tests', () => {
         min: 0,
         max: pokemonResponse.moves.length - 1,
       });
-      then(get.pokemonMoveText(testFocus)).shouldEqual(
+      then(get.attributes.pokemonMoveText(testFocus)).shouldEqual(
         pokemonResponse.moves[testFocus].move.name
       );
     });
