@@ -6,7 +6,7 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import { then } from '@shellygo/cypress-test-utils/assertable';
 import { Builder } from 'builder-pattern';
 import { Chance } from 'chance';
-import { BetterPokemon, PokemonService } from '../services/pokemon.service';
+import { BetterPokemon, PokemonService } from '../../services/pokemon.service';
 import { SearchComponent } from './search.component';
 import { SearchComponentDriver } from './serach.component.test.driver';
 

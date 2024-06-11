@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NzRowDirective } from 'ng-zorro-antd/grid';
-import { PokemonCardComponent } from '../../pokemon-card/pokemon-card.component';
 import { PokemonService } from '../../services/pokemon.service';
+import { PokemonCardComponent } from '../pokemon-card/pokemon-card.component';
 
 @Component({
   selector: 'pokemon-search',

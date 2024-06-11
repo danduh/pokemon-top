@@ -7,8 +7,8 @@ import type { SinonStub } from 'cypress/types/sinon';
 import { NamedAPIResource } from 'pokenode-ts';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import type { StubbedInstance } from 'ts-stubber/.';
-import { PokemonCardComponentDriver } from '../pokemon-card/pokemon-card.test.driver';
-import { BetterPokemon, PokemonService } from '../services/pokemon.service';
+import { PokemonCardComponentDriver } from '../../pokemon-card/pokemon-card.test.driver';
+import { BetterPokemon, PokemonService } from '../../services/pokemon.service';
 import { SearchComponent } from './search.component';
 
 export class SearchComponentDriver {

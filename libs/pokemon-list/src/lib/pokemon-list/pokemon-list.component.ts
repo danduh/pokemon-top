@@ -7,7 +7,7 @@ import {
   NzLayoutComponent,
 } from 'ng-zorro-antd/layout';
 import { HeaderComponent } from './components/header/header.component';
-import { SearchComponent } from './search/search.component';
+import { SearchComponent } from './components/search/search.component';
 
 @Component({
   standalone: true,

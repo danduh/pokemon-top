@@ -3,8 +3,8 @@ import { Component, Input } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { NzButtonComponent } from 'ng-zorro-antd/button';
 import { NzCardComponent, NzCardMetaComponent } from 'ng-zorro-antd/card';
-import { PictureComponent } from '../components/picture/picture.component';
-import { BetterPokemon } from '../services/pokemon.service';
+import { BetterPokemon } from '../../services/pokemon.service';
+import { PictureComponent } from '../picture/picture.component';
 
 @Component({
   selector: 'pokemon-pokemon-card',
