@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
 import { NzImageDirective, NzImageService } from 'ng-zorro-antd/image';
 
 @Component({
@@ -7,7 +7,6 @@ import { NzImageDirective, NzImageService } from 'ng-zorro-antd/image';
   standalone: true,
   imports: [CommonModule, NzImageDirective],
   templateUrl: './picture.component.html',
-  styleUrl: './picture.component.css',
   providers: [NzImageService],
 })
 export class PictureComponent implements OnInit {
