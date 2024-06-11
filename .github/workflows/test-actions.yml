@@ -24,6 +24,7 @@ jobs:
         if: always()
         run: |
           npx nx run details:build
+          npx nx run pokemon-details:component-test
           npx nx run details:component-test
           npx nx run details-e2e:e2e
 
@@ -31,15 +32,25 @@ jobs:
         if: success() || failure() # run this step even if previous step failed
         run: |
           npm run details-merge-results
+          npm run pokemon-details-merge-results
           npm run details-e2e-merge-results
 
-      - name: Details Component Tests Report
+      - name: Details App Component Tests Report
         uses: phoenix-actions/test-reporting@v8
-        id: details-component-report # Set ID reference for step
+        id: details-app-component-report # Set ID reference for step
         if: always() # run this step even if previous step failed
         with:
-          name: Details Component Tests # Name of the check run which will be created
+          name: Details App Component Tests # Name of the check run which will be created
           path: ${{ github.workspace }}/apps/details/cypress/results/json/merged.json # Path to test results
+          reporter: mochawesome-json # Format of test results
+
+      - name: Pokemon Details Component Tests Report
+        uses: phoenix-actions/test-reporting@v8
+        id: pokemon-details-component-report # Set ID reference for step
+        if: always() # run this step even if previous step failed
+        with:
+          name: Details App Component Tests # Name of the check run which will be created
+          path: ${{ github.workspace }}/libs/pokemon-details/cypress/results/json/merged.json # Path to test results
           reporter: mochawesome-json # Format of test results
 
       - name: Details Integration & E2E Tests Report

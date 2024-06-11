@@ -14,7 +14,7 @@ export default defineConfig({
     json: true,
     suiteTitleSeparatedBy: ' > ',
     testCaseSwitchClassnameAndName: false,
-    rootSuiteTitle: 'Details Component Tests',
+    rootSuiteTitle: 'Pokemon Details Component Tests',
     toConsole: true,
   },
 });
