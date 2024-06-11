@@ -14,7 +14,7 @@ export default defineConfig({
     json: true,
     suiteTitleSeparatedBy: ' > ',
     testCaseSwitchClassnameAndName: false,
-    rootSuiteTitle: 'List Component Tests',
+    rootSuiteTitle: 'Details MFE Component Tests',
     toConsole: true,
   },
 });

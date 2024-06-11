@@ -8,9 +8,9 @@
     "types": ["node", "cypress"]
   },
   "exclude": [
-    "src/**/*.spec.ts",
+    "**/*.spec.ts",
     "jest.config.ts",
-    "src/**/*.test.ts",
+    "**/*.test.ts",
     "cypress/**/*",
     "cypress.config.ts",
     "**/*.cy.ts",
@@ -18,5 +18,5 @@
     "**/*.cy.tsx",
     "**/*.cy.jsx"
   ],
-  "include": ["src/**/*.ts"]
+  "include": ["**/*.ts"]
 }
