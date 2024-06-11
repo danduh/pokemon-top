@@ -3,7 +3,7 @@ import { CypressReactComponentHelper } from '@shellygo/cypress-test-utils/react'
 import { Pokemon } from 'pokenode-ts';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
-export class PokemonDetailsComponentDriver {
+export class PokemonDetailsDriver {
   private helper = new CypressHelper();
   private reactComponentHelper = new CypressReactComponentHelper();
 

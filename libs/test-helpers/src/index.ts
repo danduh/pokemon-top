@@ -1,1 +1,1 @@
-export * from './lib/pokemon-builder';
+export * from './lib/builders/pokemon-builder';

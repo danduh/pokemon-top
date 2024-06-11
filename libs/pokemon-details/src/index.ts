@@ -1,2 +1,1 @@
-export * from './lib/pokemon-details';
-export * from './lib/pokemon-details.test.driver';
+export * from './lib/components/pokemon-details/pokemon-details';

@@ -3,11 +3,10 @@ import { then } from '@shellygo/cypress-test-utils/assertable';
 import { Chance } from 'chance';
 import React from 'react';
 import { PokemonDetails } from './pokemon-details';
-import { PokemonDetailsComponentDriver } from './pokemon-details.test.driver';
+import { PokemonDetailsDriver } from './pokemon-details.test.driver';
 
 describe('When rendering PokemonDetails component', () => {
-  let { beforeAndAfter, given, when, get } =
-    new PokemonDetailsComponentDriver();
+  let { beforeAndAfter, given, when, get } = new PokemonDetailsDriver();
   beforeAndAfter();
 
   const chance = new Chance();
@@ -16,8 +15,7 @@ describe('When rendering PokemonDetails component', () => {
   const pokemonResponse = aPokemon(id);
 
   beforeEach(() => {
-    ({ beforeAndAfter, given, when, get } =
-      new PokemonDetailsComponentDriver());
+    ({ beforeAndAfter, given, when, get } = new PokemonDetailsDriver());
     given.name(pokemonResponse.name);
     given.mockImageResponse('default.png');
     given.mockPokemonResponse(pokemonResponse);

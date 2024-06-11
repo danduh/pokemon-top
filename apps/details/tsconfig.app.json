@@ -23,7 +23,8 @@
     "**/*.cy.ts",
     "**/*.cy.js",
     "**/*.cy.tsx",
-    "**/*.cy.jsx"
+    "**/*.cy.jsx",
+    "**/*.test.driver.tsx"
   ],
   "include": ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx"]
 }
