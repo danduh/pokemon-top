@@ -17,7 +17,7 @@
     "paths": {
       "@pokemon/pokemon-details": ["libs/pokemon-details/src/index.ts"],
       "@pokemon/pokemon-details/test-kits": [
-        "libs/pokemon-details/test-kits/src/index.ts"
+        "libs/pokemon-details/src/lib/test-kits/index.ts"
       ],
       "@pokemon/pokemon-list": ["libs/pokemon-list/src/index.ts"],
       "@pokemon/pokemon-list/test-kits": [
