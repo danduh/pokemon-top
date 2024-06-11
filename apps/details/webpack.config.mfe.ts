@@ -1,6 +1,6 @@
-import { composePlugins, withNx } from '@nx/webpack';
 import { withReact } from '@nx/react';
 import { withModuleFederation } from '@nx/react/module-federation';
+import { composePlugins, withNx } from '@nx/webpack';
 
 import { ModuleFederationConfig } from '@nx/webpack';
 
@@ -34,7 +34,7 @@ const ruleForTsx = {
       loader: 'babel-loader',
       options: {
         // cacheDirectory: true,
-        presets: ['@babel/react', '@babel/env'],
+        presets: ['@babel/react', '@babel/env', '@babel/preset-typescript'],
       },
     },
   ],

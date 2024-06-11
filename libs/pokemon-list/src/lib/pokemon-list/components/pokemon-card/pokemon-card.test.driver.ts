@@ -4,8 +4,8 @@ import { CypressHelper } from '@shellygo/cypress-test-utils';
 import { CypressAngularComponentHelper } from '@shellygo/cypress-test-utils/angular';
 import { MountConfig } from 'cypress/angular';
 import { Observable } from 'rxjs';
-import { PictureComponentDriver } from '../components/picture/picture.component.test.driver';
-import type { BetterPokemon } from '../services/pokemon.service';
+import type { BetterPokemon } from '../../services/pokemon.service';
+import { PictureComponentDriver } from '../picture/picture.component.test.driver';
 import type { PokemonCardComponent } from './pokemon-card.component';
 export class PokemonCardComponentDriver {
   private helper = new CypressHelper();

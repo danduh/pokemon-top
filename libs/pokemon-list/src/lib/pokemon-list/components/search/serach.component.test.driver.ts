@@ -3,23 +3,20 @@ import { Router, Event as RouterEvent } from '@angular/router';
 import { CypressHelper } from '@shellygo/cypress-test-utils';
 import { CypressAngularComponentHelper } from '@shellygo/cypress-test-utils/angular';
 import { MountConfig } from 'cypress/angular';
-import type * as Sinon from 'cypress/types/sinon';
 import type { SinonStub } from 'cypress/types/sinon';
 import { NamedAPIResource } from 'pokenode-ts';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import type { StubbedInstance } from 'ts-stubber/.';
-import { HeaderComponentDriver } from './components/header/header.component.test.driver';
-import { SearchComponentDriver } from './components/search/serach.component.test.driver';
-import { PokemonListComponent } from './pokemon-list.component';
-import { BetterPokemon, PokemonService } from './services/pokemon.service';
+import { BetterPokemon, PokemonService } from '../../services/pokemon.service';
+import { PokemonCardComponentDriver } from '../pokemon-card/pokemon-card.test.driver';
+import { SearchComponent } from './search.component';
 
-export class PokemonListComponentDriver {
+export class SearchComponentDriver {
   private helper = new CypressHelper();
   private componentHelper =
-    new CypressAngularComponentHelper<PokemonListComponent>();
-  private searchDriver = new SearchComponentDriver();
-  private headerDriver = new HeaderComponentDriver();
-  private componentProperties: Partial<PokemonListComponent> = {};
+    new CypressAngularComponentHelper<SearchComponent>();
+  private cardDriver = new PokemonCardComponentDriver();
+  private componentProperties: Partial<SearchComponent> = {};
 
   private mockPokemonService = this.helper.given.stubbedInstance(
     PokemonService,
@@ -35,13 +32,11 @@ export class PokemonListComponentDriver {
 
   beforeAndAfter = () => {
     this.helper.beforeAndAfter();
-    this.searchDriver.beforeAndAfter();
-    this.headerDriver.beforeAndAfter();
+    this.cardDriver.beforeAndAfter();
   };
 
   given = {
-    header: this.headerDriver.given,
-    search: this.searchDriver.given,
+    card: this.cardDriver.given,
     types: (value: string[]) =>
       (
         this.mockPokemonService.pokemonTypes! as unknown as Subject<
@@ -55,32 +50,24 @@ export class PokemonListComponentDriver {
   };
 
   when = {
-    header: this.headerDriver.when,
-    search: this.searchDriver.when,
+    card: this.cardDriver.when,
     render: (
-      type: Type<PokemonListComponent>,
-      config: MountConfig<PokemonListComponent>
+      type: Type<SearchComponent>,
+      config: MountConfig<SearchComponent>
     ) => {
       this.componentHelper.when.mount(type, config, {
         ...this.componentProperties,
       });
     },
-    clickMoreInfo: () => this.helper.when.click('more-info'),
   };
 
   get = {
-    header: this.headerDriver.get,
-    search: this.searchDriver.get,
+    card: this.cardDriver.get,
     mock: {
       router: (): StubbedInstance<Router, SinonStub> & Router =>
         this.mockRouter,
       pokemonService: (): StubbedInstance<PokemonService, SinonStub> &
         PokemonService => this.mockPokemonService,
     },
-    navigateByUrlSpy: (): Sinon.SinonStub => this.mockRouter.navigateByUrl,
-    pokemonNameText: () => this.helper.get.elementsText('pokemon-name'),
-    overlay: () => this.helper.get.element('.ant-image-preview-wrap'),
-    filterByTypeNameSpy: (): Sinon.SinonStub =>
-      this.mockPokemonService.filterByTypeName,
   };
 }
