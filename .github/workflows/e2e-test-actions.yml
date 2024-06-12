@@ -1,4 +1,4 @@
-name: Build and Test CI
+name: run E2E Tests
 
 on:
   workflow_dispatch:
