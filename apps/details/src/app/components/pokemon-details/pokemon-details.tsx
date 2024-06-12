@@ -25,7 +25,6 @@ export function PokemonDetails() {
       !((!name && !id) || (id && pokemon?.id === id));
     const fetchPokemon = async (name?: string, id?: number) => {
       if (!shouldFetchPokemon(name, id)) return;
-      debugger;
       try {
         const fetchedPokemon = await fetchPokemonByInput(name, id);
         setPokemon(fetchedPokemon);
