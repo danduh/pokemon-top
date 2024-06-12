@@ -96,7 +96,7 @@
     },
     "serve-static": {
       "executor": "@nx/web:file-server",
-      "defaultConfiguration": "development",
+      "defaultConfiguration": "production",
       "options": {
         "buildTarget": "details:build-mfe",
         "watch": false,

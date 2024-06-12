@@ -17,6 +17,8 @@ export class PokemonDetailsComponentDriver {
   private name: string | undefined = undefined;
   beforeAndAfter = () => {
     this.helper.beforeAndAfter();
+    this.pokemonAttributesDriver.beforeAndAfter();
+    this.pokemonImageDriver.beforeAndAfter();
   };
 
   given = {

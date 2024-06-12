@@ -8,16 +8,11 @@
       "executor": "@nx/cypress:cypress",
       "options": {
         "cypressConfig": "apps/pokemon-e2e/cypress.config.ts",
-        "testingType": "e2e",
-        "devServerTarget": "pokemon:serve:development"
+        "testingType": "e2e"
       },
       "configurations": {
-        "production": {
-          "devServerTarget": "pokemon:serve:production"
-        },
-        "ci": {
-          "devServerTarget": "pokemon:serve-static"
-        }
+        "production": {},
+        "ci": {}
       }
     },
     "lint": {
@@ -26,5 +21,5 @@
     }
   },
   "tags": [],
-  "implicitDependencies": ["pokemon"]
+  "implicitDependencies": ["pokemon", "list-e2e", "!details-e2e"]
 }

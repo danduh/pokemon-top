@@ -34,7 +34,11 @@ const ruleForTsx = {
       loader: 'babel-loader',
       options: {
         // cacheDirectory: true,
-        presets: ['@babel/react', '@babel/env', '@babel/preset-typescript'],
+        presets: [
+          ['@babel/preset-react', { runtime: 'automatic' }],
+          '@babel/env',
+          '@babel/preset-typescript',
+        ],
       },
     },
   ],

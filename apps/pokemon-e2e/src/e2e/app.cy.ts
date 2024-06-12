@@ -1,13 +1,14 @@
-import { getGreeting } from '../support/app.po';
+import { PokemonAppDriver } from '../support/pokemon-app.test.driver';
 
 describe('pokemon-e2e', () => {
-  beforeEach(() => cy.visit('/'));
+  const { beforeAndAfter, given, when, get } = new PokemonAppDriver();
 
-  it('should display welcome message', () => {
-    // Custom command example, see `../support/commands.ts` file
-    cy.login('my-email@something.com', 'myPassword');
+  // beforeAndAfter();
 
-    // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains(/Welcome/);
+  beforeEach(() => {
+    // when.navigateToHomePage();
+    cy.visit('/');
   });
+
+  it('should display welcome message', () => {});
 });
