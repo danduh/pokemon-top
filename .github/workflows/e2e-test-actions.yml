@@ -1,0 +1,38 @@
+name: Build and Test CI
+
+on:
+  workflow_dispatch:
+
+permissions:
+  checks: write
+  pull-requests: write
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - run: npm ci
+      - name: pokemon e2e
+        if: always()
+        run: |
+          npx nx run pokemon-e2e:e2e
+
+      - name: Merge E2E Reports
+        if: success() || failure() # run this step even if previous step failed
+        run: |
+          npm run pokemon-merge-results
+
+      - name: Pokemon App E2E Tests Report
+        uses: phoenix-actions/test-reporting@v8
+        id: pokemon-app-e2e-report # Set ID reference for step
+        if: always() # run this step even if previous step failed
+        with:
+          name: Details App Component Tests # Name of the check run which will be created
+          path: ${{ github.workspace }}/apps/pokemon-e2e/cypress/results/json/merged.json # Path to test results
+          reporter: mochawesome-json # Format of test results
+
