@@ -25,7 +25,7 @@ jobs:
       - name: Merge E2E Reports
         if: success() || failure() # run this step even if previous step failed
         run: |
-          npm run pokemon-merge-results
+          npm run pokemon-e2e-merge-results
 
       - name: Pokemon App E2E Tests Report
         uses: phoenix-actions/test-reporting@v8
