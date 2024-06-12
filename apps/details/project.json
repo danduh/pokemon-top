@@ -129,5 +129,6 @@
       }
     }
   },
-  "tags": []
+  "tags": [],
+  "implicitDependencies": ["test-helpers", "pokemon-details"]
 }

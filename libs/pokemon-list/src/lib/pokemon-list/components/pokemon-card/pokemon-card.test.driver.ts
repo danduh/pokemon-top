@@ -40,7 +40,8 @@ export class PokemonCardComponentDriver {
         ...this.componentProperties,
       });
     },
-    clickMoreInfo: () => this.helper.when.click('more-info'),
+    clickMoreInfo: (index: number = 0) =>
+      this.helper.when.click('more-info', index),
   };
 
   get = {
