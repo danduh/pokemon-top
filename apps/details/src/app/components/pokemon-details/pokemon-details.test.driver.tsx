@@ -48,7 +48,7 @@ export class PokemonDetailsDriver {
       );
       this.reactComponentHelper.when.mountComponent(Wrapped);
     },
-
+    clickBack: () => this.helper.when.click('back'),
     waitForLastPokemonFetch: () => this.helper.when.waitForLastCall('pokemon'),
     waitForPokemonName: (pokemonName: string) =>
       this.helper.when.waitUntil(() =>

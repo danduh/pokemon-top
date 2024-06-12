@@ -31,6 +31,11 @@ describe('pokemon-e2e', () => {
       when.list.search.card.clickMoreInfo();
     });
 
+    it('should navigate back to list when clicking on back', () => {
+      when.details.clickBack();
+      then(get.list.search.card.numberOfCards()).shouldEqual(10);
+    });
+
     it('should show pokemon name', () => {
       then(get.details.pokemonName()).shouldEqual('bulbasaur');
     });
@@ -40,8 +45,8 @@ describe('pokemon-e2e', () => {
     });
 
     it('should show pokemon types', () => {
-      then(get.details.attributes.pokemonTypeText()).shouldInclude('grass');
-      then(get.details.attributes.pokemonTypeText()).shouldInclude('poison');
+      then(get.details.attributes.pokemonTypeText(0)).shouldInclude('grass');
+      then(get.details.attributes.pokemonTypeText(1)).shouldInclude('poison');
     });
 
     it('should show next pokemon when clicking on Next', () => {
