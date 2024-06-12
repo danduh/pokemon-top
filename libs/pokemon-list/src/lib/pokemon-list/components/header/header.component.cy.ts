@@ -31,7 +31,7 @@ describe('HeaderComponent Tests', () => {
   it('when typing pokemon name and clicking GO, should navigate to details page', () => {
     const name = chance.word();
     when.render(HeaderComponent, testConfig);
-    when.typeIDorName(name);
+    when.typeName(name);
     when.clickGo();
     then(get.navigateByUrlSpy()).shouldHaveBeenCalledWith(
       `/details/name/${name}`

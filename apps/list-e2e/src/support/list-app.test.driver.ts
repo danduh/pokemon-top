@@ -36,6 +36,7 @@ export class PokemonListAppDriver {
   when = {
     ...this.remoteEntryComponentDriver.when,
     navigateToHomePage: () => this.helper.when.visit('/'),
+    scrollToBottom: () => this.helper.when.scrollToBottom(),
   };
 
   get = {

@@ -31,13 +31,13 @@ export const aPokemonType = () =>
 export const aMove = () =>
   Builder<PokemonMove>().move(aNamedAPIResource()).build();
 
-export const aType = () =>
+export const aType = (count: number = 10) =>
   Builder<Type>()
     .name(chance.word())
     .pokemon(
       chance.n(
         () => Builder<TypePokemon>().pokemon(aNamedAPIResource()).build(),
-        10
+        count
       )
     )
     .build();

@@ -59,7 +59,7 @@ describe('HeaderComponent Tests', () => {
   });
 
   it('when typing name and clicking go should navigate to pokemon details', () => {
-    when.header.typeIDorName(pokemon.name);
+    when.header.typeName(pokemon.name);
     when.header.clickGo();
     then(get.navigateByUrlSpy()).shouldHaveBeenCalledWith(
       '/details/name/' + pokemon.name

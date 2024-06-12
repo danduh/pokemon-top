@@ -50,8 +50,9 @@ export class HeaderComponentDriver {
     selectType: (index: number) => {
       this.helper.when.click('type-option', index);
     },
-    typeIDorName: (value: string) =>
-      this.helper.when.type('name-id-input', value),
+    typeType: (value: string) => this.helper.when.type('types', value),
+
+    typeName: (value: string) => this.helper.when.type('name-id-input', value),
     clickGo: () => this.helper.when.click('go-to'),
     clickTypesList: () => this.helper.when.click('types'),
   };

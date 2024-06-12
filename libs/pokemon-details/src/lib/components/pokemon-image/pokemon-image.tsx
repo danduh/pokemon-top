@@ -21,7 +21,7 @@ export function PokemonImage({ name, src }: IProps) {
         src={`${src}`}
         alt={name}
         onLoad={imageLoaded}
-        width={300}
+        width={250}
         style={{ visibility: loading ? 'hidden' : 'visible' }}
       ></img>
     </>

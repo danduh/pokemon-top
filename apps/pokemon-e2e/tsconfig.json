@@ -11,7 +11,8 @@
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "jsx": "react"
   },
   "include": [
     "**/*.ts",
@@ -19,6 +20,9 @@
     "cypress.config.ts",
     "**/*.cy.ts",
     "**/*.cy.js",
-    "**/*.d.ts"
+    "**/*.d.ts",
+    "**/*.cy.tsx",
+    "**/*.cy.js",
+    "**/*.cy.jsx"
   ]
 }

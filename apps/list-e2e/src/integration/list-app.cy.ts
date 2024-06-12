@@ -11,22 +11,27 @@ describe('List MFE Integration Tests', () => {
   beforeAndAfter();
   const chance = new Chance();
 
+  const NUMBER_OF_TYPES = 7;
+  const NUMBER_OF_POKEMONS = 12;
+
   const types = Builder<NamedAPIResourceList>()
-    .count(10)
+    .count(NUMBER_OF_TYPES)
     .results(
       chance.n(
         () => Builder<NamedAPIResource>().name(chance.word()).build(),
-        10
+        NUMBER_OF_TYPES
       )
     )
     .build();
 
-  const type = aType();
+  const type = aType(NUMBER_OF_POKEMONS);
+
+  const pokemons = aNamedAPIResourceList(NUMBER_OF_POKEMONS);
 
   beforeEach(() => {
     ({ given, when, get } = new PokemonListAppDriver());
     given.typesResponse(types);
-    given.pokemonsResponse(aNamedAPIResourceList());
+    given.pokemonsResponse(pokemons);
     given.pokemonsByTypeResponse(type);
     when.navigateToHomePage();
   });
@@ -35,5 +40,12 @@ describe('List MFE Integration Tests', () => {
     when.header.clickTypesList();
     when.header.selectType(3);
     then(get.pokemonsByTypeRequest()).shouldEndWith(types.results[3].name);
+  });
+
+  it('should display all type pokemons when selecting type', () => {
+    when.header.clickTypesList();
+    when.header.selectType(3);
+    when.scrollToBottom();
+    then(get.search.card.numberOfCards()).shouldEqual(NUMBER_OF_POKEMONS);
   });
 });
