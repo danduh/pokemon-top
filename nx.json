@@ -55,6 +55,11 @@
     "sharedGlobals": []
   },
   "nxCloudAccessToken": "",
+  "pluginsConfig": {
+    "@nx/js": {
+      "analyzeSourceFiles": true
+    }
+  },
   "generators": {
     "@nx/angular:application": {
       "style": "css",

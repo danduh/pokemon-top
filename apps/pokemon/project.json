@@ -5,6 +5,7 @@
   "prefix": "apps/pokemon",
   "sourceRoot": "apps/pokemon/src",
   "tags": [],
+  "implicitDependencies": ["list", "details"],
   "targets": {
     "build": {
       "executor": "@nx/angular:webpack-browser",

@@ -4,6 +4,7 @@
   "sourceRoot": "libs/pokemon-list/src",
   "prefix": "pokemon",
   "tags": [],
+  "implicitDependencies": ["test-helpers"],
   "projectType": "library",
   "targets": {
     "lint": {
