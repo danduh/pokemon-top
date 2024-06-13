@@ -39,11 +39,8 @@ export class PictureComponentDriver {
         ...this.componentProperties,
       });
     },
-    waitForImageResponse: (): Cypress.Chainable<Interception> => {
-      const response = this.helper.when.waitForResponse('image');
-      this.helper.when.wait(50);
-      return response;
-    },
+    waitForImageResponse: (): Cypress.Chainable<Interception> =>
+      this.helper.when.waitForResponse('image'),
     clickImage: (index: number = 0) =>
       this.helper.when.click('pokemon-image', index),
   };

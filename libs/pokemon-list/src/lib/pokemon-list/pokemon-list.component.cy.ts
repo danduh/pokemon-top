@@ -10,7 +10,7 @@ import { PokemonListComponent } from './pokemon-list.component';
 import { PokemonListComponentDriver } from './pokemon-list.component.test.driver';
 import { BetterPokemon, PokemonService } from './services/pokemon.service';
 
-describe('HeaderComponent Tests', () => {
+describe('Pokemon List Component Tests', () => {
   const chance = new Chance();
   const pokemon = Builder<BetterPokemon>()
     .name(chance.word())

@@ -6,7 +6,7 @@ import { then } from '@shellygo/cypress-test-utils/assertable';
 import { Chance } from 'chance';
 import { PictureComponent } from './picture.component';
 import { PictureComponentDriver } from './picture.component.test.driver';
-describe('PictureComponent Tests', () => {
+describe('Picture Component Tests', () => {
   const testConfig = {
     imports: [BrowserAnimationsModule, NoopAnimationsModule],
   };

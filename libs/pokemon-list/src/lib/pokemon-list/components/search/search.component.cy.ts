@@ -10,7 +10,7 @@ import { BetterPokemon, PokemonService } from '../../services/pokemon.service';
 import { SearchComponent } from './search.component';
 import { SearchComponentDriver } from './serach.component.test.driver';
 
-describe('HeaderComponent Tests', () => {
+describe('Search Component Tests', () => {
   const chance = new Chance();
   const aPokemon = (id: number) =>
     Builder<BetterPokemon>().name(chance.word()).id(id).build();
