@@ -15,8 +15,6 @@ export class PokemonDetailsAppDriver {
 
   when = {
     ...this.detailsDriver.when,
-    navigateToHomePageByID: (pokemonIndex: number) =>
-      this.helper.when.visit(`details/id/${pokemonIndex}`),
     navigateToHomePageByName: (pokemonName: string) =>
       this.helper.when.visit(`details/name/${pokemonName}`),
   };
