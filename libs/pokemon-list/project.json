@@ -28,7 +28,11 @@
         "main": "libs/pokemon-list/src/index.ts",
         "index": "libs/pokemon-list/src/index.ts",
         "tsConfig": "libs/pokemon-list/tsconfig.lib.json",
-        "assets": []
+        "assets": [],
+        "styles": [
+          "apps/list/src/styles.scss",
+          "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
+        ]
       }
     }
   }

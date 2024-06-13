@@ -20,7 +20,7 @@ describe('PictureComponent Tests', () => {
     ({ when, given, get } = new PictureComponentDriver());
   });
 
-  it('given valid pokemon index should show gif', () => {
+  it('given image found should show image', () => {
     const pokemonID: number = chance.integer({ min: 1, max: 500 });
     given.pokemonID(pokemonID);
     given.mockImageResponse('default.png');
