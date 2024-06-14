@@ -61,7 +61,6 @@ export class PokemonDetailsDriver {
 
   get = {
     ...this.pokemonDetailsComponentDriver.get,
-
     pokemonRequestUrl: () => this.helper.get.requestUrl('pokemon'),
   };
 }

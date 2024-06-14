@@ -11,6 +11,11 @@ export class PokemonDetailsAppDriver {
 
   given = {
     ...this.detailsDriver.given,
+    spyOnPokemonRequests: () =>
+      this.helper.given.intercept(
+        /\/pokeapi\.co\/api\/v2\/pokemon\/(?!other$)/,
+        'pokemon'
+      ),
   };
 
   when = {
@@ -21,5 +26,6 @@ export class PokemonDetailsAppDriver {
 
   get = {
     ...this.detailsDriver.get,
+    numberOfPokemonRequests: () => this.helper.get.numberOfRequests('pokemon'),
   };
 }

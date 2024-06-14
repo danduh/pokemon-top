@@ -54,4 +54,12 @@ describe('pokemon-e2e', () => {
       then(get.details.pokemonName()).shouldEqual('ivysaur');
     });
   });
+
+  it('should fetch next pokemon details only once when clicking on next', () => {
+    given.details.spyOnPokemonRequests();
+    when.navigateToHomePage();
+    when.list.search.card.clickMoreInfo();
+    when.details.clickNext();
+    then(get.details.numberOfPokemonRequests()).shouldEqual(1);
+  });
 });
