@@ -56,9 +56,9 @@ describe('pokemon-e2e', () => {
   });
 
   it('should fetch next pokemon details only once when clicking on next', () => {
-    given.details.spyOnPokemonRequests();
     when.navigateToHomePage();
     when.list.search.card.clickMoreInfo();
+    given.details.spyOnPokemonRequests();
     when.details.clickNext();
     then(get.details.numberOfPokemonRequests()).shouldEqual(1);
   });
