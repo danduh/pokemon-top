@@ -36,7 +36,7 @@ export function PokemonDetails() {
       }
     };
     fetchPokemon(name, currentIndex);
-  }, [name, currentIndex, pokemon]);
+  }, [name, currentIndex]);
 
   const navigate = useNavigate();
 
