@@ -38,7 +38,7 @@ jobs:
           npx nx run details:build:production
           npx nx run list:build:production
           npx nx run pokemon:build:production --base-href /pokemon-top/
-          cp index.html dist/docs/index.html
+          cp index.html dist/index.html
           cp dist/apps/pokemon/index.html dist/apps/pokemon/404.html
           cp -r dist/apps/list dist/apps/pokemon/assets
           cp -r dist/apps/details dist/apps/pokemon/assets
