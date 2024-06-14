@@ -2,7 +2,7 @@
   <form nz-form [nzLayout]="'inline'" [formGroup]="validateForm">
     <nz-form-item>
       <nz-form-label nzFor="pokemon-name" class="label"
-        >Insert pokemon name</nz-form-label
+        >Search Pokémon</nz-form-label
       >
       <nz-form-control nzErrorTip="Please input name">
         <nz-input-group>
@@ -17,11 +17,11 @@
     </nz-form-item>
     <nz-form-item>
       <nz-form-control nzErrorTip="Please input name">
-        <button nz-button (click)="navigateTo()" data-cy="go-to">Go To</button>
+        <button nz-button (click)="navigateTo()" data-cy="go-to">Go</button>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-      <nz-form-label nzFor="pokemon-type">Filter pokemon type</nz-form-label>
+      <nz-form-label nzFor="pokemon-type">Filter Pokémon type</nz-form-label>
       <nz-form-control nzErrorTip="Filter by type:">
         <nz-input-group>
           <nz-select formControlName="type" data-cy="types" nzShowSearch>
