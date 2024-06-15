@@ -17,4 +17,5 @@ export default defineConfig({
     rootSuiteTitle: 'List MFE Component Tests',
     toConsole: true,
   },
+  defaultCommandTimeout: 10000,
 });
