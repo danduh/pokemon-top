@@ -11,11 +11,14 @@ describe('List MFE Integration Tests', () => {
     when.navigateToHomePage();
   });
 
-  it('should fetch pokemons of selected type when selecting type', () => {
+  it('should display 83 pokemons of selected type when selecting fairy type', () => {
+    given.spyOnPokemonsByTypeRequest();
     when.header.clickTypesList();
-    when.header.typeType('unknown');
+    when.header.typeType('fairy');
     when.header.selectType(0);
-    then(get.search.card.numberOfCards()).shouldEqual(0);
+    when.waitForPokemonsByTypeResponse();
+    when.scrollToBottom();
+    then(get.search.card.numberOfCards()).shouldEqual(83);
   });
 
   it('should display 10 first pokemons', () => {

@@ -31,12 +31,16 @@ export class PokemonListAppDriver {
         response,
         alias: 'pokemons-by-type',
       }),
+    spyOnPokemonsByTypeRequest: () =>
+      this.helper.given.intercept('**/api/v2/type/*', 'pokemons-by-type'),
   };
 
   when = {
     ...this.remoteEntryComponentDriver.when,
     navigateToHomePage: () => this.helper.when.visit('/'),
     scrollToBottom: () => this.helper.when.scrollToBottom(),
+    waitForPokemonsByTypeResponse: () =>
+      this.helper.when.waitForResponse('pokemons-by-type'),
   };
 
   get = {
