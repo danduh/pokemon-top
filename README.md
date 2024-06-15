@@ -1,4 +1,5 @@
 ![pokemon-top](https://github.com/danduh/pokemon-top/actions/workflows/test-actions.yml/badge.svg)
+![pokemon-top-pages](https://github.com/danduh/pokemon-top/actions/workflows/deploy-pages-actions.yml/badge.svg)
 
 # List / Search (home page)
 
