@@ -34,5 +34,5 @@ jobs:
         with:
           name: Details App Component Tests # Name of the check run which will be created
           path: ${{ github.workspace }}/apps/pokemon-e2e/cypress/results/json/merged.json # Path to test results
-          reporter: mochawesome-json # Format of test results
+          reporter: mocha-json # Format of test results
 
