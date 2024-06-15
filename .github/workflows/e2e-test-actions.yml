@@ -28,7 +28,7 @@ jobs:
           npm run pokemon-e2e-merge-results
 
       - name: Pokemon App E2E Tests Report
-        uses: phoenix-actions/test-reporting@v8
+        uses: dorny/test-reporter@v1
         id: pokemon-app-e2e-report # Set ID reference for step
         if: always() # run this step even if previous step failed
         with:
