@@ -51,3 +51,21 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: pokemon e2e
+        if: always()
+        run: |
+          npx nx run pokemon-e2e:e2e
+
+      - name: Merge E2E Reports
+        if: success() || failure() # run this step even if previous step failed
+        run: |
+          npm run pokemon-e2e-merge-results
+
+      - name: Pokemon App E2E Tests Report
+        uses: phoenix-actions/test-reporting@v8
+        id: pokemon-app-e2e-report # Set ID reference for step
+        if: always() # run this step even if previous step failed
+        with:
+          name: Details App Component Tests # Name of the check run which will be created
+          path: ${{ github.workspace }}/apps/pokemon-e2e/cypress/results/json/merged.json # Path to test results
+          reporter: mochawesome-json # Format of test results
