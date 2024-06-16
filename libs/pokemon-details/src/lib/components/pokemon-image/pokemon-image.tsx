@@ -1,29 +1,36 @@
-import { Spin } from 'antd';
-import { useState } from 'react';
-
+import { useEffect, useState, type SyntheticEvent } from 'react';
+import fallback from '../../../missing.png';
 export interface IProps {
   name?: string;
   src: string;
 }
 
 export function PokemonImage({ name, src }: IProps) {
-  const [loading, setLoading] = useState(true);
+  const [showFallbackImage, setShowFallbackImage] = useState(false);
+  useEffect(() => setShowFallbackImage(false), [src]);
 
-  const imageLoaded = () => {
-    setLoading(false);
+  const onImageError = (event: SyntheticEvent<HTMLImageElement, Event>) => {
+    setShowFallbackImage(true);
   };
 
   return (
     <>
-      {loading && <Spin size="large" data-cy="spinner" />}
-      <img
-        data-cy="pokemon-image"
-        src={`${src}`}
-        alt={name}
-        onLoad={imageLoaded}
-        width={250}
-        style={{ visibility: loading ? 'hidden' : 'visible' }}
-      ></img>
+      {showFallbackImage ? (
+        <img
+          data-cy="pokemon-fallback-image"
+          src={fallback}
+          alt="missing"
+          width={250}
+        />
+      ) : (
+        <img
+          data-cy="pokemon-image"
+          src={`${src}`}
+          alt={name}
+          width={250}
+          onError={onImageError}
+        ></img>
+      )}
     </>
   );
 }

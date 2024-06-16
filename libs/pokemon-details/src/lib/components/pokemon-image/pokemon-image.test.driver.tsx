@@ -6,7 +6,6 @@ import { IProps, PokemonImage } from './pokemon-image';
 export class PokemonImageComponentDriver {
   private helper = new CypressHelper();
   private reactComponentHelper = new CypressReactComponentHelper();
-
   private props: IProps = {
     name: undefined,
     src: '',
@@ -28,8 +27,8 @@ export class PokemonImageComponentDriver {
     missingImage: () =>
       this.helper.given.interceptAndMockResponse({
         url: '**/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/**',
-        response: { headers: 404 },
-        alias: 'pokemonImage',
+        response: { statusCode: 404 },
+        alias: 'pokemonMissingImage',
       }),
   };
 
@@ -47,6 +46,7 @@ export class PokemonImageComponentDriver {
   get = {
     pictureSrc: () => this.helper.get.elementsAttribute('pokemon-image', 'src'),
     pokemonImage: () => this.helper.get.elementByTestId('pokemon-image'),
-    spinner: () => this.helper.get.elementByTestId('spinner'),
+    fallbackImage: () =>
+      this.helper.get.elementByTestId('pokemon-fallback-image'),
   };
 }
