@@ -35,7 +35,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Build APPLication
         run: |
-          npm i
+          npm i --force
           npx nx run details:build:production
           npx nx run list:build:production
           npx nx run pokemon:build:production --base-href /pokemon-top/
