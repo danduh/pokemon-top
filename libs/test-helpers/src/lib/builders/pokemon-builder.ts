@@ -54,8 +54,7 @@ export const aPokemon = (id: number = chance.integer({ min: 1, max: 500 })) =>
         .other(
           Builder<OtherPokemonSprites>()
             ['official-artwork']({
-              front_default:
-                'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/26.png',
+              front_default: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`,
             })
             .build()
         )
