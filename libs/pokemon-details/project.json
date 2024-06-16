@@ -20,13 +20,7 @@
         "external": ["react", "react-dom", "react/jsx-runtime"],
         "rollupConfig": "@nx/react/plugins/bundle-rollup",
         "compiler": "babel",
-        "assets": [
-          {
-            "glob": "libs/pokemon-details/README.md",
-            "input": ".",
-            "output": "."
-          }
-        ]
+        "assets": ["libs/pokemon-details/src/missing.png"]
       }
     },
     "component-test": {

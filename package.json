@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "cy:details-open": "nx run detail:component-test --watch",
-    "cy:details-run": "nx run detail:component-test --headless",
+    "cy:details-open": "nx run details:component-test --watch",
+    "cy:details-run": "nx run details:component-test --headless",
     "cy:details-e2e-open": "nx run detail:e2e --watch",
     "cy:details-e2e-run": "nx run detail:e2e --headless",
     "cy:list-open": "nx run pokemon-list:component-test --watch",
