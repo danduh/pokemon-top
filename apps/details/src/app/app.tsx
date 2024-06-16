@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { PokemonDetails } from './components/pokemon-details/pokemon-details';
@@ -12,6 +12,9 @@ export function App() {
     <StyledApp>
       <BrowserRouter>
         <Routes>
+          <Route path="/">
+            <Route index element={<Navigate to="details/name/venusaur" replace />} />
+          </Route>
           <Route path="details">
             <Route path="" element={<PokemonDetails />}></Route>
             <Route path="id">

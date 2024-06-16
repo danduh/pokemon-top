@@ -3,13 +3,12 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/pokemon-list/src",
   "prefix": "pokemon",
+  "projectType": "library",
   "tags": [],
   "implicitDependencies": ["test-helpers"],
-  "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
+      "executor": "@nx/eslint:lint"
     },
     "component-test": {
       "executor": "@nx/cypress:cypress",
