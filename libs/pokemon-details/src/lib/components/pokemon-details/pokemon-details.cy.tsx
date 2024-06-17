@@ -18,6 +18,7 @@ describe('When rendering PokemonDetails component', () => {
     ({ beforeAndAfter, given, when, get } =
       new PokemonDetailsComponentDriver());
     given.pokemon(pokemon);
+    given.image.mockImageResponse('default.png');
     when.render(PokemonDetailsComponent);
   });
 
