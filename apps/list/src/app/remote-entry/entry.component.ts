@@ -1,3 +1,4 @@
+import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import {
@@ -24,6 +25,7 @@ import {
     HeaderComponent,
     PokemonListComponent,
   ],
+  providers: [CdkConnectedOverlay],
   selector: 'pokemon-list-entry',
   styles: `
         nz-header {
