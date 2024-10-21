@@ -17,7 +17,8 @@
     "pokemon-details-merge-results": "mochawesome-merge libs/pokemon-details/cypress/results/json/*.json > libs/pokemon-details/cypress/results/json/merged.json",
     "details-e2e-merge-results": "mochawesome-merge apps/details-e2e/cypress/results/json/*.json > apps/details-e2e/cypress/results/json/merged.json",
     "pokemon-e2e-merge-results": "mochawesome-merge apps/pokemon-e2e/cypress/results/json/*.json > apps/pokemon-e2e/cypress/results/json/merged.json",
-    "list-e2e-merge-results": "mochawesome-merge apps/list-e2e/cypress/results/json/*.json > apps/list-e2e/cypress/results/json/merged.json"
+    "list-e2e-merge-results": "mochawesome-merge apps/list-e2e/cypress/results/json/*.json > apps/list-e2e/cypress/results/json/merged.json",
+    "cy":"cypress open "
   },
   "private": true,
   "dependencies": {
