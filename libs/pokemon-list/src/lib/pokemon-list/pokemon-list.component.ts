@@ -8,9 +8,11 @@ import {
 } from 'ng-zorro-antd/layout';
 import { HeaderComponent } from './components/header/header.component';
 import { SearchComponent } from './components/search/search.component';
+import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 
 @Component({
   standalone: true,
+  providers: [CdkConnectedOverlay],
   imports: [
     CommonModule,
     SearchComponent,
